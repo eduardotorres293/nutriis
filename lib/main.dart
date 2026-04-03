@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pages/lists.dart';
 import 'pages/searcher.dart';
 import 'pages/settings.dart';
+import 'pages/mainmenu.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'NutriIS',
       theme: ThemeData(
         colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 252, 179, 96)),
       ),
@@ -35,9 +36,10 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0;
 
   static const List<Widget> _widgetOptions = <Widget>[
-    Settings(),
-    Lists(),
+    Mainmenu(),
     Searcher(),
+    Lists(),
+    Settings(),
   ];
 
   void _onItemTapped(int index) {
@@ -47,12 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
   }
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
         // TRY THIS: Try changing the color here to a specific color (to
@@ -65,6 +61,9 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       body: _widgetOptions.elementAt(currentIndex),
       bottomNavigationBar: BottomNavigationBar(
+        currentIndex: currentIndex,
+        selectedItemColor: Colors.amber[800],
+        onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home), 
@@ -83,9 +82,6 @@ class _MyHomePageState extends State<MyHomePage> {
             label: 'Configuración'
           ),
         ],
-        currentIndex: currentIndex,
-        selectedItemColor: Colors.amber[800],
-        onTap: _onItemTapped,
       ),
     );
   }
