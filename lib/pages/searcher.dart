@@ -44,7 +44,7 @@ class _SearcherState extends State<Searcher> {
                   },
                   icon: const Icon(Icons.search),
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.orange[100],
+                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
@@ -61,7 +61,7 @@ class _SearcherState extends State<Searcher> {
                   },
                   icon: const Icon(Icons.filter_alt),
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.orange[100],
+                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
@@ -79,7 +79,7 @@ class _SearcherState extends State<Searcher> {
                   },
                   icon: Icon(crossAxisCount == 2 ? Icons.view_agenda : Icons.view_cozy,),
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.orange[100],
+                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(

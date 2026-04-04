@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'NutriIS',
       theme: ThemeData(
-        colorScheme: .fromSeed(seedColor: const Color.fromARGB(255, 252, 179, 96)),
+        primaryColor: const Color.fromARGB(255, 255, 189, 89),
       ),
       home: const MyHomePage(title: 'NutriIS'),
     );
@@ -50,39 +50,59 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        // TRY THIS: Try changing the color here to a specific color (to
-        // Colors.amber, perhaps?) and trigger a hot reload to see the AppBar
-        // change color while the other colors stay the same.
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
-      ),
       body: _widgetOptions.elementAt(currentIndex),
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.shifting,
         currentIndex: currentIndex,
-        selectedItemColor: Colors.amber[800],
+        selectedItemColor: const Color.fromARGB(255, 94, 91, 87),
+        unselectedItemColor: Colors.white,
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.home), 
-            label: 'Página principal'
+            icon: Icon(Icons.home),
+            label: 'Página principal',
+            backgroundColor: Color.fromARGB(255, 255, 189, 89),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Buscador',
+            backgroundColor: Color.fromARGB(255, 255, 189, 89),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.view_list), 
-            label: 'Listas'
+            icon: Icon(Icons.view_list),
+            label: 'Listas',
+            backgroundColor: Color.fromARGB(255, 255, 189, 89),
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.settings), 
-            label: 'Configuración'
+            icon: Icon(Icons.settings),
+            label: 'Configuración',
+            backgroundColor: Color.fromARGB(255, 255, 189, 89),
           ),
         ],
       ),
+      // bottomNavigationBar: NavigationBar(
+      //   selectedIndex: currentIndex,
+      //   onDestinationSelected: _onItemTapped,
+      //   backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+      //   destinations: const [
+      //     NavigationDestination(
+      //       icon: Icon(Icons.home),
+      //       label: 'Página principal',
+      //     ),
+      //     NavigationDestination(
+      //       icon: Icon(Icons.search),
+      //       label: 'Buscador',
+      //     ),
+      //     NavigationDestination(
+      //       icon: Icon(Icons.view_list),
+      //       label: 'Listas',
+      //     ),
+      //     NavigationDestination(
+      //       icon: Icon(Icons.settings),
+      //       label: 'Configuración',
+      //     ),
+      //   ],
+      // ),
     );
   }
 }

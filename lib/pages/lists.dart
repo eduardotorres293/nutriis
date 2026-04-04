@@ -43,7 +43,7 @@ class _ListsState extends State<Lists> {
                   },
                   icon: const Icon(Icons.search),
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.orange[100],
+                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
@@ -60,7 +60,7 @@ class _ListsState extends State<Lists> {
                   },
                   icon: const Icon(Icons.filter_alt),
                   style: IconButton.styleFrom(
-                    backgroundColor: Colors.orange[100],
+                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
                     shape: RoundedRectangleBorder(
@@ -82,7 +82,7 @@ class _ListsState extends State<Lists> {
                   });
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 230, 157, 47),
+                  backgroundColor: const Color.fromARGB(255, 255, 189, 89),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
                   ),
