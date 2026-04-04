@@ -19,74 +19,75 @@ class _SearcherState extends State<Searcher> {
           Row(
             children: [
               Expanded(
-                  child: Container(
-                    height: 40, 
-                    decoration: BoxDecoration(
-                      color: Colors.grey[300],
+                child: TextField(
+                  onChanged: (value) {
+                    print("Buscando: $value");
+                  },
+                  decoration: InputDecoration(
+                    hintText: 'Buscar receta o ingrediente',
+                    suffixIcon: const Icon(Icons.search),
+                    filled: true,
+                    fillColor: Colors.grey[300],
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                    border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(16),
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 12),
-                    child: const Align(
-                      alignment: Alignment.centerLeft,
-                      child: Text(
-                        'Buscar receta o ingrediente',
-                        style: TextStyle(fontSize: 18, color: Color.fromARGB(255, 78, 73, 73)),
-                      ),
+                      borderSide: BorderSide.none,
                     ),
                   ),
                 ),
-                const SizedBox(width: 8),
+              ),
+              const SizedBox(width: 8),
 
-                // Boton de busqueda
-                IconButton(
-                  onPressed: () {
-                    print("Botón de búsqueda presionado");
-                  },
-                  icon: const Icon(Icons.search),
-                  style: IconButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                    minimumSize: const Size(40, 40),
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
+              // // Boton de busqueda
+              // IconButton(
+              //   onPressed: () {
+              //     print("Botón de búsqueda presionado");
+              //   },
+              //   icon: const Icon(Icons.search),
+              //   style: IconButton.styleFrom(
+              //     backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+              //     minimumSize: const Size(40, 40),
+              //     padding: EdgeInsets.zero,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(8),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(width: 8),
 
-                // Boton de filtro
-                IconButton(
-                  onPressed: () {
-                    print("Filtro presionado");
-                  },
-                  icon: const Icon(Icons.filter_alt),
-                  style: IconButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                    minimumSize: const Size(40, 40),
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+              // Boton de filtro
+              IconButton(
+                onPressed: () {
+                  print("Filtro presionado");
+                },
+                icon: const Icon(Icons.filter_alt),
+                style: IconButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+                  minimumSize: const Size(40, 40),
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                const SizedBox(width: 8),
-                // Boton de orden
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                    crossAxisCount = crossAxisCount == 2 ? 1 : 2;
-                  });
-                  },
-                  icon: Icon(crossAxisCount == 2 ? Icons.view_agenda : Icons.view_cozy,),
-                  style: IconButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                    minimumSize: const Size(40, 40),
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+              ),
+              const SizedBox(width: 8),
+              // Boton de orden
+              IconButton(
+                onPressed: () {
+                  setState(() {
+                  crossAxisCount = crossAxisCount == 2 ? 1 : 2;
+                });
+                },
+                icon: Icon(crossAxisCount == 2 ? Icons.view_agenda : Icons.view_cozy,),
+                style: IconButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+                  minimumSize: const Size(40, 40),
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
+              ),
             ],
           ),
 
@@ -94,7 +95,6 @@ class _SearcherState extends State<Searcher> {
 
           // Recetas y eso
           Expanded(
-            
             child: crossAxisCount == 2
             ? GridView.builder(
                 itemCount: globalItemCount,
