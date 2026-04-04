@@ -46,6 +46,9 @@ class _MainmenuState extends State<Mainmenu> {
                     backgroundColor: Colors.orange[100],
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -60,6 +63,9 @@ class _MainmenuState extends State<Mainmenu> {
                     backgroundColor: Colors.orange[100],
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
             ],
@@ -90,7 +96,9 @@ class _MainmenuState extends State<Mainmenu> {
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Center(
-                          child: Text('Receta ${index + 1}'),
+                          child: Text('Receta ${index + 1}',
+                          style: const TextStyle(fontSize: 24),
+                          ),
                         ),
                       );
                     },

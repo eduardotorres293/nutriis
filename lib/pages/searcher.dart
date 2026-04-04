@@ -47,6 +47,9 @@ class _SearcherState extends State<Searcher> {
                     backgroundColor: Colors.orange[100],
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -61,6 +64,9 @@ class _SearcherState extends State<Searcher> {
                     backgroundColor: Colors.orange[100],
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -76,6 +82,9 @@ class _SearcherState extends State<Searcher> {
                     backgroundColor: Colors.orange[100],
                     minimumSize: const Size(40, 40),
                     padding: EdgeInsets.zero,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                    ),
                   ),
                 ),
             ],
@@ -104,7 +113,7 @@ class _SearcherState extends State<Searcher> {
                     child: Center(
                       child: Text(
                         'Receta ${index + 1}',
-                        style: const TextStyle(fontSize: 16),
+                        style: const TextStyle(fontSize: 24),
                       ),
                     ),
                   );
@@ -124,7 +133,7 @@ class _SearcherState extends State<Searcher> {
                       child: Center(
                         child: Text(
                           'Receta ${index + 1}',
-                          style: const TextStyle(fontSize: 16),
+                          style: const TextStyle(fontSize: 24),
                         ),
                       ),
                     ),
