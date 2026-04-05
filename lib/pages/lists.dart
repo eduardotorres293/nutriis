@@ -20,7 +20,9 @@ class _ListsState extends State<Lists> {
               Expanded(
                   child: TextField(
                     onChanged: (value) {
-                      print("Buscando: $value");
+                      print("Buscando: $value"); 
+                      // Reiniciar busquedas con el texto disponible
+                      // es un bucle
                     },
                     decoration: InputDecoration(
                       hintText: 'Buscar nombre de lista o ingrediente',

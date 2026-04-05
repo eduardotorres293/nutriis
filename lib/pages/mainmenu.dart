@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'recipedetail.dart';
 
 class Mainmenu extends StatefulWidget {
   const Mainmenu({super.key});
@@ -91,7 +92,18 @@ class _MainmenuState extends State<Mainmenu> {
                       childAspectRatio: 1,
                     ),
                     itemBuilder: (context, index) {
-                      return Container(
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Recipedetail(
+                                nombre: 'Receta ${index + 1}',
+                              ),
+                            ),
+                          );
+                        },
+                        child: Container(
                         decoration: BoxDecoration(
                           color: Colors.orange[100],
                           borderRadius: BorderRadius.circular(16),
@@ -100,6 +112,7 @@ class _MainmenuState extends State<Mainmenu> {
                           child: Text('Receta ${index + 1}',
                           style: const TextStyle(fontSize: 24),
                           ),
+                        ),
                         ),
                       );
                     },
