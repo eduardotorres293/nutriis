@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
+import '../database/database.dart';
 
 class Recipedetail extends StatefulWidget {
-  final String nombre;
-  const Recipedetail({super.key, required this.nombre});
+  final int id;
+  const Recipedetail({super.key, required this.id});
 
   @override
   State<Recipedetail> createState() => _RecipedetailState();
@@ -10,10 +11,44 @@ class Recipedetail extends StatefulWidget {
 
 class _RecipedetailState extends State<Recipedetail> {
   bool isSaved = false;
+  late AppDatabase db;
+
+  late Future<Receta> recetaFuture;
+  late Future<List<Ingrediente>> ingredientesFuture;
+  late Future<List<Instruccione>> instruccionesFuture;
+  late Future<InfoNutrimentalData?> infoFuture;
+
+  @override
+    void initState() {
+      super.initState();
+
+      db = AppDatabase();
+
+      recetaFuture = (db.select(db.recetas)
+            ..where((t) => t.id.equals(widget.id)))
+          .getSingle();
+
+      ingredientesFuture = db.obtenerIngredientes(widget.id);
+      instruccionesFuture = db.obtenerInstrucciones(widget.id);
+      infoFuture = db.obtenerInfo(widget.id);
+    }
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
+      body: FutureBuilder<Receta>(
+        future: recetaFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData) {
+            return const Center(child: Text('Receta no encontrada'));
+          }
+
+          final receta = snapshot.data!;
+        return SingleChildScrollView(
         child: Column(
           children: [
             Stack(
@@ -59,7 +94,7 @@ class _RecipedetailState extends State<Recipedetail> {
                   Container(
                     padding: const EdgeInsets.all(16),
                     child: Text(
-                      widget.nombre,
+                      receta.nombre,
                       style: const TextStyle(
                       fontSize: 36,
                       fontWeight: FontWeight.bold,
@@ -107,19 +142,21 @@ class _RecipedetailState extends State<Recipedetail> {
                 const SizedBox(width: 16),
               ],
             ),
+
             Row(
               children: [
                 Expanded(
                   child: Container(
                     padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: const Text(
-                      'Descripción breve de la receta, ingredientes principales, tiempo de preparación, etc.',
-                      style: TextStyle(fontSize: 16),
+                    child: Text(
+                      receta.descripcion,
+                      style: const TextStyle(fontSize: 16),
                     ),
                   ),
                 ),
               ],
             ),
+
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(16),
@@ -141,10 +178,26 @@ class _RecipedetailState extends State<Recipedetail> {
                       backgroundColor: Colors.grey[200],
                       collapsedBackgroundColor: Colors.grey[200],
                       title: const Text('Ingredientes'),
-                      children: const [
-                        ListTile(title: Text('• 1 taza de arroz')),
-                        ListTile(title: Text('• 2 huevos')),
-                        ListTile(title: Text('• Verduras')),
+                      children: [
+                        FutureBuilder <List<Ingrediente>>(
+                          future: ingredientesFuture,
+                          builder: (context, snapshot) {
+                            if (snapshot.connectionState == ConnectionState.waiting) {
+                              return const Center(child: CircularProgressIndicator());
+                            } else if (snapshot.hasError) {
+                              return Center(child: Text('Error: ${snapshot.error}'));
+                            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                              return const Center(child: Text('No hay ingredientes'));
+                            }
+                            return Column(
+                              children: snapshot.data!.map((ingrediente) {
+                                return ListTile(
+                                  title: Text(
+                                    '${ingrediente.cantidad} ${ingrediente.unidad} de ${ingrediente.nombre}'));
+                              }).toList(),
+                            );
+                          },
+                        ),
                       ],
                   ),
 
@@ -160,11 +213,24 @@ class _RecipedetailState extends State<Recipedetail> {
                       ),
                       backgroundColor: Colors.grey[200],
                       collapsedBackgroundColor: Colors.grey[200],
-                      title: const Text('Ingredientes'),
-                      children: const [
-                        ListTile(title: Text('1. Hervir arroz')),
-                        ListTile(title: Text('2. Cocinar huevos')),
-                        ListTile(title: Text('3. Mezclar')),
+                      title: const Text('Instrucciones'),
+                      children: [
+                          FutureBuilder<List<Instruccione>>(
+                            future: instruccionesFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData) {
+                                return const SizedBox();
+                              }
+                              return Column(
+                                children: snapshot.data!.map((paso) {
+                                  return ListTile(
+                                    title: Text(
+                                        '${paso.numero}. ${paso.descripcion}'),
+                                  );
+                              }).toList(),
+                            );
+                          },
+                        )
                       ],
                   ),
 
@@ -181,18 +247,45 @@ class _RecipedetailState extends State<Recipedetail> {
                       backgroundColor: Colors.grey[200],
                       collapsedBackgroundColor: Colors.grey[200],
                       title: const Text('Información nutricional'),
-                      children: const [
-                        ListTile(title: Text('Calorias: 350 kcal')),
-                        ListTile(title: Text('Proteinas: 12g')),
-                        ListTile(title: Text('Carbohidratos: 60g')),
-                      ],
+                      children: [
+                          FutureBuilder<InfoNutrimentalData?>(
+                            future: infoFuture,
+                            builder: (context, snapshot) {
+                              if (!snapshot.hasData ||
+                                  snapshot.data == null) {
+                                return const SizedBox();
+                              }
+
+                              final info = snapshot.data!;
+
+                              return Column(
+                                children: [
+                                  ListTile(
+                                      title: Text(
+                                          'Calorías: ${info.calorias} kcal')),
+                                  ListTile(
+                                      title: Text(
+                                          'Proteínas: ${info.proteinas} g')),
+                                  ListTile(
+                                      title:
+                                          Text('Grasas: ${info.grasas} g')),
+                                  ListTile(
+                                      title: Text(
+                                          'Carbohidratos: ${info.carbohidratos} g')),
+                                ],
+                              );
+                            },
+                          )
+                        ],
+                      ),
+                    ],
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
-          ],
-        ),
-      )
+          );
+        },
+      ),
     );
   }
 }

@@ -123,7 +123,7 @@ class _MainmenuState extends State<Mainmenu> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => Recipedetail(
-                                nombre: receta.nombre,
+                                id: receta.id,
                               ),
                             ),
                           );
