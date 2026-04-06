@@ -3,8 +3,12 @@ import 'pages/lists.dart';
 import 'pages/searcher.dart';
 import 'pages/settings.dart';
 import 'pages/mainmenu.dart';
+import 'database/database.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  final database = AppDatabase();
+  await database.insertarDatosIniciales();
   runApp(const MyApp());
 }
 

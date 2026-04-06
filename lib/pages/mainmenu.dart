@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'recipedetail.dart';
+import '../database/database.dart';
+
+
 
 class Mainmenu extends StatefulWidget {
   const Mainmenu({super.key});
@@ -10,6 +13,16 @@ class Mainmenu extends StatefulWidget {
 
 class _MainmenuState extends State<Mainmenu> {
   int crossAxisCount = 2;
+
+  late AppDatabase db;
+  late Future<List<Receta>> recetasFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    db = AppDatabase();
+    recetasFuture = db.obtenerRecetas();
+  }
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -81,45 +94,60 @@ class _MainmenuState extends State<Mainmenu> {
               child: Center(
                 child: ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 800),
-                  child: GridView.builder(
-                    itemCount: 4,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      childAspectRatio: 1,
-                    ),
+                  child: FutureBuilder<List<Receta>>(
+                    future: recetasFuture,
+                    builder: (context, snapshot) {
+
+                      if (!snapshot.hasData) {
+                        return const Center(child: CircularProgressIndicator());
+                      }
+
+                      final recetas = snapshot.data!;
+
+                      return GridView.builder(
+                        itemCount: recetas.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: 1,
+                        ),
                     itemBuilder: (context, index) {
+                      final receta = recetas[index];
+
                       return GestureDetector(
                         onTap: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => Recipedetail(
-                                nombre: 'Receta ${index + 1}',
+                                nombre: receta.nombre,
                               ),
                             ),
                           );
                         },
                         child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.orange[100],
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Center(
-                          child: Text('Receta ${index + 1}',
-                          style: const TextStyle(fontSize: 24),
+                          decoration: BoxDecoration(
+                            color: Colors.orange[100],
+                            borderRadius: BorderRadius.circular(16),
                           ),
-                        ),
+                          child: Center(
+                            child: Text(
+                              receta.nombre,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ),
                         ),
                       );
                     },
-                  ),
+                  );
+                  },
                 ),
               ),
             ),
+          )
           )
         ],
       )
