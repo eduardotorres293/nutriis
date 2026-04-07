@@ -1,0 +1,115 @@
+[
+  {
+    "nombre": "Ensalada fresca",
+    "descripcion": "Ligera y saludable",
+    "tiempo": 10,
+    "categoria": "Ensaladas",
+    "imagen": "https://via.placeholder.com/400",
+    "ingredientes": [
+      {"nombre": "Lechuga", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Tomate", "cantidad": 2, "unidad": "piezas"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Lavar ingredientes"},
+      {"numero": 2, "descripcion": "Mezclar"}
+    ],
+    "info": {
+      "calorias": 150,
+      "proteinas": 5,
+      "grasas": 3,
+      "carbohidratos": 20
+    }
+    
+  },
+  {
+  "nombre": "Pasta al ajo",
+  "descripcion": "Rápida y deliciosa",
+  "tiempo": 20,
+  "categoria": "Pastas",
+  "imagen": "https://via.placeholder.com/400",
+  "ingredientes": [
+    {"nombre": "Pasta", "cantidad": 200, "unidad": "gramos"},
+    {"nombre": "Ajo", "cantidad": 2, "unidad": "dientes"},
+    {"nombre": "Aceite de oliva", "cantidad": 2, "unidad": "cucharadas"}
+  ],
+  "instrucciones": [
+    {"numero": 1, "descripcion": "Cocer la pasta"},
+    {"numero": 2, "descripcion": "Sofreír el ajo"},
+    {"numero": 3, "descripcion": "Mezclar todo"}
+  ],
+  "info": {
+    "calorias": 350,
+    "proteinas": 10,
+    "grasas": 12,
+    "carbohidratos": 50
+  }
+},
+{
+  "nombre": "Batido de plátano",
+  "descripcion": "Energético y cremoso",
+  "tiempo": 5,
+  "categoria": "Bebidas",
+  "imagen": "https://via.placeholder.com/400",
+  "ingredientes": [
+    {"nombre": "Plátano", "cantidad": 1, "unidad": "pieza"},
+    {"nombre": "Leche", "cantidad": 1, "unidad": "taza"},
+    {"nombre": "Miel", "cantidad": 1, "unidad": "cucharada"}
+  ],
+  "instrucciones": [
+    {"numero": 1, "descripcion": "Agregar todo a la licuadora"},
+    {"numero": 2, "descripcion": "Licuar hasta obtener mezcla homogénea"}
+  ],
+  "info": {
+    "calorias": 220,
+    "proteinas": 6,
+    "grasas": 4,
+    "carbohidratos": 40
+  }
+},
+{
+  "nombre": "Tostadas de aguacate",
+  "descripcion": "Sencillas y nutritivas",
+  "tiempo": 10,
+  "categoria": "Desayunos",
+  "imagen": "https://via.placeholder.com/400",
+  "ingredientes": [
+    {"nombre": "Pan", "cantidad": 2, "unidad": "rebanadas"},
+    {"nombre": "Aguacate", "cantidad": 1, "unidad": "pieza"},
+    {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
+  ],
+  "instrucciones": [
+    {"numero": 1, "descripcion": "Tostar el pan"},
+    {"numero": 2, "descripcion": "Machacar el aguacate"},
+    {"numero": 3, "descripcion": "Untar y sazonar"}
+  ],
+  "info": {
+    "calorias": 280,
+    "proteinas": 6,
+    "grasas": 15,
+    "carbohidratos": 30
+  }
+},
+{
+  "nombre": "Huevos revueltos",
+  "descripcion": "Clásico desayuno",
+  "tiempo": 8,
+  "categoria": "Desayunos",
+  "imagen": "https://via.placeholder.com/400",
+  "ingredientes": [
+    {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
+    {"nombre": "Mantequilla", "cantidad": 1, "unidad": "cucharada"},
+    {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
+  ],
+  "instrucciones": [
+    {"numero": 1, "descripcion": "Batir los huevos"},
+    {"numero": 2, "descripcion": "Derretir mantequilla en sartén"},
+    {"numero": 3, "descripcion": "Cocinar los huevos moviendo constantemente"}
+  ],
+  "info": {
+    "calorias": 200,
+    "proteinas": 12,
+    "grasas": 15,
+    "carbohidratos": 2
+  }
+}
+]

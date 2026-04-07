@@ -176,7 +176,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       backgroundColor: Colors.grey[200],
-                      collapsedBackgroundColor: Colors.grey[200],
+                      collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
                       title: const Text('Ingredientes'),
                       children: [
                         FutureBuilder <List<Ingrediente>>(
@@ -212,7 +212,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       backgroundColor: Colors.grey[200],
-                      collapsedBackgroundColor: Colors.grey[200],
+                      collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
                       title: const Text('Instrucciones'),
                       children: [
                           FutureBuilder<List<Instruccione>>(
@@ -245,7 +245,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         borderRadius: BorderRadius.circular(12),
                       ),
                       backgroundColor: Colors.grey[200],
-                      collapsedBackgroundColor: Colors.grey[200],
+                      collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
                       title: const Text('Información nutricional'),
                       children: [
                           FutureBuilder<InfoNutrimentalData?>(

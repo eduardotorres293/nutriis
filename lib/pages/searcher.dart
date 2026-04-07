@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../database/database.dart';
+import 'recipedetail.dart';
 
 class Searcher extends StatefulWidget {
   const Searcher({super.key});
@@ -9,8 +11,14 @@ class Searcher extends StatefulWidget {
 
 class _SearcherState extends State<Searcher> {
   int crossAxisCount = 2;
-  List<String> recetas = List.generate(500, (i) => 'Receta ${i + 1}');
-  List<String> recetasFiltradas = [];
+
+  late List<Receta> todosRecetas = [];
+  List<Receta> recetasFiltradas = [];
+  // Se declara la variable para la base de datos
+  late AppDatabase db;
+  // Y se crea una lista para guardar las 
+  // recetas obtenidas de la base de datos
+  late Future<List<Receta>> recetasFuture;
 
   String categoriaSeleccionada = 'Todas';
   String ordenSeleccionado = 'Ninguno';
@@ -41,21 +49,37 @@ class _SearcherState extends State<Searcher> {
   @override
   void initState() {
     super.initState();
-    recetasFiltradas = recetas;
+    db = AppDatabase();
+    cargarRecetas();
   }
-  void filtrarRecetas() {
-    List<String> resultado = recetas.where((receta) {
-      final coincideBusqueda =
-          receta.toLowerCase().contains(busqueda.toLowerCase());
-      final coincideCategoria = categoriaSeleccionada == 'Todas'
-          ? true
-          : receta.contains(categoriaSeleccionada);
 
+  Future<void> cargarRecetas() async {
+    final recetas = await db.obtenerRecetas();
+    setState(() {
+      todosRecetas = recetas;
+      recetasFiltradas = recetas;
+    });
+  }
+
+  void filtrarRecetas() {
+    List<Receta> resultado = todosRecetas.where((receta) {
+      final coincideBusqueda =
+          receta.nombre
+        .toLowerCase()
+        .contains(busqueda.toLowerCase());
+      final coincideCategoria = categoriaSeleccionada == 'Todas'
+        ? true
+        : true;
+        
       return coincideBusqueda && coincideCategoria;
     }).toList();
 
-    if (ordenSeleccionado == 'Tiempo') {
-      resultado = resultado.reversed.toList();
+    if (ordenSeleccionado == 'Por nombre') {
+      resultado.sort((a, b) => a.nombre.compareTo(b.nombre));
+    }
+
+    if (ordenSeleccionado == 'Tiempo de preparación') {
+      resultado.sort((a, b) => a.tiempo.compareTo(b.tiempo));
     }
 
     setState(() {
@@ -244,46 +268,82 @@ class _SearcherState extends State<Searcher> {
             ? GridView.builder(
                 itemCount: recetasFiltradas.length,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 400,
+                    maxCrossAxisExtent: 300,
                     crossAxisSpacing: 16,
                     mainAxisSpacing: 16,
                     childAspectRatio: 1,
                 ),
               itemBuilder: (context, index) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: Colors.orange[100],
-                      borderRadius: BorderRadius.circular(16),
-                    ),
-                    child: Center(
-                      child: Text(
-                        recetasFiltradas[index],
-                        style: const TextStyle(fontSize: 24),
-                      ),
-                    ),
-                  );
-                } 
+                          final receta = recetasFiltradas[index];
+
+                          // Cada receta se muestra dentro de un GestureDetector para
+                          // permitir hacer clic e ir a la página de detalles
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Recipedetail(
+                                    id: receta.id,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              // Creación de un contenedor para cada receta
+                              decoration: BoxDecoration(
+                                color: Colors.orange[100],
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+
+                              // Nombre de la receta centrado dentro del contenedor
+                              child: Center(
+                                child: Text(
+                                  receta.nombre,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          );
+                        }, 
             )
             : ListView.separated(
                 itemCount: recetasFiltradas.length,
                 separatorBuilder: (_, _) => const SizedBox(height: 8),
                 itemBuilder: (context, index) {
-                  return SizedBox(
-                    height: 300,
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.orange[100],
-                        borderRadius: BorderRadius.circular(16),
-                      ),
-                      child: Center(
-                        child: Text(
-                          'Receta ${index + 1}',
-                          style: const TextStyle(fontSize: 24),
-                        ),
-                      ),
-                    ),
-                  );
-                },
+                          final receta = recetasFiltradas[index];
+
+                          // Cada receta se muestra dentro de un GestureDetector para
+                          // permitir hacer clic e ir a la página de detalles
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => Recipedetail(
+                                    id: receta.id,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              // Creación de un contenedor para cada receta
+                              height:300,
+                              decoration: BoxDecoration(
+                                color: Colors.orange[100],
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+
+                              // Nombre de la receta centrado dentro del contenedor
+                              child: Center(
+                                child: Text(
+                                  receta.nombre,
+                                  style: const TextStyle(fontSize: 20),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
               ),
             ),
         ],

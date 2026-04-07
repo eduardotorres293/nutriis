@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'recipedetail.dart';
 import '../database/database.dart';
+import 'dart:math';
 
 
 class Mainmenu extends StatefulWidget {
@@ -18,6 +19,7 @@ class _MainmenuState extends State<Mainmenu> {
   // Y se crea una lista para guardar las 
   // recetas obtenidas de la base de datos
   late Future<List<Receta>> recetasFuture;
+  List<Receta> recetasRandom = [];
 
   // En el initState se inicializa 
   // la base de datos y se obtiene la lista de recetas
@@ -25,7 +27,11 @@ class _MainmenuState extends State<Mainmenu> {
   void initState() {
     super.initState();
     db = AppDatabase();
-    recetasFuture = db.obtenerRecetas();
+    recetasFuture = db.obtenerRecetas().then((recetas) {
+      recetas.shuffle(Random());
+      recetasRandom = recetas.take(4).toList();
+      return recetas;
+    });
   }
   @override
   Widget build(BuildContext context) {

@@ -11,7 +11,7 @@ void main() async{
   final database = AppDatabase();
 
   // El que inserta los datos
-  await database.insertarDatosIniciales();
+  await database.cargarDesdeJson();
   runApp(const MyApp());
 }
 
@@ -27,8 +27,10 @@ class MyApp extends StatelessWidget {
       title: 'NutriIS',
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 255, 189, 89),
+        scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
       ),
       home: const MyHomePage(title: 'NutriIS'),
+      
     );
   }
 }
@@ -48,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0; // Creacion del indice actual
 
   // Lista de páginas a mostrar según el indice seleccionado
-  static const List<Widget> _widgetOptions = <Widget>[
+  final List<Widget> _widgetOptions = [
     Mainmenu(),
     Searcher(),
     Lists(),
@@ -66,7 +68,10 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // Se muestra la página correspondiente al indice seleccionado
     return Scaffold(
-      body: _widgetOptions.elementAt(currentIndex),
+      body: IndexedStack(
+        index: currentIndex,
+        children: _widgetOptions,
+      ),
       // Creación de la barra de navegación inferior
       bottomNavigationBar: BottomNavigationBar( 
 
