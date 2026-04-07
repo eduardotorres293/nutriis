@@ -5,13 +5,19 @@ import 'pages/settings.dart';
 import 'pages/mainmenu.dart';
 import 'database/database.dart';
 
+// Aqui se crea la base de datos y se insertan los datos iniciales antes de iniciar la aplicación
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
   final database = AppDatabase();
+
+  // El que inserta los datos
   await database.insertarDatosIniciales();
   runApp(const MyApp());
 }
 
+// Aquí se define la estructura principal de la aplicación, 
+// con un MaterialApp y un Scaffold que contiene un 
+// BottomNavigationBar para navegar entre las diferentes páginas
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -36,9 +42,12 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// Aquí se maneja la navegación entre las 
+// diferentes páginas usando un BottomNavigationBar
 class _MyHomePageState extends State<MyHomePage> {
-  int currentIndex = 0;
+  int currentIndex = 0; // Creacion del indice actual
 
+  // Lista de páginas a mostrar según el indice seleccionado
   static const List<Widget> _widgetOptions = <Widget>[
     Mainmenu(),
     Searcher(),
@@ -46,37 +55,52 @@ class _MyHomePageState extends State<MyHomePage> {
     Settings(),
   ];
 
+  // Segun el indice seleccionado, se actualiza la página mostrada
   void _onItemTapped(int index) {
     setState(() {
       currentIndex = index;
     });
   }
+
   @override
   Widget build(BuildContext context) {
+    // Se muestra la página correspondiente al indice seleccionado
     return Scaffold(
       body: _widgetOptions.elementAt(currentIndex),
-      bottomNavigationBar: BottomNavigationBar(
+      // Creación de la barra de navegación inferior
+      bottomNavigationBar: BottomNavigationBar( 
+
+        // Detalles del aspecto
         type: BottomNavigationBarType.shifting,
         currentIndex: currentIndex,
         selectedItemColor: const Color.fromARGB(255, 94, 91, 87),
         unselectedItemColor: Colors.white,
+
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
+
+          // Item para la pagina principal
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
             label: 'Página principal',
             backgroundColor: Color.fromARGB(255, 255, 189, 89),
           ),
+
+          // Item para el buscador
           BottomNavigationBarItem(
             icon: Icon(Icons.search),
             label: 'Buscador',
             backgroundColor: Color.fromARGB(255, 255, 189, 89),
           ),
+
+          // Item para las listas
           BottomNavigationBarItem(
             icon: Icon(Icons.view_list),
             label: 'Listas',
             backgroundColor: Color.fromARGB(255, 255, 189, 89),
           ),
+
+          // Item para la configuración (aun falta implementar)
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'Configuración',
@@ -84,6 +108,10 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ],
       ),
+
+
+      // Estp era pq era un diseño anterior, pero lo dejo 
+      // comentado por si acaso
       // bottomNavigationBar: NavigationBar(
       //   selectedIndex: currentIndex,
       //   onDestinationSelected: _onItemTapped,
