@@ -61,18 +61,22 @@ class _SearcherState extends State<Searcher> {
     });
   }
 
-  void filtrarRecetas() {
-    List<Receta> resultado = todosRecetas.where((receta) {
-      final coincideBusqueda =
-          receta.nombre
+  Future<void> filtrarRecetas() async {
+    List<Receta> resultado = [];
+    for (var receta in todosRecetas) {
+
+      final coincideNombre = receta.nombre
         .toLowerCase()
         .contains(busqueda.toLowerCase());
-      final coincideCategoria = categoriaSeleccionada == 'Todas'
-        ? true
-        : true;
-        
-      return coincideBusqueda && coincideCategoria;
-    }).toList();
+
+      final ingredientes = await db.obtenerIngredientes(receta.id);
+      final coincideIngrediente = ingredientes.any((ing) => 
+        ing.nombre.toLowerCase().contains(busqueda.toLowerCase()));
+      
+      if(coincideNombre || coincideIngrediente) {
+        resultado.add(receta);
+      }
+    }
 
     if (ordenSeleccionado == 'Por nombre') {
       resultado.sort((a, b) => a.nombre.compareTo(b.nombre));
@@ -182,7 +186,7 @@ class _SearcherState extends State<Searcher> {
                 child: TextField(
                   onChanged: (value) {
                     busqueda = value;
-                    seleccionarFiltros();
+                    filtrarRecetas();
                   },
                   decoration: InputDecoration(
                     hintText: 'Buscar receta o ingrediente',

@@ -4,7 +4,11 @@
     "descripcion": "Ligera y saludable",
     "tiempo": 10,
     "categoria": "Ensaladas",
-    "imagen": "https://via.placeholder.com/400",
+    "imagenes": [
+    "assets/images/huevos_revueltos.jpg",
+    "assets/images/huevos_revueltos2.jpg",
+    "assets/images/huevos_revueltos3.jpg"
+    ],
     "ingredientes": [
       {"nombre": "Lechuga", "cantidad": 1, "unidad": "taza"},
       {"nombre": "Tomate", "cantidad": 2, "unidad": "piezas"}
@@ -26,7 +30,11 @@
   "descripcion": "Rápida y deliciosa",
   "tiempo": 20,
   "categoria": "Pastas",
-  "imagen": "https://via.placeholder.com/400",
+  "imagenes": [
+    "assets/images/huevos_revueltos.jpg",
+    "assets/images/huevos_revueltos2.jpg",
+    "assets/images/huevos_revueltos3.jpg"
+  ],
   "ingredientes": [
     {"nombre": "Pasta", "cantidad": 200, "unidad": "gramos"},
     {"nombre": "Ajo", "cantidad": 2, "unidad": "dientes"},
@@ -49,7 +57,11 @@
   "descripcion": "Energético y cremoso",
   "tiempo": 5,
   "categoria": "Bebidas",
-  "imagen": "https://via.placeholder.com/400",
+  "imagenes": [
+    "assets/images/huevos_revueltos.jpg",
+    "assets/images/huevos_revueltos2.jpg",
+    "assets/images/huevos_revueltos3.jpg"
+  ],
   "ingredientes": [
     {"nombre": "Plátano", "cantidad": 1, "unidad": "pieza"},
     {"nombre": "Leche", "cantidad": 1, "unidad": "taza"},
@@ -71,7 +83,11 @@
   "descripcion": "Sencillas y nutritivas",
   "tiempo": 10,
   "categoria": "Desayunos",
-  "imagen": "https://via.placeholder.com/400",
+  "imagenes": [
+    "assets/images/huevos_revueltos.jpg",
+    "assets/images/huevos_revueltos2.jpg",
+    "assets/images/huevos_revueltos3.jpg"
+  ],
   "ingredientes": [
     {"nombre": "Pan", "cantidad": 2, "unidad": "rebanadas"},
     {"nombre": "Aguacate", "cantidad": 1, "unidad": "pieza"},
@@ -94,7 +110,11 @@
   "descripcion": "Clásico desayuno",
   "tiempo": 8,
   "categoria": "Desayunos",
-  "imagen": "assets/images/huevos_revueltos.jpg",
+  "imagenes": [
+    "assets/images/huevos_revueltos.jpg",
+    "assets/images/huevos_revueltos2.jpg",
+    "assets/images/huevos_revueltos3.jpg"
+  ],
   "ingredientes": [
     {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
     {"nombre": "Mantequilla", "cantidad": 1, "unidad": "cucharada"},

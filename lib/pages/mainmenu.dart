@@ -48,7 +48,6 @@ class _MainmenuState extends State<Mainmenu> {
           Row(
             children: [
               Expanded(
-
                 // Caja de texto para el buscador
                 child: TextField(
                   onChanged: (value) {

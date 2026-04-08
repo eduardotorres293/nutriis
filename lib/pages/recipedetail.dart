@@ -11,6 +11,7 @@ class Recipedetail extends StatefulWidget {
 
 class _RecipedetailState extends State<Recipedetail> {
   bool isSaved = false;
+  int currentImage = 0;
   late AppDatabase db;
 
   late Future<Receta> recetaFuture;
@@ -56,26 +57,47 @@ class _RecipedetailState extends State<Recipedetail> {
                 Container(
                   height: 300,
                   width: double.infinity,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: receta.imagen != null
-                          ? AssetImage(receta.imagen!)
-                          : const AssetImage('assets/images/default.jpg'),
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                  child: Builder(
+                    builder: (context) {
+                    final imagenesList = receta.imagenes != null
+                        ? receta.imagenes!.split(',')
+                        : ['assets/images/default.jpg'];
+
+                    return PageView.builder(
+                      itemCount: imagenesList.length,
+                      onPageChanged: (index) {
+                        setState(() {
+                          currentImage = index;
+                        });
+                      },
+                      itemBuilder: (context, index) {
+                          final img = imagenesList[index];
+
+                          return Image(
+                            image: img.startsWith('http')
+                                ? NetworkImage(img)
+                                : AssetImage(img) as ImageProvider,
+                            fit: BoxFit.cover,
+                        );
+                      },
+                    );
+                  }),
                 ),
                 Positioned(
                   top: 40,
                   left: 10,
                   child: IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Color.fromARGB(255, 56, 55, 55)),
+                    icon: const Icon(
+                      Icons.arrow_back, 
+                      color: Color.fromARGB(255, 56, 55, 55),
+                      size: 30,
+                    ),
                     style: IconButton.styleFrom(
                       backgroundColor: Color.fromARGB(255, 255, 189, 89),
                       minimumSize: const Size(40, 40),
                       padding: EdgeInsets.zero,
                       shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(64),
+                        borderRadius: BorderRadius.circular(16),
                       ),
                     ),
                     onPressed: () {
@@ -83,6 +105,36 @@ class _RecipedetailState extends State<Recipedetail> {
                     },
                   ),
                 ),
+
+                Positioned(
+                  bottom: 10,
+                  left: 0,
+                  right: 0,
+                  child: Builder(
+                    builder: (context) {
+                      final imagenesList = receta.imagenes != null
+                          ? receta.imagenes!.split(',')
+                          : ['assets/images/default.jpg'];
+
+                      return Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(imagenesList.length, (index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            width: currentImage == index ? 12 : 8,
+                            height: currentImage == index ? 12 : 8,
+                            decoration: BoxDecoration(
+                              color: currentImage == index
+                                  ? const Color.fromARGB(255, 255, 255, 255)
+                                  : Colors.grey,
+                              shape: BoxShape.circle,
+                            ),
+                          );
+                        }),
+                      );
+                    }
+                  ),
+                 ),
               ],
             ),
 

@@ -15,7 +15,7 @@ class Recetas extends Table {
   TextColumn get descripcion => text()();
   IntColumn get tiempo => integer()();
   BoolColumn get guardada => boolean().withDefault(const Constant(false))();
-  TextColumn get imagen => text().nullable()();
+  TextColumn get imagenes => text().nullable()();
 }
 
 class Categorias extends Table {
@@ -111,13 +111,17 @@ extension JsonSeed on AppDatabase {
         categoriaId = categoriaExistente.id;
       }
 
+      final imagenesJson = recetaJson['imagenes'];
+      
       final recetaId = await into(recetas).insert(
         RecetasCompanion(
           nombre: Value(recetaJson['nombre']),
           descripcion: Value(recetaJson['descripcion']),
           tiempo: Value(recetaJson['tiempo']),
           categoriaId: Value(categoriaId),
-          imagen: Value(recetaJson['imagen']),
+          imagenes: imagenesJson != null && imagenesJson is List
+            ? Value(imagenesJson.join(','))
+            : const Value(null),
         ),
       );
 
