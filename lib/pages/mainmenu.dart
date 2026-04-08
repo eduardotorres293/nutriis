@@ -129,11 +129,12 @@ class _MainmenuState extends State<Mainmenu> {
                       if (!snapshot.hasData) {
                         return const Center(child: CircularProgressIndicator());
                       }
-                      final recetas = snapshot.data!;
+                      final recetas = snapshot.data!..shuffle();
+                      final recetasRandom = recetas.take(4).toList(); // Se muestran solo las recetas aleatorias seleccionadas previamente
 
                       // Creación de un GridView para mostrar las recetas en una cuadrícula
                       return GridView.builder(
-                        itemCount: recetas.length,
+                        itemCount: recetasRandom.length,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

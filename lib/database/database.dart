@@ -15,6 +15,7 @@ class Recetas extends Table {
   TextColumn get descripcion => text()();
   IntColumn get tiempo => integer()();
   BoolColumn get guardada => boolean().withDefault(const Constant(false))();
+  TextColumn get imagen => text().nullable()();
 }
 
 class Categorias extends Table {
@@ -116,6 +117,7 @@ extension JsonSeed on AppDatabase {
           descripcion: Value(recetaJson['descripcion']),
           tiempo: Value(recetaJson['tiempo']),
           categoriaId: Value(categoriaId),
+          imagen: Value(recetaJson['imagen']),
         ),
       );
 

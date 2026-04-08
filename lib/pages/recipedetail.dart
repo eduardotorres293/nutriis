@@ -56,16 +56,14 @@ class _RecipedetailState extends State<Recipedetail> {
                 Container(
                   height: 300,
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: NetworkImage('https://via.placeholder.com/400x300'),
+                      image: receta.imagen != null
+                          ? AssetImage(receta.imagen!)
+                          : const AssetImage('assets/images/default.jpg'),
                       fit: BoxFit.cover,
                     ),
                   ),
-                  child: const Icon(
-                      Icons.restaurant, 
-                      size: 100, 
-                      color: Colors.white),
                 ),
                 Positioned(
                   top: 40,

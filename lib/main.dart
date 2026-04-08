@@ -11,7 +11,7 @@ void main() async{
   final database = AppDatabase();
 
   // El que inserta los datos
-  await database.cargarDesdeJson();
+  await database.cargarSiVacio();
   runApp(const MyApp());
 }
 

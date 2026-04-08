@@ -256,6 +256,30 @@ class $RecetasTable extends Recetas with TableInfo<$RecetasTable, Receta> {
     type: DriftSqlType.int,
     requiredDuringInsert: true,
   );
+  static const VerificationMeta _guardadaMeta = const VerificationMeta(
+    'guardada',
+  );
+  @override
+  late final GeneratedColumn<bool> guardada = GeneratedColumn<bool>(
+    'guardada',
+    aliasedName,
+    false,
+    type: DriftSqlType.bool,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'CHECK ("guardada" IN (0, 1))',
+    ),
+    defaultValue: const Constant(false),
+  );
+  static const VerificationMeta _imagenMeta = const VerificationMeta('imagen');
+  @override
+  late final GeneratedColumn<String> imagen = GeneratedColumn<String>(
+    'imagen',
+    aliasedName,
+    true,
+    type: DriftSqlType.string,
+    requiredDuringInsert: false,
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -263,6 +287,8 @@ class $RecetasTable extends Recetas with TableInfo<$RecetasTable, Receta> {
     nombre,
     descripcion,
     tiempo,
+    guardada,
+    imagen,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -317,6 +343,18 @@ class $RecetasTable extends Recetas with TableInfo<$RecetasTable, Receta> {
     } else if (isInserting) {
       context.missing(_tiempoMeta);
     }
+    if (data.containsKey('guardada')) {
+      context.handle(
+        _guardadaMeta,
+        guardada.isAcceptableOrUnknown(data['guardada']!, _guardadaMeta),
+      );
+    }
+    if (data.containsKey('imagen')) {
+      context.handle(
+        _imagenMeta,
+        imagen.isAcceptableOrUnknown(data['imagen']!, _imagenMeta),
+      );
+    }
     return context;
   }
 
@@ -346,6 +384,14 @@ class $RecetasTable extends Recetas with TableInfo<$RecetasTable, Receta> {
         DriftSqlType.int,
         data['${effectivePrefix}tiempo'],
       )!,
+      guardada: attachedDatabase.typeMapping.read(
+        DriftSqlType.bool,
+        data['${effectivePrefix}guardada'],
+      )!,
+      imagen: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}imagen'],
+      ),
     );
   }
 
@@ -361,12 +407,16 @@ class Receta extends DataClass implements Insertable<Receta> {
   final String nombre;
   final String descripcion;
   final int tiempo;
+  final bool guardada;
+  final String? imagen;
   const Receta({
     required this.id,
     required this.categoriaId,
     required this.nombre,
     required this.descripcion,
     required this.tiempo,
+    required this.guardada,
+    this.imagen,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -376,6 +426,10 @@ class Receta extends DataClass implements Insertable<Receta> {
     map['nombre'] = Variable<String>(nombre);
     map['descripcion'] = Variable<String>(descripcion);
     map['tiempo'] = Variable<int>(tiempo);
+    map['guardada'] = Variable<bool>(guardada);
+    if (!nullToAbsent || imagen != null) {
+      map['imagen'] = Variable<String>(imagen);
+    }
     return map;
   }
 
@@ -386,6 +440,10 @@ class Receta extends DataClass implements Insertable<Receta> {
       nombre: Value(nombre),
       descripcion: Value(descripcion),
       tiempo: Value(tiempo),
+      guardada: Value(guardada),
+      imagen: imagen == null && nullToAbsent
+          ? const Value.absent()
+          : Value(imagen),
     );
   }
 
@@ -400,6 +458,8 @@ class Receta extends DataClass implements Insertable<Receta> {
       nombre: serializer.fromJson<String>(json['nombre']),
       descripcion: serializer.fromJson<String>(json['descripcion']),
       tiempo: serializer.fromJson<int>(json['tiempo']),
+      guardada: serializer.fromJson<bool>(json['guardada']),
+      imagen: serializer.fromJson<String?>(json['imagen']),
     );
   }
   @override
@@ -411,6 +471,8 @@ class Receta extends DataClass implements Insertable<Receta> {
       'nombre': serializer.toJson<String>(nombre),
       'descripcion': serializer.toJson<String>(descripcion),
       'tiempo': serializer.toJson<int>(tiempo),
+      'guardada': serializer.toJson<bool>(guardada),
+      'imagen': serializer.toJson<String?>(imagen),
     };
   }
 
@@ -420,12 +482,16 @@ class Receta extends DataClass implements Insertable<Receta> {
     String? nombre,
     String? descripcion,
     int? tiempo,
+    bool? guardada,
+    Value<String?> imagen = const Value.absent(),
   }) => Receta(
     id: id ?? this.id,
     categoriaId: categoriaId ?? this.categoriaId,
     nombre: nombre ?? this.nombre,
     descripcion: descripcion ?? this.descripcion,
     tiempo: tiempo ?? this.tiempo,
+    guardada: guardada ?? this.guardada,
+    imagen: imagen.present ? imagen.value : this.imagen,
   );
   Receta copyWithCompanion(RecetasCompanion data) {
     return Receta(
@@ -438,6 +504,8 @@ class Receta extends DataClass implements Insertable<Receta> {
           ? data.descripcion.value
           : this.descripcion,
       tiempo: data.tiempo.present ? data.tiempo.value : this.tiempo,
+      guardada: data.guardada.present ? data.guardada.value : this.guardada,
+      imagen: data.imagen.present ? data.imagen.value : this.imagen,
     );
   }
 
@@ -448,13 +516,23 @@ class Receta extends DataClass implements Insertable<Receta> {
           ..write('categoriaId: $categoriaId, ')
           ..write('nombre: $nombre, ')
           ..write('descripcion: $descripcion, ')
-          ..write('tiempo: $tiempo')
+          ..write('tiempo: $tiempo, ')
+          ..write('guardada: $guardada, ')
+          ..write('imagen: $imagen')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode => Object.hash(id, categoriaId, nombre, descripcion, tiempo);
+  int get hashCode => Object.hash(
+    id,
+    categoriaId,
+    nombre,
+    descripcion,
+    tiempo,
+    guardada,
+    imagen,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -463,7 +541,9 @@ class Receta extends DataClass implements Insertable<Receta> {
           other.categoriaId == this.categoriaId &&
           other.nombre == this.nombre &&
           other.descripcion == this.descripcion &&
-          other.tiempo == this.tiempo);
+          other.tiempo == this.tiempo &&
+          other.guardada == this.guardada &&
+          other.imagen == this.imagen);
 }
 
 class RecetasCompanion extends UpdateCompanion<Receta> {
@@ -472,12 +552,16 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
   final Value<String> nombre;
   final Value<String> descripcion;
   final Value<int> tiempo;
+  final Value<bool> guardada;
+  final Value<String?> imagen;
   const RecetasCompanion({
     this.id = const Value.absent(),
     this.categoriaId = const Value.absent(),
     this.nombre = const Value.absent(),
     this.descripcion = const Value.absent(),
     this.tiempo = const Value.absent(),
+    this.guardada = const Value.absent(),
+    this.imagen = const Value.absent(),
   });
   RecetasCompanion.insert({
     this.id = const Value.absent(),
@@ -485,6 +569,8 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     required String nombre,
     required String descripcion,
     required int tiempo,
+    this.guardada = const Value.absent(),
+    this.imagen = const Value.absent(),
   }) : categoriaId = Value(categoriaId),
        nombre = Value(nombre),
        descripcion = Value(descripcion),
@@ -495,6 +581,8 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     Expression<String>? nombre,
     Expression<String>? descripcion,
     Expression<int>? tiempo,
+    Expression<bool>? guardada,
+    Expression<String>? imagen,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -502,6 +590,8 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
       if (nombre != null) 'nombre': nombre,
       if (descripcion != null) 'descripcion': descripcion,
       if (tiempo != null) 'tiempo': tiempo,
+      if (guardada != null) 'guardada': guardada,
+      if (imagen != null) 'imagen': imagen,
     });
   }
 
@@ -511,6 +601,8 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     Value<String>? nombre,
     Value<String>? descripcion,
     Value<int>? tiempo,
+    Value<bool>? guardada,
+    Value<String?>? imagen,
   }) {
     return RecetasCompanion(
       id: id ?? this.id,
@@ -518,6 +610,8 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
       nombre: nombre ?? this.nombre,
       descripcion: descripcion ?? this.descripcion,
       tiempo: tiempo ?? this.tiempo,
+      guardada: guardada ?? this.guardada,
+      imagen: imagen ?? this.imagen,
     );
   }
 
@@ -539,6 +633,12 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     if (tiempo.present) {
       map['tiempo'] = Variable<int>(tiempo.value);
     }
+    if (guardada.present) {
+      map['guardada'] = Variable<bool>(guardada.value);
+    }
+    if (imagen.present) {
+      map['imagen'] = Variable<String>(imagen.value);
+    }
     return map;
   }
 
@@ -549,7 +649,9 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
           ..write('categoriaId: $categoriaId, ')
           ..write('nombre: $nombre, ')
           ..write('descripcion: $descripcion, ')
-          ..write('tiempo: $tiempo')
+          ..write('tiempo: $tiempo, ')
+          ..write('guardada: $guardada, ')
+          ..write('imagen: $imagen')
           ..write(')'))
         .toString();
   }
@@ -1878,6 +1980,8 @@ typedef $$RecetasTableCreateCompanionBuilder =
       required String nombre,
       required String descripcion,
       required int tiempo,
+      Value<bool> guardada,
+      Value<String?> imagen,
     });
 typedef $$RecetasTableUpdateCompanionBuilder =
     RecetasCompanion Function({
@@ -1886,6 +1990,8 @@ typedef $$RecetasTableUpdateCompanionBuilder =
       Value<String> nombre,
       Value<String> descripcion,
       Value<int> tiempo,
+      Value<bool> guardada,
+      Value<String?> imagen,
     });
 
 final class $$RecetasTableReferences
@@ -1994,6 +2100,16 @@ class $$RecetasTableFilterComposer
 
   ColumnFilters<int> get tiempo => $composableBuilder(
     column: $table.tiempo,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<bool> get guardada => $composableBuilder(
+    column: $table.guardada,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get imagen => $composableBuilder(
+    column: $table.imagen,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2125,6 +2241,16 @@ class $$RecetasTableOrderingComposer
     builder: (column) => ColumnOrderings(column),
   );
 
+  ColumnOrderings<bool> get guardada => $composableBuilder(
+    column: $table.guardada,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get imagen => $composableBuilder(
+    column: $table.imagen,
+    builder: (column) => ColumnOrderings(column),
+  );
+
   $$CategoriasTableOrderingComposer get categoriaId {
     final $$CategoriasTableOrderingComposer composer = $composerBuilder(
       composer: this,
@@ -2171,6 +2297,12 @@ class $$RecetasTableAnnotationComposer
 
   GeneratedColumn<int> get tiempo =>
       $composableBuilder(column: $table.tiempo, builder: (column) => column);
+
+  GeneratedColumn<bool> get guardada =>
+      $composableBuilder(column: $table.guardada, builder: (column) => column);
+
+  GeneratedColumn<String> get imagen =>
+      $composableBuilder(column: $table.imagen, builder: (column) => column);
 
   $$CategoriasTableAnnotationComposer get categoriaId {
     final $$CategoriasTableAnnotationComposer composer = $composerBuilder(
@@ -2309,12 +2441,16 @@ class $$RecetasTableTableManager
                 Value<String> nombre = const Value.absent(),
                 Value<String> descripcion = const Value.absent(),
                 Value<int> tiempo = const Value.absent(),
+                Value<bool> guardada = const Value.absent(),
+                Value<String?> imagen = const Value.absent(),
               }) => RecetasCompanion(
                 id: id,
                 categoriaId: categoriaId,
                 nombre: nombre,
                 descripcion: descripcion,
                 tiempo: tiempo,
+                guardada: guardada,
+                imagen: imagen,
               ),
           createCompanionCallback:
               ({
@@ -2323,12 +2459,16 @@ class $$RecetasTableTableManager
                 required String nombre,
                 required String descripcion,
                 required int tiempo,
+                Value<bool> guardada = const Value.absent(),
+                Value<String?> imagen = const Value.absent(),
               }) => RecetasCompanion.insert(
                 id: id,
                 categoriaId: categoriaId,
                 nombre: nombre,
                 descripcion: descripcion,
                 tiempo: tiempo,
+                guardada: guardada,
+                imagen: imagen,
               ),
           withReferenceMapper: (p0) => p0
               .map(

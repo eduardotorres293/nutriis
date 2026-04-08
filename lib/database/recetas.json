@@ -94,7 +94,7 @@
   "descripcion": "Clásico desayuno",
   "tiempo": 8,
   "categoria": "Desayunos",
-  "imagen": "https://via.placeholder.com/400",
+  "imagen": "assets/images/huevos_revueltos.jpg",
   "ingredientes": [
     {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
     {"nombre": "Mantequilla", "cantidad": 1, "unidad": "cucharada"},
