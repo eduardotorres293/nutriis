@@ -145,6 +145,10 @@ class _MainmenuState extends State<Mainmenu> {
                         itemBuilder: (context, index) {
                           final receta = recetas[index];
 
+                          final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
+                            ? receta.imagenes!.split(',').first
+                            : 'assets/images/default.jpg';
+
                           // Cada receta se muestra dentro de un GestureDetector para
                           // permitir hacer clic e ir a la página de detalles
                           return GestureDetector(
@@ -161,8 +165,11 @@ class _MainmenuState extends State<Mainmenu> {
                             child: Container(
                               // Creación de un contenedor para cada receta
                               decoration: BoxDecoration(
-                                color: Colors.orange[100],
                                 borderRadius: BorderRadius.circular(16),
+                                image: DecorationImage(
+                                  image: AssetImage(imagen),
+                                  fit: BoxFit.cover,
+                                ),
                               ),
 
                               // Nombre de la receta centrado dentro del contenedor

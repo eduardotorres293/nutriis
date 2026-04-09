@@ -113,7 +113,8 @@
   "imagenes": [
     "assets/images/huevos_revueltos.jpg",
     "assets/images/huevos_revueltos2.jpg",
-    "assets/images/huevos_revueltos3.jpg"
+    "assets/images/huevos_revueltos3.jpg",
+    "assets/images/huevos_revueltos4.jpg"
   ],
   "ingredientes": [
     {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},

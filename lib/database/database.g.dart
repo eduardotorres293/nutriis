@@ -1723,6 +1723,448 @@ class InfoNutrimentalCompanion extends UpdateCompanion<InfoNutrimentalData> {
   }
 }
 
+class $ListasTable extends Listas with TableInfo<$ListasTable, Lista> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ListasTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _nombreMeta = const VerificationMeta('nombre');
+  @override
+  late final GeneratedColumn<String> nombre = GeneratedColumn<String>(
+    'nombre',
+    aliasedName,
+    false,
+    type: DriftSqlType.string,
+    requiredDuringInsert: true,
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, nombre];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'listas';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<Lista> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('nombre')) {
+      context.handle(
+        _nombreMeta,
+        nombre.isAcceptableOrUnknown(data['nombre']!, _nombreMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_nombreMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  Lista map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return Lista(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      nombre: attachedDatabase.typeMapping.read(
+        DriftSqlType.string,
+        data['${effectivePrefix}nombre'],
+      )!,
+    );
+  }
+
+  @override
+  $ListasTable createAlias(String alias) {
+    return $ListasTable(attachedDatabase, alias);
+  }
+}
+
+class Lista extends DataClass implements Insertable<Lista> {
+  final int id;
+  final String nombre;
+  const Lista({required this.id, required this.nombre});
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['nombre'] = Variable<String>(nombre);
+    return map;
+  }
+
+  ListasCompanion toCompanion(bool nullToAbsent) {
+    return ListasCompanion(id: Value(id), nombre: Value(nombre));
+  }
+
+  factory Lista.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return Lista(
+      id: serializer.fromJson<int>(json['id']),
+      nombre: serializer.fromJson<String>(json['nombre']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'nombre': serializer.toJson<String>(nombre),
+    };
+  }
+
+  Lista copyWith({int? id, String? nombre}) =>
+      Lista(id: id ?? this.id, nombre: nombre ?? this.nombre);
+  Lista copyWithCompanion(ListasCompanion data) {
+    return Lista(
+      id: data.id.present ? data.id.value : this.id,
+      nombre: data.nombre.present ? data.nombre.value : this.nombre,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('Lista(')
+          ..write('id: $id, ')
+          ..write('nombre: $nombre')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, nombre);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is Lista && other.id == this.id && other.nombre == this.nombre);
+}
+
+class ListasCompanion extends UpdateCompanion<Lista> {
+  final Value<int> id;
+  final Value<String> nombre;
+  const ListasCompanion({
+    this.id = const Value.absent(),
+    this.nombre = const Value.absent(),
+  });
+  ListasCompanion.insert({
+    this.id = const Value.absent(),
+    required String nombre,
+  }) : nombre = Value(nombre);
+  static Insertable<Lista> custom({
+    Expression<int>? id,
+    Expression<String>? nombre,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (nombre != null) 'nombre': nombre,
+    });
+  }
+
+  ListasCompanion copyWith({Value<int>? id, Value<String>? nombre}) {
+    return ListasCompanion(id: id ?? this.id, nombre: nombre ?? this.nombre);
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (nombre.present) {
+      map['nombre'] = Variable<String>(nombre.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ListasCompanion(')
+          ..write('id: $id, ')
+          ..write('nombre: $nombre')
+          ..write(')'))
+        .toString();
+  }
+}
+
+class $ListaRecetasTable extends ListaRecetas
+    with TableInfo<$ListaRecetasTable, ListaReceta> {
+  @override
+  final GeneratedDatabase attachedDatabase;
+  final String? _alias;
+  $ListaRecetasTable(this.attachedDatabase, [this._alias]);
+  static const VerificationMeta _idMeta = const VerificationMeta('id');
+  @override
+  late final GeneratedColumn<int> id = GeneratedColumn<int>(
+    'id',
+    aliasedName,
+    false,
+    hasAutoIncrement: true,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'PRIMARY KEY AUTOINCREMENT',
+    ),
+  );
+  static const VerificationMeta _listaIdMeta = const VerificationMeta(
+    'listaId',
+  );
+  @override
+  late final GeneratedColumn<int> listaId = GeneratedColumn<int>(
+    'lista_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES listas (id)',
+    ),
+  );
+  static const VerificationMeta _recetaIdMeta = const VerificationMeta(
+    'recetaId',
+  );
+  @override
+  late final GeneratedColumn<int> recetaId = GeneratedColumn<int>(
+    'receta_id',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: true,
+    defaultConstraints: GeneratedColumn.constraintIsAlways(
+      'REFERENCES recetas (id)',
+    ),
+  );
+  @override
+  List<GeneratedColumn> get $columns => [id, listaId, recetaId];
+  @override
+  String get aliasedName => _alias ?? actualTableName;
+  @override
+  String get actualTableName => $name;
+  static const String $name = 'lista_recetas';
+  @override
+  VerificationContext validateIntegrity(
+    Insertable<ListaReceta> instance, {
+    bool isInserting = false,
+  }) {
+    final context = VerificationContext();
+    final data = instance.toColumns(true);
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id']!, _idMeta));
+    }
+    if (data.containsKey('lista_id')) {
+      context.handle(
+        _listaIdMeta,
+        listaId.isAcceptableOrUnknown(data['lista_id']!, _listaIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_listaIdMeta);
+    }
+    if (data.containsKey('receta_id')) {
+      context.handle(
+        _recetaIdMeta,
+        recetaId.isAcceptableOrUnknown(data['receta_id']!, _recetaIdMeta),
+      );
+    } else if (isInserting) {
+      context.missing(_recetaIdMeta);
+    }
+    return context;
+  }
+
+  @override
+  Set<GeneratedColumn> get $primaryKey => {id};
+  @override
+  ListaReceta map(Map<String, dynamic> data, {String? tablePrefix}) {
+    final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : '';
+    return ListaReceta(
+      id: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}id'],
+      )!,
+      listaId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}lista_id'],
+      )!,
+      recetaId: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}receta_id'],
+      )!,
+    );
+  }
+
+  @override
+  $ListaRecetasTable createAlias(String alias) {
+    return $ListaRecetasTable(attachedDatabase, alias);
+  }
+}
+
+class ListaReceta extends DataClass implements Insertable<ListaReceta> {
+  final int id;
+  final int listaId;
+  final int recetaId;
+  const ListaReceta({
+    required this.id,
+    required this.listaId,
+    required this.recetaId,
+  });
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    map['id'] = Variable<int>(id);
+    map['lista_id'] = Variable<int>(listaId);
+    map['receta_id'] = Variable<int>(recetaId);
+    return map;
+  }
+
+  ListaRecetasCompanion toCompanion(bool nullToAbsent) {
+    return ListaRecetasCompanion(
+      id: Value(id),
+      listaId: Value(listaId),
+      recetaId: Value(recetaId),
+    );
+  }
+
+  factory ListaReceta.fromJson(
+    Map<String, dynamic> json, {
+    ValueSerializer? serializer,
+  }) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return ListaReceta(
+      id: serializer.fromJson<int>(json['id']),
+      listaId: serializer.fromJson<int>(json['listaId']),
+      recetaId: serializer.fromJson<int>(json['recetaId']),
+    );
+  }
+  @override
+  Map<String, dynamic> toJson({ValueSerializer? serializer}) {
+    serializer ??= driftRuntimeOptions.defaultSerializer;
+    return <String, dynamic>{
+      'id': serializer.toJson<int>(id),
+      'listaId': serializer.toJson<int>(listaId),
+      'recetaId': serializer.toJson<int>(recetaId),
+    };
+  }
+
+  ListaReceta copyWith({int? id, int? listaId, int? recetaId}) => ListaReceta(
+    id: id ?? this.id,
+    listaId: listaId ?? this.listaId,
+    recetaId: recetaId ?? this.recetaId,
+  );
+  ListaReceta copyWithCompanion(ListaRecetasCompanion data) {
+    return ListaReceta(
+      id: data.id.present ? data.id.value : this.id,
+      listaId: data.listaId.present ? data.listaId.value : this.listaId,
+      recetaId: data.recetaId.present ? data.recetaId.value : this.recetaId,
+    );
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ListaReceta(')
+          ..write('id: $id, ')
+          ..write('listaId: $listaId, ')
+          ..write('recetaId: $recetaId')
+          ..write(')'))
+        .toString();
+  }
+
+  @override
+  int get hashCode => Object.hash(id, listaId, recetaId);
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is ListaReceta &&
+          other.id == this.id &&
+          other.listaId == this.listaId &&
+          other.recetaId == this.recetaId);
+}
+
+class ListaRecetasCompanion extends UpdateCompanion<ListaReceta> {
+  final Value<int> id;
+  final Value<int> listaId;
+  final Value<int> recetaId;
+  const ListaRecetasCompanion({
+    this.id = const Value.absent(),
+    this.listaId = const Value.absent(),
+    this.recetaId = const Value.absent(),
+  });
+  ListaRecetasCompanion.insert({
+    this.id = const Value.absent(),
+    required int listaId,
+    required int recetaId,
+  }) : listaId = Value(listaId),
+       recetaId = Value(recetaId);
+  static Insertable<ListaReceta> custom({
+    Expression<int>? id,
+    Expression<int>? listaId,
+    Expression<int>? recetaId,
+  }) {
+    return RawValuesInsertable({
+      if (id != null) 'id': id,
+      if (listaId != null) 'lista_id': listaId,
+      if (recetaId != null) 'receta_id': recetaId,
+    });
+  }
+
+  ListaRecetasCompanion copyWith({
+    Value<int>? id,
+    Value<int>? listaId,
+    Value<int>? recetaId,
+  }) {
+    return ListaRecetasCompanion(
+      id: id ?? this.id,
+      listaId: listaId ?? this.listaId,
+      recetaId: recetaId ?? this.recetaId,
+    );
+  }
+
+  @override
+  Map<String, Expression> toColumns(bool nullToAbsent) {
+    final map = <String, Expression>{};
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
+    }
+    if (listaId.present) {
+      map['lista_id'] = Variable<int>(listaId.value);
+    }
+    if (recetaId.present) {
+      map['receta_id'] = Variable<int>(recetaId.value);
+    }
+    return map;
+  }
+
+  @override
+  String toString() {
+    return (StringBuffer('ListaRecetasCompanion(')
+          ..write('id: $id, ')
+          ..write('listaId: $listaId, ')
+          ..write('recetaId: $recetaId')
+          ..write(')'))
+        .toString();
+  }
+}
+
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(e);
   $AppDatabaseManager get managers => $AppDatabaseManager(this);
@@ -1733,6 +2175,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   late final $InfoNutrimentalTable infoNutrimental = $InfoNutrimentalTable(
     this,
   );
+  late final $ListasTable listas = $ListasTable(this);
+  late final $ListaRecetasTable listaRecetas = $ListaRecetasTable(this);
   @override
   Iterable<TableInfo<Table, Object?>> get allTables =>
       allSchemaEntities.whereType<TableInfo<Table, Object?>>();
@@ -1743,6 +2187,8 @@ abstract class _$AppDatabase extends GeneratedDatabase {
     ingredientes,
     instrucciones,
     infoNutrimental,
+    listas,
+    listaRecetas,
   ];
 }
 
@@ -2074,6 +2520,24 @@ final class $$RecetasTableReferences
       manager.$state.copyWith(prefetchedData: cache),
     );
   }
+
+  static MultiTypedResultKey<$ListaRecetasTable, List<ListaReceta>>
+  _listaRecetasRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.listaRecetas,
+    aliasName: $_aliasNameGenerator(db.recetas.id, db.listaRecetas.recetaId),
+  );
+
+  $$ListaRecetasTableProcessedTableManager get listaRecetasRefs {
+    final manager = $$ListaRecetasTableTableManager(
+      $_db,
+      $_db.listaRecetas,
+    ).filter((f) => f.recetaId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_listaRecetasRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
 }
 
 class $$RecetasTableFilterComposer
@@ -2204,6 +2668,31 @@ class $$RecetasTableFilterComposer
           }) => $$InfoNutrimentalTableFilterComposer(
             $db: $db,
             $table: $db.infoNutrimental,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+
+  Expression<bool> listaRecetasRefs(
+    Expression<bool> Function($$ListaRecetasTableFilterComposer f) f,
+  ) {
+    final $$ListaRecetasTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.listaRecetas,
+      getReferencedColumn: (t) => t.recetaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ListaRecetasTableFilterComposer(
+            $db: $db,
+            $table: $db.listaRecetas,
             $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
             joinBuilder: joinBuilder,
             $removeJoinBuilderFromRootComposer:
@@ -2403,6 +2892,31 @@ class $$RecetasTableAnnotationComposer
     );
     return f(composer);
   }
+
+  Expression<T> listaRecetasRefs<T extends Object>(
+    Expression<T> Function($$ListaRecetasTableAnnotationComposer a) f,
+  ) {
+    final $$ListaRecetasTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.listaRecetas,
+      getReferencedColumn: (t) => t.recetaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ListaRecetasTableAnnotationComposer(
+            $db: $db,
+            $table: $db.listaRecetas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
 }
 
 class $$RecetasTableTableManager
@@ -2423,6 +2937,7 @@ class $$RecetasTableTableManager
             bool ingredientesRefs,
             bool instruccionesRefs,
             bool infoNutrimentalRefs,
+            bool listaRecetasRefs,
           })
         > {
   $$RecetasTableTableManager(_$AppDatabase db, $RecetasTable table)
@@ -2486,6 +3001,7 @@ class $$RecetasTableTableManager
                 ingredientesRefs = false,
                 instruccionesRefs = false,
                 infoNutrimentalRefs = false,
+                listaRecetasRefs = false,
               }) {
                 return PrefetchHooks(
                   db: db,
@@ -2493,6 +3009,7 @@ class $$RecetasTableTableManager
                     if (ingredientesRefs) db.ingredientes,
                     if (instruccionesRefs) db.instrucciones,
                     if (infoNutrimentalRefs) db.infoNutrimental,
+                    if (listaRecetasRefs) db.listaRecetas,
                   ],
                   addJoins:
                       <
@@ -2591,6 +3108,27 @@ class $$RecetasTableTableManager
                               ),
                           typedResults: items,
                         ),
+                      if (listaRecetasRefs)
+                        await $_getPrefetchedData<
+                          Receta,
+                          $RecetasTable,
+                          ListaReceta
+                        >(
+                          currentTable: table,
+                          referencedTable: $$RecetasTableReferences
+                              ._listaRecetasRefsTable(db),
+                          managerFromTypedResult: (p0) =>
+                              $$RecetasTableReferences(
+                                db,
+                                table,
+                                p0,
+                              ).listaRecetasRefs,
+                          referencedItemsForCurrentItem:
+                              (item, referencedItems) => referencedItems.where(
+                                (e) => e.recetaId == item.id,
+                              ),
+                          typedResults: items,
+                        ),
                     ];
                   },
                 );
@@ -2616,6 +3154,7 @@ typedef $$RecetasTableProcessedTableManager =
         bool ingredientesRefs,
         bool instruccionesRefs,
         bool infoNutrimentalRefs,
+        bool listaRecetasRefs,
       })
     >;
 typedef $$IngredientesTableCreateCompanionBuilder =
@@ -3578,6 +4117,587 @@ typedef $$InfoNutrimentalTableProcessedTableManager =
       InfoNutrimentalData,
       PrefetchHooks Function({bool recetaId})
     >;
+typedef $$ListasTableCreateCompanionBuilder =
+    ListasCompanion Function({Value<int> id, required String nombre});
+typedef $$ListasTableUpdateCompanionBuilder =
+    ListasCompanion Function({Value<int> id, Value<String> nombre});
+
+final class $$ListasTableReferences
+    extends BaseReferences<_$AppDatabase, $ListasTable, Lista> {
+  $$ListasTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static MultiTypedResultKey<$ListaRecetasTable, List<ListaReceta>>
+  _listaRecetasRefsTable(_$AppDatabase db) => MultiTypedResultKey.fromTable(
+    db.listaRecetas,
+    aliasName: $_aliasNameGenerator(db.listas.id, db.listaRecetas.listaId),
+  );
+
+  $$ListaRecetasTableProcessedTableManager get listaRecetasRefs {
+    final manager = $$ListaRecetasTableTableManager(
+      $_db,
+      $_db.listaRecetas,
+    ).filter((f) => f.listaId.id.sqlEquals($_itemColumn<int>('id')!));
+
+    final cache = $_typedResult.readTableOrNull(_listaRecetasRefsTable($_db));
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: cache),
+    );
+  }
+}
+
+class $$ListasTableFilterComposer
+    extends Composer<_$AppDatabase, $ListasTable> {
+  $$ListasTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<String> get nombre => $composableBuilder(
+    column: $table.nombre,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  Expression<bool> listaRecetasRefs(
+    Expression<bool> Function($$ListaRecetasTableFilterComposer f) f,
+  ) {
+    final $$ListaRecetasTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.listaRecetas,
+      getReferencedColumn: (t) => t.listaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ListaRecetasTableFilterComposer(
+            $db: $db,
+            $table: $db.listaRecetas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$ListasTableOrderingComposer
+    extends Composer<_$AppDatabase, $ListasTable> {
+  $$ListasTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  ColumnOrderings<String> get nombre => $composableBuilder(
+    column: $table.nombre,
+    builder: (column) => ColumnOrderings(column),
+  );
+}
+
+class $$ListasTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ListasTable> {
+  $$ListasTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  GeneratedColumn<String> get nombre =>
+      $composableBuilder(column: $table.nombre, builder: (column) => column);
+
+  Expression<T> listaRecetasRefs<T extends Object>(
+    Expression<T> Function($$ListaRecetasTableAnnotationComposer a) f,
+  ) {
+    final $$ListaRecetasTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.id,
+      referencedTable: $db.listaRecetas,
+      getReferencedColumn: (t) => t.listaId,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ListaRecetasTableAnnotationComposer(
+            $db: $db,
+            $table: $db.listaRecetas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return f(composer);
+  }
+}
+
+class $$ListasTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ListasTable,
+          Lista,
+          $$ListasTableFilterComposer,
+          $$ListasTableOrderingComposer,
+          $$ListasTableAnnotationComposer,
+          $$ListasTableCreateCompanionBuilder,
+          $$ListasTableUpdateCompanionBuilder,
+          (Lista, $$ListasTableReferences),
+          Lista,
+          PrefetchHooks Function({bool listaRecetasRefs})
+        > {
+  $$ListasTableTableManager(_$AppDatabase db, $ListasTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ListasTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ListasTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ListasTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<String> nombre = const Value.absent(),
+              }) => ListasCompanion(id: id, nombre: nombre),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required String nombre,
+              }) => ListasCompanion.insert(id: id, nombre: nombre),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) =>
+                    (e.readTable(table), $$ListasTableReferences(db, table, e)),
+              )
+              .toList(),
+          prefetchHooksCallback: ({listaRecetasRefs = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [if (listaRecetasRefs) db.listaRecetas],
+              addJoins: null,
+              getPrefetchedDataCallback: (items) async {
+                return [
+                  if (listaRecetasRefs)
+                    await $_getPrefetchedData<Lista, $ListasTable, ListaReceta>(
+                      currentTable: table,
+                      referencedTable: $$ListasTableReferences
+                          ._listaRecetasRefsTable(db),
+                      managerFromTypedResult: (p0) => $$ListasTableReferences(
+                        db,
+                        table,
+                        p0,
+                      ).listaRecetasRefs,
+                      referencedItemsForCurrentItem: (item, referencedItems) =>
+                          referencedItems.where((e) => e.listaId == item.id),
+                      typedResults: items,
+                    ),
+                ];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$ListasTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ListasTable,
+      Lista,
+      $$ListasTableFilterComposer,
+      $$ListasTableOrderingComposer,
+      $$ListasTableAnnotationComposer,
+      $$ListasTableCreateCompanionBuilder,
+      $$ListasTableUpdateCompanionBuilder,
+      (Lista, $$ListasTableReferences),
+      Lista,
+      PrefetchHooks Function({bool listaRecetasRefs})
+    >;
+typedef $$ListaRecetasTableCreateCompanionBuilder =
+    ListaRecetasCompanion Function({
+      Value<int> id,
+      required int listaId,
+      required int recetaId,
+    });
+typedef $$ListaRecetasTableUpdateCompanionBuilder =
+    ListaRecetasCompanion Function({
+      Value<int> id,
+      Value<int> listaId,
+      Value<int> recetaId,
+    });
+
+final class $$ListaRecetasTableReferences
+    extends BaseReferences<_$AppDatabase, $ListaRecetasTable, ListaReceta> {
+  $$ListaRecetasTableReferences(super.$_db, super.$_table, super.$_typedResult);
+
+  static $ListasTable _listaIdTable(_$AppDatabase db) => db.listas.createAlias(
+    $_aliasNameGenerator(db.listaRecetas.listaId, db.listas.id),
+  );
+
+  $$ListasTableProcessedTableManager get listaId {
+    final $_column = $_itemColumn<int>('lista_id')!;
+
+    final manager = $$ListasTableTableManager(
+      $_db,
+      $_db.listas,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_listaIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+
+  static $RecetasTable _recetaIdTable(_$AppDatabase db) =>
+      db.recetas.createAlias(
+        $_aliasNameGenerator(db.listaRecetas.recetaId, db.recetas.id),
+      );
+
+  $$RecetasTableProcessedTableManager get recetaId {
+    final $_column = $_itemColumn<int>('receta_id')!;
+
+    final manager = $$RecetasTableTableManager(
+      $_db,
+      $_db.recetas,
+    ).filter((f) => f.id.sqlEquals($_column));
+    final item = $_typedResult.readTableOrNull(_recetaIdTable($_db));
+    if (item == null) return manager;
+    return ProcessedTableManager(
+      manager.$state.copyWith(prefetchedData: [item]),
+    );
+  }
+}
+
+class $$ListaRecetasTableFilterComposer
+    extends Composer<_$AppDatabase, $ListaRecetasTable> {
+  $$ListaRecetasTableFilterComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnFilters<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  $$ListasTableFilterComposer get listaId {
+    final $$ListasTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.listaId,
+      referencedTable: $db.listas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ListasTableFilterComposer(
+            $db: $db,
+            $table: $db.listas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RecetasTableFilterComposer get recetaId {
+    final $$RecetasTableFilterComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.recetaId,
+      referencedTable: $db.recetas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RecetasTableFilterComposer(
+            $db: $db,
+            $table: $db.recetas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ListaRecetasTableOrderingComposer
+    extends Composer<_$AppDatabase, $ListaRecetasTable> {
+  $$ListaRecetasTableOrderingComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  ColumnOrderings<int> get id => $composableBuilder(
+    column: $table.id,
+    builder: (column) => ColumnOrderings(column),
+  );
+
+  $$ListasTableOrderingComposer get listaId {
+    final $$ListasTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.listaId,
+      referencedTable: $db.listas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ListasTableOrderingComposer(
+            $db: $db,
+            $table: $db.listas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RecetasTableOrderingComposer get recetaId {
+    final $$RecetasTableOrderingComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.recetaId,
+      referencedTable: $db.recetas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RecetasTableOrderingComposer(
+            $db: $db,
+            $table: $db.recetas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ListaRecetasTableAnnotationComposer
+    extends Composer<_$AppDatabase, $ListaRecetasTable> {
+  $$ListaRecetasTableAnnotationComposer({
+    required super.$db,
+    required super.$table,
+    super.joinBuilder,
+    super.$addJoinBuilderToRootComposer,
+    super.$removeJoinBuilderFromRootComposer,
+  });
+  GeneratedColumn<int> get id =>
+      $composableBuilder(column: $table.id, builder: (column) => column);
+
+  $$ListasTableAnnotationComposer get listaId {
+    final $$ListasTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.listaId,
+      referencedTable: $db.listas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$ListasTableAnnotationComposer(
+            $db: $db,
+            $table: $db.listas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+
+  $$RecetasTableAnnotationComposer get recetaId {
+    final $$RecetasTableAnnotationComposer composer = $composerBuilder(
+      composer: this,
+      getCurrentColumn: (t) => t.recetaId,
+      referencedTable: $db.recetas,
+      getReferencedColumn: (t) => t.id,
+      builder:
+          (
+            joinBuilder, {
+            $addJoinBuilderToRootComposer,
+            $removeJoinBuilderFromRootComposer,
+          }) => $$RecetasTableAnnotationComposer(
+            $db: $db,
+            $table: $db.recetas,
+            $addJoinBuilderToRootComposer: $addJoinBuilderToRootComposer,
+            joinBuilder: joinBuilder,
+            $removeJoinBuilderFromRootComposer:
+                $removeJoinBuilderFromRootComposer,
+          ),
+    );
+    return composer;
+  }
+}
+
+class $$ListaRecetasTableTableManager
+    extends
+        RootTableManager<
+          _$AppDatabase,
+          $ListaRecetasTable,
+          ListaReceta,
+          $$ListaRecetasTableFilterComposer,
+          $$ListaRecetasTableOrderingComposer,
+          $$ListaRecetasTableAnnotationComposer,
+          $$ListaRecetasTableCreateCompanionBuilder,
+          $$ListaRecetasTableUpdateCompanionBuilder,
+          (ListaReceta, $$ListaRecetasTableReferences),
+          ListaReceta,
+          PrefetchHooks Function({bool listaId, bool recetaId})
+        > {
+  $$ListaRecetasTableTableManager(_$AppDatabase db, $ListaRecetasTable table)
+    : super(
+        TableManagerState(
+          db: db,
+          table: table,
+          createFilteringComposer: () =>
+              $$ListaRecetasTableFilterComposer($db: db, $table: table),
+          createOrderingComposer: () =>
+              $$ListaRecetasTableOrderingComposer($db: db, $table: table),
+          createComputedFieldComposer: () =>
+              $$ListaRecetasTableAnnotationComposer($db: db, $table: table),
+          updateCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                Value<int> listaId = const Value.absent(),
+                Value<int> recetaId = const Value.absent(),
+              }) => ListaRecetasCompanion(
+                id: id,
+                listaId: listaId,
+                recetaId: recetaId,
+              ),
+          createCompanionCallback:
+              ({
+                Value<int> id = const Value.absent(),
+                required int listaId,
+                required int recetaId,
+              }) => ListaRecetasCompanion.insert(
+                id: id,
+                listaId: listaId,
+                recetaId: recetaId,
+              ),
+          withReferenceMapper: (p0) => p0
+              .map(
+                (e) => (
+                  e.readTable(table),
+                  $$ListaRecetasTableReferences(db, table, e),
+                ),
+              )
+              .toList(),
+          prefetchHooksCallback: ({listaId = false, recetaId = false}) {
+            return PrefetchHooks(
+              db: db,
+              explicitlyWatchedTables: [],
+              addJoins:
+                  <
+                    T extends TableManagerState<
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic,
+                      dynamic
+                    >
+                  >(state) {
+                    if (listaId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.listaId,
+                                referencedTable: $$ListaRecetasTableReferences
+                                    ._listaIdTable(db),
+                                referencedColumn: $$ListaRecetasTableReferences
+                                    ._listaIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+                    if (recetaId) {
+                      state =
+                          state.withJoin(
+                                currentTable: table,
+                                currentColumn: table.recetaId,
+                                referencedTable: $$ListaRecetasTableReferences
+                                    ._recetaIdTable(db),
+                                referencedColumn: $$ListaRecetasTableReferences
+                                    ._recetaIdTable(db)
+                                    .id,
+                              )
+                              as T;
+                    }
+
+                    return state;
+                  },
+              getPrefetchedDataCallback: (items) async {
+                return [];
+              },
+            );
+          },
+        ),
+      );
+}
+
+typedef $$ListaRecetasTableProcessedTableManager =
+    ProcessedTableManager<
+      _$AppDatabase,
+      $ListaRecetasTable,
+      ListaReceta,
+      $$ListaRecetasTableFilterComposer,
+      $$ListaRecetasTableOrderingComposer,
+      $$ListaRecetasTableAnnotationComposer,
+      $$ListaRecetasTableCreateCompanionBuilder,
+      $$ListaRecetasTableUpdateCompanionBuilder,
+      (ListaReceta, $$ListaRecetasTableReferences),
+      ListaReceta,
+      PrefetchHooks Function({bool listaId, bool recetaId})
+    >;
 
 class $AppDatabaseManager {
   final _$AppDatabase _db;
@@ -3592,4 +4712,8 @@ class $AppDatabaseManager {
       $$InstruccionesTableTableManager(_db, _db.instrucciones);
   $$InfoNutrimentalTableTableManager get infoNutrimental =>
       $$InfoNutrimentalTableTableManager(_db, _db.infoNutrimental);
+  $$ListasTableTableManager get listas =>
+      $$ListasTableTableManager(_db, _db.listas);
+  $$ListaRecetasTableTableManager get listaRecetas =>
+      $$ListaRecetasTableTableManager(_db, _db.listaRecetas);
 }

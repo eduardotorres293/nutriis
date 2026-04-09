@@ -8,6 +8,9 @@ import 'package:path/path.dart' as p;
 
 part 'database.g.dart';
 
+
+// NOTA: CADA VEZ QUE SE ACTUALICE ESTE ARCHIVO
+// UTILIZAR EL COMANDO: flutter pub run build_runner build --delete-conflicting-outputs
 class Recetas extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get categoriaId => integer().references(Categorias, #id)();
@@ -47,8 +50,19 @@ class InfoNutrimental extends Table {
   RealColumn get carbohidratos => real()();
 }
 
+class Listas extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  TextColumn get nombre => text()();
+}
+
+class ListaRecetas extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get listaId => integer().references(Listas, #id)();
+  IntColumn get recetaId => integer().references(Recetas, #id)();
+}
+
 @DriftDatabase(
-  tables: [Recetas, Categorias, Ingredientes, Instrucciones, InfoNutrimental],
+  tables: [Recetas, Categorias, Ingredientes, Instrucciones, InfoNutrimental, Listas, ListaRecetas],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
@@ -77,6 +91,39 @@ class AppDatabase extends _$AppDatabase {
     return (select(infoNutrimental)
           ..where((tbl) => tbl.recetaId.equals(recetaId)))
         .getSingleOrNull();
+  }
+
+  Future<int> crearLista(String nombre) {
+  return into(listas).insert(
+    ListasCompanion(nombre: Value(nombre)),
+  );
+  }
+
+  Future<void> agregarRecetaALista(int listaId, int recetaId) {
+    return into(listaRecetas).insert(
+      ListaRecetasCompanion(
+        listaId: Value(listaId),
+        recetaId: Value(recetaId),
+      ),
+    );
+  }
+
+  Future<List<Lista>> obtenerListas() {
+    return select(listas).get();
+  }
+
+  Future<List<Receta>> obtenerRecetasDeLista(int listaId) async {
+    final query = select(recetas).join([
+      innerJoin(
+        listaRecetas,
+        listaRecetas.recetaId.equalsExp(recetas.id),
+      )
+    ])
+      ..where(listaRecetas.listaId.equals(listaId));
+
+    final rows = await query.get();
+
+    return rows.map((row) => row.readTable(recetas)).toList();
   }
 }
 
