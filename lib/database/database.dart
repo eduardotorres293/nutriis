@@ -120,6 +120,13 @@ class AppDatabase extends _$AppDatabase {
     }
   }
 
+  Future<void> eliminarRecetaDeLista(int listaId, int recetaId) async {
+    await (delete(listaRecetas)
+          ..where((t) =>
+              t.listaId.equals(listaId) & t.recetaId.equals(recetaId)))
+        .go();
+  }
+
   Future<List<Lista>> obtenerListas() {
     return select(listas).get();
   }
@@ -144,9 +151,15 @@ class AppDatabase extends _$AppDatabase {
 
     return result.isNotEmpty;
   }
+  Future<bool> existeEnLista(int listaId, int recetaId) async {
+    final result = await (select(listaRecetas)
+          ..where((t) =>
+              t.listaId.equals(listaId) & t.recetaId.equals(recetaId)))
+        .get();
+
+    return result.isNotEmpty;
+  }
 }
-
-
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {

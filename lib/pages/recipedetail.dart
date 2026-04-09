@@ -202,22 +202,26 @@ class _RecipedetailState extends State<Recipedetail> {
                           );
 
                           if (selectedListaId != null) {
-                            final inserted = await db.agregarRecetaALista(selectedListaId, receta.id);
+                            final inserted = await db.existeEnLista(selectedListaId, receta.id);
 
-                            if (!inserted) {
+                            if (inserted) {
+                              await db.eliminarRecetaDeLista(selectedListaId, receta.id);
+
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(content: Text("Ya está en esta lista")),
+                                const SnackBar(content: Text("Receta eliminada correctamente")),
                               );
-                              return;
+                            } else {
+                              await db.agregarRecetaALista(selectedListaId, receta.id);
+
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text("Receta agregada a la lista")),
+                              );
                             }
+                            final estaEnAlguna = await db.recetaEstaEnAlgunaLista(receta.id);
 
                             setState(() {
-                              isSaved = true;
+                              isSaved = estaEnAlguna;
                             });
-
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Receta agregada")),
-                            );
                           }
                         },
                         icon: Icon(
