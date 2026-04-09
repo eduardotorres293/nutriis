@@ -10,7 +10,8 @@ part 'database.g.dart';
 
 
 // NOTA: CADA VEZ QUE SE ACTUALICE ESTE ARCHIVO
-// UTILIZAR EL COMANDO: flutter pub run build_runner build --delete-conflicting-outputs
+// UTILIZAR EL COMANDO: 
+// flutter pub run build_runner build --delete-conflicting-outputs
 class Recetas extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get categoriaId => integer().references(Categorias, #id)();
@@ -59,6 +60,11 @@ class ListaRecetas extends Table {
   IntColumn get id => integer().autoIncrement()();
   IntColumn get listaId => integer().references(Listas, #id)();
   IntColumn get recetaId => integer().references(Recetas, #id)();
+
+  @override
+  List<Set<Column>> get uniqueKeys => [
+    {listaId, recetaId},
+  ];
 }
 
 @DriftDatabase(
@@ -99,13 +105,19 @@ class AppDatabase extends _$AppDatabase {
   );
   }
 
-  Future<void> agregarRecetaALista(int listaId, int recetaId) {
-    return into(listaRecetas).insert(
-      ListaRecetasCompanion(
-        listaId: Value(listaId),
-        recetaId: Value(recetaId),
-      ),
-    );
+  Future<bool> agregarRecetaALista(int listaId, int recetaId) async{
+    try {
+      await into(listaRecetas).insert(
+        ListaRecetasCompanion(
+          listaId: Value(listaId),
+          recetaId: Value(recetaId),
+        ),
+      );
+      return true;
+    } 
+    catch (e) {
+      return false;
+    }
   }
 
   Future<List<Lista>> obtenerListas() {
@@ -125,7 +137,16 @@ class AppDatabase extends _$AppDatabase {
 
     return rows.map((row) => row.readTable(recetas)).toList();
   }
+  Future<bool> recetaEstaEnAlgunaLista(int recetaId) async {
+    final result = await (select(listaRecetas)
+          ..where((t) => t.recetaId.equals(recetaId)))
+        .get();
+
+    return result.isNotEmpty;
+  }
 }
+
+
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../database/database.dart';
+import 'selectlist.dart';
 
 class Recipedetail extends StatefulWidget {
   final int id;
@@ -19,6 +20,14 @@ class _RecipedetailState extends State<Recipedetail> {
   late Future<List<Instruccione>> instruccionesFuture;
   late Future<InfoNutrimentalData?> infoFuture;
 
+  Future<void> _checkSaved() async {
+    final saved = await db.recetaEstaEnAlgunaLista(widget.id);
+
+    setState(() {
+      isSaved = saved;
+    }
+  );
+}
   @override
   void initState() {
     super.initState();
@@ -30,6 +39,8 @@ class _RecipedetailState extends State<Recipedetail> {
     ingredientesFuture = db.obtenerIngredientes(widget.id);
     instruccionesFuture = db.obtenerInstrucciones(widget.id);
     infoFuture = db.obtenerInfo(widget.id);
+
+    _checkSaved();
   }
   
   @override
@@ -181,32 +192,31 @@ class _RecipedetailState extends State<Recipedetail> {
                       width: 40,
                       height: 40,
                       child: IconButton(
-                        onPressed: () async{
-                          final listas = await db.obtenerListas();
-                          final listaId = await showDialog<int>(
+                        onPressed: () async {
+                          final selectedListaId = await showModalBottomSheet<int>(
                             context: context,
-                            builder: (context) {
-                              return SimpleDialog(
-                                title: const Text("Agregar a lista"),
-                                children: listas.map((l) {
-                                  return SimpleDialogOption(
-                                    onPressed: () => Navigator.pop(context, l.id),
-                                    child: Text(l.nombre),
-                                  );
-                                }).toList(),
-                              );
-                            },
+                            isScrollControlled: true,
+                            builder: (_) => SeleccionarListaSheet(
+                              recetaId: receta.id,
+                            ),
                           );
 
-                          if (listaId != null) {
-                            await db.agregarRecetaALista(listaId, receta.id);
+                          if (selectedListaId != null) {
+                            final inserted = await db.agregarRecetaALista(selectedListaId, receta.id);
+
+                            if (!inserted) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(content: Text("Ya está en esta lista")),
+                              );
+                              return;
+                            }
 
                             setState(() {
                               isSaved = true;
                             });
 
                             ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text("Receta agregada a la lista"))
+                              const SnackBar(content: Text("Receta agregada")),
                             );
                           }
                         },

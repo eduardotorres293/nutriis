@@ -257,6 +257,7 @@ class _SearcherState extends State<Searcher> {
           ),
 
           const SizedBox(height: 20),
+          
           Align(
             alignment: Alignment.centerLeft,
             child: Text(
@@ -321,45 +322,45 @@ class _SearcherState extends State<Searcher> {
                 itemCount: recetasFiltradas.length,
                 separatorBuilder: (_, _) => const SizedBox(height: 8),
                 itemBuilder: (context, index) {
-                          final receta = recetasFiltradas[index];
-                          final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
-                            ? receta.imagenes!.split(',').first
-                            : 'assets/images/default.jpg';
+                  final receta = recetasFiltradas[index];
+                  final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
+                    ? receta.imagenes!.split(',').first
+                    : 'assets/images/default.jpg';
 
-                          // Cada receta se muestra dentro de un GestureDetector para
-                          // permitir hacer clic e ir a la página de detalles
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Recipedetail(
-                                    id: receta.id,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              // Creación de un contenedor para cada receta
-                              height:300,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                image: DecorationImage(
-                                  image: AssetImage(imagen),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                  // Cada receta se muestra dentro de un GestureDetector para
+                  // permitir hacer clic e ir a la página de detalles
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Recipedetail(
+                            id: receta.id,
+                          ),
+                        ),
+                      );
+                    },
+                    child: Container(
+                      // Creación de un contenedor para cada receta
+                      height:300,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        image: DecorationImage(
+                          image: AssetImage(imagen),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
 
-                              // Nombre de la receta centrado dentro del contenedor
-                              child: Center(
-                                child: Text(
-                                  receta.nombre,
-                                  style: const TextStyle(fontSize: 20),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
+                      // Nombre de la receta centrado dentro del contenedor
+                      child: Center(
+                        child: Text(
+                          receta.nombre,
+                          style: const TextStyle(fontSize: 20),
+                        ),
+                      ),
+                    ),
+                  );
+                },
               ),
             ),
         ],
