@@ -259,7 +259,7 @@ class _SearcherState extends State<Searcher> {
             ],
           ),
 
-          const SizedBox(height: 20),
+          const SizedBox(height: 30),
           
           Align(
             alignment: Alignment.centerLeft,

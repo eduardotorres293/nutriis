@@ -106,10 +106,23 @@ class _MainmenuState extends State<Mainmenu> {
               ),
             ],
           ),
-          
+
           // Caja vacia para separar el buscador de las recetas
           const SizedBox(height: 20),
 
+          Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'RECETAS DESTACADAS',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+
+          const SizedBox(height: 8),
+          
           // Recetas destacadas y eso
           Expanded(
             // Se usa un SingleChildScrollView para permitir 

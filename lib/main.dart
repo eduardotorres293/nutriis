@@ -68,10 +68,13 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     // Se muestra la página correspondiente al indice seleccionado
     return Scaffold(
-      body: IndexedStack(
-        index: currentIndex,
-        children: _widgetOptions,
+      body: SafeArea(
+        child: IndexedStack(
+          index: currentIndex,
+          children: _widgetOptions,
+        ),
       ),
+      
       // Creación de la barra de navegación inferior
       bottomNavigationBar: BottomNavigationBar( 
 
