@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../database/database.dart';
 import 'selectlist.dart';
+import 'fullimage.dart';
 
 class Recipedetail extends StatefulWidget {
   final int id;
@@ -82,13 +83,30 @@ class _RecipedetailState extends State<Recipedetail> {
                               });
                             },
                             itemBuilder: (context, index) {
-                                final img = imagenesList[index];
+                              final img = imagenesList[index];
 
-                                return Image(
+                              return GestureDetector(
+                                onTap: () {
+                                  final imagenesList = receta.imagenes != null
+                                      ? receta.imagenes!.split(',')
+                                      : ['assets/images/default.jpg'];
+
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => FullscreenImage(
+                                        images: imagenesList,
+                                        initialIndex: index,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: Image(
                                   image: img.startsWith('http')
                                       ? NetworkImage(img)
                                       : AssetImage(img) as ImageProvider,
                                   fit: BoxFit.cover,
+                                ),
                               );
                             },
                           );
