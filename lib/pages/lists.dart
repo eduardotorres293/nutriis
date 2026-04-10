@@ -60,63 +60,65 @@ class _ListsState extends State<Lists> {
           Row(
             children: [
               Expanded(
-                  child: TextField(
-                    onChanged: (value) {
-                      print("Buscando: $value"); 
-                      // Reiniciar busquedas con el texto disponible
-                      // es un bucle
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Buscar nombre de lista o ingrediente',
-                      suffixIcon: const Icon(Icons.search),
-                      filled: true,
-                      fillColor: Colors.grey[300],
-                      contentPadding: const EdgeInsets.symmetric(horizontal: 12),
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none,
-                      ),
-                    ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-
-                // // Boton de busqueda
-                // IconButton(
-                //   onPressed: () {
-                //     print("Botón de búsqueda presionado");
-                //   },
-                //   icon: const Icon(Icons.search),
-                //   style: IconButton.styleFrom(
-                //     backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                //     minimumSize: const Size(40, 40),
-                //     padding: EdgeInsets.zero,
-                //     shape: RoundedRectangleBorder(
-                //       borderRadius: BorderRadius.circular(8),
-                //     ),
-                //   ),
-                // ),
-                // const SizedBox(width: 8),
-
-                // Boton de filtro
-                IconButton(
-                  onPressed: () {
-                    print("Filtro presionado");
+                child: TextField(
+                  onChanged: (value) {
+                    print("Buscando: $value"); 
+                    // Reiniciar busquedas con el texto disponible
+                    // es un bucle
                   },
-                  icon: const Icon(Icons.filter_alt),
-                  style: IconButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                    minimumSize: const Size(40, 40),
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                  decoration: InputDecoration(
+                    hintText: 'Buscar nombre de lista o ingrediente',
+                    suffixIcon: const Icon(Icons.search),
+                    filled: true,
+                    fillColor: Colors.grey[300],
+                    contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                      borderSide: BorderSide.none,
                     ),
                   ),
                 ),
+              ),
+              
+              const SizedBox(width: 8),
+
+              // // Boton de busqueda
+              // IconButton(
+              //   onPressed: () {
+              //     print("Botón de búsqueda presionado");
+              //   },
+              //   icon: const Icon(Icons.search),
+              //   style: IconButton.styleFrom(
+              //     backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+              //     minimumSize: const Size(40, 40),
+              //     padding: EdgeInsets.zero,
+              //     shape: RoundedRectangleBorder(
+              //       borderRadius: BorderRadius.circular(8),
+              //     ),
+              //   ),
+              // ),
+              // const SizedBox(width: 8),
+
+              // Boton de filtro
+              IconButton(
+                onPressed: () {
+                  print("Filtro presionado");
+                },
+                icon: const Icon(Icons.filter_alt),
+                style: IconButton.styleFrom(
+                  backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+                  minimumSize: const Size(40, 40),
+                  padding: EdgeInsets.zero,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
+              ),
             ],
           ),
 
           const SizedBox(height: 20),
+
           //Boton de crear lista
           Row(
             children: [

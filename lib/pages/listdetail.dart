@@ -64,7 +64,6 @@ class _DetalleListaState extends State<DetalleLista> {
     List<Receta> resultado = [];
     
     for (var receta in todosRecetas) {
-
       final coincideNombre = receta.nombre
         .toLowerCase()
         .contains(busqueda.toLowerCase());
@@ -164,7 +163,7 @@ class _DetalleListaState extends State<DetalleLista> {
                       },
                       child: const Text("Aplicar filtros"),
                     ),
-                  )
+                  ),
                 ],
               ),
             );
@@ -284,6 +283,8 @@ class _DetalleListaState extends State<DetalleLista> {
                       );
                     },
                     child: Container(
+                      padding: const EdgeInsets.all(4),
+                      // Creación de un contenedor para cada receta
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
@@ -291,9 +292,14 @@ class _DetalleListaState extends State<DetalleLista> {
                           fit: BoxFit.cover,
                         ),
                       ),
+
+                      // Nombre de la receta centrado dentro del contenedor
                       child: Center(
                         child: Text(
-                          receta.nombre, 
+                          receta.nombre,
+                          textAlign: TextAlign.center,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(fontSize: 20),
                         ),
                       ),
@@ -324,6 +330,8 @@ class _DetalleListaState extends State<DetalleLista> {
                     },
                     child: Container(
                       height: 300,
+                      padding: const EdgeInsets.all(4),
+                      // Creación de un contenedor para cada receta
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
                         image: DecorationImage(
@@ -331,9 +339,14 @@ class _DetalleListaState extends State<DetalleLista> {
                           fit: BoxFit.cover,
                         ),
                       ),
+
+                      // Nombre de la receta centrado dentro del contenedor
                       child: Center(
                         child: Text(
                           receta.nombre,
+                          textAlign: TextAlign.center,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
                           style: const TextStyle(fontSize: 20),
                         ),
                       ),

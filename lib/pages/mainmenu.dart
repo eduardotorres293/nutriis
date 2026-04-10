@@ -163,6 +163,7 @@ class _MainmenuState extends State<Mainmenu> {
                               );
                             },
                             child: Container(
+                              padding: const EdgeInsets.all(4),
                               // Creación de un contenedor para cada receta
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(16),
@@ -176,6 +177,9 @@ class _MainmenuState extends State<Mainmenu> {
                               child: Center(
                                 child: Text(
                                   receta.nombre,
+                                  textAlign: TextAlign.center,
+                                  maxLines: 3,
+                                  overflow: TextOverflow.ellipsis,
                                   style: const TextStyle(fontSize: 20),
                                 ),
                               ),

@@ -164,7 +164,7 @@ class _SearcherState extends State<Searcher> {
                       },
                       child: const Text("Aplicar filtros"),
                     ),
-                  )
+                  ),
                 ],
               ),
             );
@@ -201,6 +201,7 @@ class _SearcherState extends State<Searcher> {
                   ),
                 ),
               ),
+              
               const SizedBox(width: 8),
 
               // // Boton de busqueda
@@ -235,13 +236,15 @@ class _SearcherState extends State<Searcher> {
                   ),
                 ),
               ),
+
               const SizedBox(width: 8),
+
               // Boton de vista
               IconButton(
                 onPressed: () {
                   setState(() {
-                  crossAxisCount = crossAxisCount == 2 ? 1 : 2;
-                });
+                    crossAxisCount = crossAxisCount == 2 ? 1 : 2;
+                  });
                 },
                 icon: Icon(crossAxisCount == 2 ? Icons.view_agenda : Icons.view_cozy,),
                 style: IconButton.styleFrom(
@@ -267,17 +270,18 @@ class _SearcherState extends State<Searcher> {
           ),
 
           const SizedBox(height: 10),
+
           // Recetas y eso
           Expanded(
             child: crossAxisCount == 2
-            ? GridView.builder(
-                itemCount: recetasFiltradas.length,
-                gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: 300,
-                    crossAxisSpacing: 16,
-                    mainAxisSpacing: 16,
-                    childAspectRatio: 1,
-                ),
+          ? GridView.builder(
+              itemCount: recetasFiltradas.length,
+              gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+                  maxCrossAxisExtent: 300,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
+                  childAspectRatio: 1,
+              ),
               itemBuilder: (context, index) {
                 final receta = recetasFiltradas[index];
                 final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
@@ -298,6 +302,7 @@ class _SearcherState extends State<Searcher> {
                     );
                   },
                   child: Container(
+                    padding: const EdgeInsets.all(4),
                     // Creación de un contenedor para cada receta
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
@@ -311,6 +316,9 @@ class _SearcherState extends State<Searcher> {
                     child: Center(
                       child: Text(
                         receta.nombre,
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
                         style: const TextStyle(fontSize: 20),
                       ),
                     ),
@@ -318,53 +326,57 @@ class _SearcherState extends State<Searcher> {
                 );
               }, 
             )
-            : ListView.separated(
-                itemCount: recetasFiltradas.length,
-                separatorBuilder: (_, _) => const SizedBox(height: 8),
-                itemBuilder: (context, index) {
-                  final receta = recetasFiltradas[index];
-                  final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
-                    ? receta.imagenes!.split(',').first
-                    : 'assets/images/default.jpg';
+          : ListView.separated(
+              itemCount: recetasFiltradas.length,
+              separatorBuilder: (_, _) => const SizedBox(height: 8),
+              itemBuilder: (context, index) {
+                final receta = recetasFiltradas[index];
+                final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
+                  ? receta.imagenes!.split(',').first
+                  : 'assets/images/default.jpg';
 
-                  // Cada receta se muestra dentro de un GestureDetector para
-                  // permitir hacer clic e ir a la página de detalles
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => Recipedetail(
-                            id: receta.id,
-                          ),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      // Creación de un contenedor para cada receta
-                      height:300,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        image: DecorationImage(
-                          image: AssetImage(imagen),
-                          fit: BoxFit.cover,
+                // Cada receta se muestra dentro de un GestureDetector para
+                // permitir hacer clic e ir a la página de detalles
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Recipedetail(
+                          id: receta.id,
                         ),
                       ),
-
-                      // Nombre de la receta centrado dentro del contenedor
-                      child: Center(
-                        child: Text(
-                          receta.nombre,
-                          style: const TextStyle(fontSize: 20),
-                        ),
+                    );
+                  },
+                  child: Container(
+                    height: 300,
+                    padding: const EdgeInsets.all(4),
+                    // Creación de un contenedor para cada receta
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      image: DecorationImage(
+                        image: AssetImage(imagen),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                  );
-                },
-              ),
+
+                    // Nombre de la receta centrado dentro del contenedor
+                    child: Center(
+                      child: Text(
+                        receta.nombre,
+                        textAlign: TextAlign.center,
+                        maxLines: 3,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(fontSize: 20),
+                      ),
+                    ),
+                  ),
+                );
+              },
             ),
+          ),
         ],
-      )
+      ),
     );
   }
 }

@@ -56,7 +56,9 @@ class _RecipedetailState extends State<Recipedetail> {
           } else if (!snapshot.hasData) {
             return const Center(child: Text('Receta no encontrada'));
           }
+
           final receta = snapshot.data!;
+
           return SingleChildScrollView(
             child: Column(
               children: [
@@ -144,7 +146,7 @@ class _RecipedetailState extends State<Recipedetail> {
                                     shape: BoxShape.circle,
                                   ),
                                 );
-                              }
+                              },
                             ),
                           );
                         },
@@ -374,16 +376,24 @@ class _RecipedetailState extends State<Recipedetail> {
                                 children: [
                                   ListTile(
                                     title: Text(
-                                      'Calorías: ${info.calorias} kcal')),
+                                      'Calorías: ${info.calorias} kcal'
+                                    ),
+                                  ),
                                   ListTile(
                                     title: Text(
-                                      'Proteínas: ${info.proteinas} g')),
-                                  ListTile(
-                                    title:
-                                      Text('Grasas: ${info.grasas} g')),
+                                      'Proteínas: ${info.proteinas} g'
+                                    ),
+                                  ),
                                   ListTile(
                                     title: Text(
-                                      'Carbohidratos: ${info.carbohidratos} g')),
+                                      'Grasas: ${info.grasas} g'
+                                    ),
+                                  ),
+                                  ListTile(
+                                    title: Text(
+                                      'Carbohidratos: ${info.carbohidratos} g'
+                                    ),
+                                  ),
                                 ],
                               );
                             },

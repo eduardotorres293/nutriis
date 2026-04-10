@@ -51,86 +51,114 @@
     "grasas": 12,
     "carbohidratos": 50
   }
-},
-{
-  "nombre": "Batido de plátano",
-  "descripcion": "Energético y cremoso",
-  "tiempo": 5,
-  "categoria": "Bebidas",
-  "imagenes": [
-    "assets/images/huevos_revueltos.jpg",
-    "assets/images/huevos_revueltos2.jpg",
-    "assets/images/huevos_revueltos3.jpg"
-  ],
-  "ingredientes": [
-    {"nombre": "Plátano", "cantidad": 1, "unidad": "pieza"},
-    {"nombre": "Leche", "cantidad": 1, "unidad": "taza"},
-    {"nombre": "Miel", "cantidad": 1, "unidad": "cucharada"}
-  ],
-  "instrucciones": [
-    {"numero": 1, "descripcion": "Agregar todo a la licuadora"},
-    {"numero": 2, "descripcion": "Licuar hasta obtener mezcla homogénea"}
-  ],
-  "info": {
-    "calorias": 220,
-    "proteinas": 6,
-    "grasas": 4,
-    "carbohidratos": 40
+  },
+  {
+    "nombre": "Batido de plátano",
+    "descripcion": "Energético y cremoso",
+    "tiempo": 5,
+    "categoria": "Bebidas",
+    "imagenes": [
+      "assets/images/huevos_revueltos.jpg",
+      "assets/images/huevos_revueltos2.jpg",
+      "assets/images/huevos_revueltos3.jpg"
+    ],
+    "ingredientes": [
+      {"nombre": "Plátano", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Leche", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Miel", "cantidad": 1, "unidad": "cucharada"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Agregar todo a la licuadora"},
+      {"numero": 2, "descripcion": "Licuar hasta obtener mezcla homogénea"}
+    ],
+    "info": {
+      "calorias": 220,
+      "proteinas": 6,
+      "grasas": 4,
+      "carbohidratos": 40
+    }
+  },
+  {
+    "nombre": "Tostadas de aguacate",
+    "descripcion": "Sencillas y nutritivas",
+    "tiempo": 10,
+    "categoria": "Desayunos",
+    "imagenes": [
+      "assets/images/huevos_revueltos.jpg",
+      "assets/images/huevos_revueltos2.jpg",
+      "assets/images/huevos_revueltos3.jpg"
+    ],
+    "ingredientes": [
+      {"nombre": "Pan", "cantidad": 2, "unidad": "rebanadas"},
+      {"nombre": "Aguacate", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Tostar el pan"},
+      {"numero": 2, "descripcion": "Machacar el aguacate"},
+      {"numero": 3, "descripcion": "Untar y sazonar"}
+    ],
+    "info": {
+      "calorias": 280,
+      "proteinas": 6,
+      "grasas": 15,
+      "carbohidratos": 30
+    }
+  },
+  {
+    "nombre": "Huevos revueltos",
+    "descripcion": "Clásico desayuno",
+    "tiempo": 8,
+    "categoria": "Desayunos",
+    "imagenes": [
+      "assets/images/huevos_revueltos.jpg",
+      "assets/images/huevos_revueltos2.jpg",
+      "assets/images/huevos_revueltos3.jpg",
+      "assets/images/huevos_revueltos4.jpg"
+    ],
+    "ingredientes": [
+      {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
+      {"nombre": "Mantequilla", "cantidad": 1, "unidad": "cucharada"},
+      {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Batir los huevos"},
+      {"numero": 2, "descripcion": "Derretir mantequilla en sartén"},
+      {"numero": 3, "descripcion": "Cocinar los huevos moviendo constantemente"}
+    ],
+    "info": {
+      "calorias": 200,
+      "proteinas": 12,
+      "grasas": 15,
+      "carbohidratos": 2
+    }
+  },
+  {
+    "nombre": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "tiempo": 8,
+    "categoria": "Desayunos",
+    "imagenes": [
+      "assets/images/huevos_revueltos.jpg",
+      "assets/images/huevos_revueltos2.jpg",
+      "assets/images/huevos_revueltos3.jpg",
+      "assets/images/huevos_revueltos4.jpg"
+    ],
+    "ingredientes": [
+      {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
+      {"nombre": "Mantequilla", "cantidad": 1, "unidad": "cucharada"},
+      {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+      {"numero": 2, "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."},
+      {"numero": 3, "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."}
+    ],
+    "info": {
+      "calorias": 200,
+      "proteinas": 12,
+      "grasas": 15,
+      "carbohidratos": 2
+    }
   }
-},
-{
-  "nombre": "Tostadas de aguacate",
-  "descripcion": "Sencillas y nutritivas",
-  "tiempo": 10,
-  "categoria": "Desayunos",
-  "imagenes": [
-    "assets/images/huevos_revueltos.jpg",
-    "assets/images/huevos_revueltos2.jpg",
-    "assets/images/huevos_revueltos3.jpg"
-  ],
-  "ingredientes": [
-    {"nombre": "Pan", "cantidad": 2, "unidad": "rebanadas"},
-    {"nombre": "Aguacate", "cantidad": 1, "unidad": "pieza"},
-    {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
-  ],
-  "instrucciones": [
-    {"numero": 1, "descripcion": "Tostar el pan"},
-    {"numero": 2, "descripcion": "Machacar el aguacate"},
-    {"numero": 3, "descripcion": "Untar y sazonar"}
-  ],
-  "info": {
-    "calorias": 280,
-    "proteinas": 6,
-    "grasas": 15,
-    "carbohidratos": 30
-  }
-},
-{
-  "nombre": "Huevos revueltos",
-  "descripcion": "Clásico desayuno",
-  "tiempo": 8,
-  "categoria": "Desayunos",
-  "imagenes": [
-    "assets/images/huevos_revueltos.jpg",
-    "assets/images/huevos_revueltos2.jpg",
-    "assets/images/huevos_revueltos3.jpg",
-    "assets/images/huevos_revueltos4.jpg"
-  ],
-  "ingredientes": [
-    {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
-    {"nombre": "Mantequilla", "cantidad": 1, "unidad": "cucharada"},
-    {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
-  ],
-  "instrucciones": [
-    {"numero": 1, "descripcion": "Batir los huevos"},
-    {"numero": 2, "descripcion": "Derretir mantequilla en sartén"},
-    {"numero": 3, "descripcion": "Cocinar los huevos moviendo constantemente"}
-  ],
-  "info": {
-    "calorias": 200,
-    "proteinas": 12,
-    "grasas": 15,
-    "carbohidratos": 2
-  }
-}
 ]
