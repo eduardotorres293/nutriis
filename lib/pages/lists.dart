@@ -13,6 +13,13 @@ class _ListsState extends State<Lists> {
   late AppDatabase db;
   late Future<List<Lista>> listasFuture;
 
+  Future<void> _refrescar() async {
+    setState(() {
+      listasFuture = db.obtenerListas();
+    });
+
+    await Future.delayed(const Duration(milliseconds: 500));
+  }
   @override
   void initState() {
     super.initState();
@@ -163,38 +170,125 @@ class _ListsState extends State<Lists> {
 
               final listas = snapshot.data!;
 
-              return ListView.separated(
-                separatorBuilder: (_, __) => const SizedBox(height: 16),
-                itemCount: listas.length,
-                itemBuilder: (context, index) {
-                  final lista = listas[index];
+              return RefreshIndicator(
+                onRefresh: _refrescar,
+                child: ListView.separated(
+                  physics: const AlwaysScrollableScrollPhysics(),
+                  separatorBuilder: (_, __) => const SizedBox(height: 16),
+                  itemCount: listas.length,
+                  itemBuilder: (context, index) {
+                    final lista = listas[index];
 
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) => DetalleLista(listaId: lista.id, nombreLista: lista.nombre),
-                        ),
-                      );
-                    },
-                    child: SizedBox(
-                      height: 120,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: Colors.orange[100],
-                          borderRadius: BorderRadius.circular(16),
-                        ),
-                        child: Center(
-                          child: Text(
-                            lista.nombre,
-                            style: const TextStyle(fontSize: 22),
+                    return GestureDetector(
+                      onTap: () async{
+                        await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => DetalleLista(listaId: lista.id, nombreLista: lista.nombre),
                           ),
+                        );
+
+                        setState(() {
+                          listasFuture = db.obtenerListas();
+                        });
+                      },
+                      onLongPress: () async {
+                        final confirmar = await showDialog<bool>(
+                          context: context,
+                          builder: (context) {
+                            return AlertDialog(
+                              title: const Text("Eliminar lista"),
+                              content: Text("¿Seguro que quieres eliminar '${lista.nombre}'?"),
+                              actions: [
+                                TextButton(
+                                  onPressed: () => Navigator.pop(context, false),
+                                  child: const Text("Cancelar"),
+                                ),
+                                ElevatedButton(
+                                  onPressed: () => Navigator.pop(context, true),
+                                  child: const Text("Eliminar"),
+                                ),
+                              ],
+                            );
+                          },
+                        );
+
+                        if (confirmar == true) {
+                          await db.eliminarLista(lista.id);
+
+                          setState(() {
+                            listasFuture = db.obtenerListas();
+                          });
+                        }
+                      },
+                      child: SizedBox(
+                        height: 330,
+                        child: FutureBuilder<List<Receta>>(
+                          future: db.obtenerRecetasDeLista(lista.id),
+                          builder: (context, snapshotRecetas) {
+                            if (!snapshotRecetas.hasData) {
+                              return Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.orange[100],
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                              );
+                            }
+
+                            final recetas = snapshotRecetas.data!.take(4).toList();
+
+                            return Stack(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(16),
+                                  child: GridView.builder(
+                                    physics: const NeverScrollableScrollPhysics(),
+                                    itemCount: recetas.length,
+                                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                      crossAxisCount: 2,
+                                    ),
+                                    itemBuilder: (context, i) {
+                                      final receta = recetas[i];
+
+                                      final imagen = (receta.imagenes != null &&
+                                              receta.imagenes!.isNotEmpty)
+                                          ? receta.imagenes!.split(',').first
+                                          : 'assets/images/default.jpg';
+
+                                      return Image.asset(
+                                        imagen,
+                                        fit: BoxFit.cover,
+                                      );
+                                    },
+                                  ),
+                                ),
+
+                                Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(16),
+                                    color: Colors.black.withOpacity(0.3),
+                                  ),
+                                ),
+
+                                Center(
+                                  child: Text(
+                                    lista.nombre,
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                )
               );
             },),
           ),

@@ -136,6 +136,15 @@ class AppDatabase extends _$AppDatabase {
               t.listaId.equals(listaId) & t.recetaId.equals(recetaId)))
         .go();
   }
+  Future<void> eliminarLista(int listaId) async {
+    await (delete(listaRecetas)
+          ..where((t) => t.listaId.equals(listaId)))
+        .go();
+
+    await (delete(listas)
+          ..where((t) => t.id.equals(listaId)))
+        .go();
+  }
 
   Future<List<Lista>> obtenerListas() {
     return select(listas).get();

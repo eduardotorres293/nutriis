@@ -20,7 +20,7 @@ class _DetalleListaState extends State<DetalleLista> {
   List<Receta> todosRecetas = [];
   List<Receta> recetasFiltradas = [];
 
-  String categoriaSeleccionada = 'Todas';
+  List<String> categoriasSeleccionadas = [];
   String ordenSeleccionado = 'Ninguno';
   String busqueda = '';
 
@@ -62,8 +62,8 @@ class _DetalleListaState extends State<DetalleLista> {
 
   Future<void> filtrarRecetas() async {
     List<Receta> resultado = [];
-    
     for (var receta in todosRecetas) {
+
       final coincideNombre = receta.nombre
         .toLowerCase()
         .contains(busqueda.toLowerCase());
@@ -72,7 +72,13 @@ class _DetalleListaState extends State<DetalleLista> {
       final coincideIngrediente = ingredientes.any((ing) => 
         ing.nombre.toLowerCase().contains(busqueda.toLowerCase()));
       
-      if(coincideNombre || coincideIngrediente) {
+      final categoriasReceta = await db.obtenerCategoriasDeReceta(receta.id);
+
+      final coincideCategoria = categoriasSeleccionadas.isEmpty ||
+          categoriasReceta.any((cat) =>
+              categoriasSeleccionadas.contains(cat));
+
+      if ((coincideNombre || coincideIngrediente) && coincideCategoria) {
         resultado.add(receta);
       }
     }
@@ -111,15 +117,19 @@ class _DetalleListaState extends State<DetalleLista> {
                   Wrap(
                     spacing: 8,
                     children: categorias.map((cat) {
-                      final seleccionado = cat == categoriaSeleccionada;
+                      final seleccionado = categoriasSeleccionadas.contains(cat);
 
                       return ChoiceChip(
                         label: Text(cat),
                         selected: seleccionado,
                         selectedColor: Colors.orange,
-                        onSelected: (_) {
+                        onSelected: (selected) {
                           setModalState(() {
-                            categoriaSeleccionada = cat;
+                            if (selected) {
+                              categoriasSeleccionadas.add(cat);
+                            } else {
+                              categoriasSeleccionadas.remove(cat);
+                            }
                           });
                         },
                       );
@@ -243,9 +253,9 @@ class _DetalleListaState extends State<DetalleLista> {
             const SizedBox(height: 20),
 
             Align(
-              alignment: Alignment.centerLeft,
+            alignment: Alignment.centerLeft,
               child: Text(
-                'Categoría: $categoriaSeleccionada | Orden: $ordenSeleccionado',
+                'Categorías: ${categoriasSeleccionadas.isEmpty ? "Todas" : categoriasSeleccionadas.join(", ")} | Orden: $ordenSeleccionado',
                 style: const TextStyle(fontSize: 12),
               ),
             ),
