@@ -3,6 +3,12 @@ import 'recipedetail.dart';
 import '../database/database.dart';
 import 'dart:math';
 
+class ListaSugerida {
+  final String nombre;
+  final List<Receta> recetas;
+
+  ListaSugerida({required this.nombre, required this.recetas});
+}
 
 class Mainmenu extends StatefulWidget {
   const Mainmenu({super.key});
@@ -20,18 +26,63 @@ class _MainmenuState extends State<Mainmenu> {
   // recetas obtenidas de la base de datos
   late Future<List<Receta>> recetasFuture;
   List<Receta> recetasRandom = [];
+  List<ListaSugerida> listasSugeridas = [];
 
+  Future<List<Receta>> cargarTodo() async {
+    final recetas = await db.obtenerRecetas();
+
+    recetas.shuffle(Random());
+
+    recetasRandom = recetas.take(4).toList();
+
+    List<ListaSugerida> nuevasListas = [];
+
+    final configuraciones = [
+      {"nombre": "Desayunos rápidos", "categoria": "Desayuno"},
+      {"nombre": "Cena ligera", "categoria": "Cena"},
+      {"nombre": "Opciones veganas", "categoria": "Vegano"},
+      {"nombre": "Algo dulce", "categoria": "Postre"},
+    ];
+
+    for (var config in configuraciones) {
+      List<Receta> filtradas = [];
+
+      for (var receta in recetas) {
+        final cats = await db.obtenerCategoriasDeReceta(receta.id);
+
+        if (cats.contains(config["categoria"])) {
+          filtradas.add(receta);
+        }
+      }
+
+      filtradas.shuffle();
+
+      if (filtradas.isNotEmpty) {
+        nuevasListas.add(
+          ListaSugerida(
+            nombre: config["nombre"] as String,
+            recetas: filtradas.take(4).toList(),
+          ),
+        );
+      }
+    }
+
+    nuevasListas.shuffle();
+    nuevasListas = nuevasListas.take(2).toList();
+
+    setState(() {
+      listasSugeridas = nuevasListas;
+    });
+
+    return recetas;
+  }
   // En el initState se inicializa 
   // la base de datos y se obtiene la lista de recetas
   @override
   void initState() {
     super.initState();
     db = AppDatabase();
-    recetasFuture = db.obtenerRecetas().then((recetas) {
-      recetas.shuffle(Random());
-      recetasRandom = recetas.take(4).toList();
-      return recetas;
-    });
+    recetasFuture = cargarTodo();
   }
   @override
   Widget build(BuildContext context) {
@@ -109,19 +160,6 @@ class _MainmenuState extends State<Mainmenu> {
 
           // Caja vacia para separar el buscador de las recetas
           const SizedBox(height: 20),
-
-          Align(
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'RECETAS DESTACADAS',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ),
-
-          const SizedBox(height: 8),
           
           // Recetas destacadas y eso
           Expanded(
@@ -130,80 +168,162 @@ class _MainmenuState extends State<Mainmenu> {
             child: SingleChildScrollView(
               // Se centra el contenido y se limita el ancho para 
               // que no se vea tan estirado en pantallas grandes
-              child: Center(
+              child: Column(
                 // Se usa un FutureBuilder para mostrar las recetas una vez
                 // que se hayan cargado desde la base de datos
-                child: ConstrainedBox(
-                  constraints: const BoxConstraints(maxWidth: 800),
-                  child: FutureBuilder<List<Receta>>(
-                    future: recetasFuture,
-                    builder: (context, snapshot) {
-                      if (!snapshot.hasData) {
-                        return const Center(child: CircularProgressIndicator());
-                      }
-                      final recetas = snapshot.data!..shuffle();
-                      final recetasRandom = recetas.take(4).toList(); // Se muestran solo las recetas aleatorias seleccionadas previamente
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'RECETAS DESTACADAS',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
 
-                      // Creación de un GridView para mostrar las recetas en una cuadrícula
-                      return GridView.builder(
-                        itemCount: recetasRandom.length,
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 2,
-                          crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                          childAspectRatio: 1,
-                        ),
-                        itemBuilder: (context, index) {
-                          final receta = recetas[index];
+                  const SizedBox(height: 10),
 
-                          final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
-                            ? receta.imagenes!.split(',').first
-                            : 'assets/images/default.jpg';
+                  GridView.builder(
+                    itemCount: recetasRandom.length,
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                    ),
+                    itemBuilder: (context, index) {
+                      final receta = recetasRandom[index];
 
-                          // Cada receta se muestra dentro de un GestureDetector para
-                          // permitir hacer clic e ir a la página de detalles
-                          return GestureDetector(
-                            onTap: () {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => Recipedetail(
-                                    id: receta.id,
-                                  ),
-                                ),
-                              );
-                            },
-                            child: Container(
-                              padding: const EdgeInsets.all(4),
-                              // Creación de un contenedor para cada receta
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(16),
-                                image: DecorationImage(
-                                  image: AssetImage(imagen),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                      final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
+                        ? receta.imagenes!.split(',').first
+                        : 'assets/images/default.jpg';
 
-                              // Nombre de la receta centrado dentro del contenedor
-                              child: Center(
-                                child: Text(
-                                  receta.nombre,
-                                  textAlign: TextAlign.center,
-                                  maxLines: 3,
-                                  overflow: TextOverflow.ellipsis,
-                                  style: const TextStyle(fontSize: 20),
-                                ),
+                      // Cada receta se muestra dentro de un GestureDetector para
+                      // permitir hacer clic e ir a la página de detalles
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Recipedetail(
+                                id: receta.id,
                               ),
                             ),
                           );
                         },
+                        child: Container(
+                          padding: const EdgeInsets.all(4),
+                          // Creación de un contenedor para cada receta
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            image: DecorationImage(
+                              image: AssetImage(imagen),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+
+                          // Nombre de la receta centrado dentro del contenedor
+                          child: Center(
+                            child: Text(
+                              receta.nombre,
+                              textAlign: TextAlign.center,
+                              maxLines: 3,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(fontSize: 20),
+                            ),
+                          ),
+                        ),
                       );
                     },
                   ),
-                ),
-              ),
+                  const SizedBox(height: 20),
+
+                  const Text(
+                    'QUIZÁ PODRÍA INTERESARTE...',
+                    style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  Column(
+                    children: listasSugeridas.map((lista) {
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+
+                          // NOMBRE DE LA LISTA
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 8),
+                            child: Text(
+                              lista.nombre,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+
+                          // RECETAS DE LA LISTA
+                          SizedBox(
+                            height: 140,
+                            child: ListView.separated(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: lista.recetas.length,
+                              separatorBuilder: (_, __) => const SizedBox(width: 10),
+                              itemBuilder: (context, index) {
+                                final receta = lista.recetas[index];
+
+                                final imagen = (receta.imagenes != null && receta.imagenes!.isNotEmpty)
+                                  ? receta.imagenes!.split(',').first
+                                  : 'assets/images/default.jpg';
+
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (_) => Recipedetail(id: receta.id),
+                                      ),
+                                    );
+                                  },
+                                  child: Container(
+                                    width: 120,
+                                    decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(16),
+                                      image: DecorationImage(
+                                        image: AssetImage(imagen),
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    child: Container(
+                                      alignment: Alignment.center,
+                                      padding: const EdgeInsets.all(6),
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        color: Colors.black.withOpacity(0.3),
+                                      ),
+                                      child: Text(
+                                        receta.nombre,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                        style: const TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+
+                          const SizedBox(height: 10),
+                        ],
+                      );
+                    }).toList(),
+                  )
+                ],
+              )
             ),
           ),
         ],
