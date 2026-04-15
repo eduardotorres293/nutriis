@@ -14,12 +14,22 @@ part 'database.g.dart';
 // flutter pub run build_runner build --delete-conflicting-outputs
 class Recetas extends Table {
   IntColumn get id => integer().autoIncrement()();
-  IntColumn get categoriaId => integer().references(Categorias, #id)();
   TextColumn get nombre => text()();
   TextColumn get descripcion => text()();
   IntColumn get tiempo => integer()();
   BoolColumn get guardada => boolean().withDefault(const Constant(false))();
   TextColumn get imagenes => text().nullable()();
+}
+
+class RecetaCategorias extends Table {
+  IntColumn get id => integer().autoIncrement()();
+  IntColumn get recetaId => integer().references(Recetas, #id)();
+  IntColumn get categoriaId => integer().references(Categorias, #id)();
+
+  @override
+  List<Set<Column>> get uniqueKeys => [
+    {recetaId, categoriaId},
+  ];
 }
 
 class Categorias extends Table {
@@ -68,7 +78,7 @@ class ListaRecetas extends Table {
 }
 
 @DriftDatabase(
-  tables: [Recetas, Categorias, Ingredientes, Instrucciones, InfoNutrimental, Listas, ListaRecetas],
+  tables: [Recetas, Categorias, Ingredientes, Instrucciones, InfoNutrimental, Listas, ListaRecetas, RecetaCategorias],
 )
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
@@ -159,6 +169,19 @@ class AppDatabase extends _$AppDatabase {
 
     return result.isNotEmpty;
   }
+  Future<List<String>> obtenerCategoriasDeReceta(int recetaId) async {
+    final query = select(categorias).join([
+      innerJoin(
+        recetaCategorias,
+        recetaCategorias.categoriaId.equalsExp(categorias.id),
+      )
+    ])
+      ..where(recetaCategorias.recetaId.equals(recetaId));
+
+    final rows = await query.get();
+
+    return rows.map((row) => row.readTable(categorias).nombre).toList();
+  }
 }
 
 LazyDatabase _openConnection() {
@@ -176,20 +199,27 @@ extension JsonSeed on AppDatabase {
 
     for (var recetaJson in data) {
 
-      final categoriaNombre = recetaJson['categoria'];
+      final categoriasJson = recetaJson['categorias'] as List;
 
-      final categoriaExistente = await (select(categorias)
-            ..where((c) => c.nombre.equals(categoriaNombre)))
-          .getSingleOrNull();
+      List<int> categoriasIds = [];
 
-      int categoriaId;
+      for (var categoriaNombre in categoriasJson) {
 
-      if (categoriaExistente == null) {
-        categoriaId = await into(categorias).insert(
-          CategoriasCompanion(nombre: Value(categoriaNombre)),
-        );
-      } else {
-        categoriaId = categoriaExistente.id;
+        final categoriaExistente = await (select(categorias)
+              ..where((c) => c.nombre.equals(categoriaNombre)))
+            .getSingleOrNull();
+
+        int categoriaId;
+
+        if (categoriaExistente == null) {
+          categoriaId = await into(categorias).insert(
+            CategoriasCompanion(nombre: Value(categoriaNombre)),
+          );
+        } else {
+          categoriaId = categoriaExistente.id;
+        }
+
+        categoriasIds.add(categoriaId);
       }
 
       final imagenesJson = recetaJson['imagenes'];
@@ -199,12 +229,20 @@ extension JsonSeed on AppDatabase {
           nombre: Value(recetaJson['nombre']),
           descripcion: Value(recetaJson['descripcion']),
           tiempo: Value(recetaJson['tiempo']),
-          categoriaId: Value(categoriaId),
           imagenes: imagenesJson != null && imagenesJson is List
             ? Value(imagenesJson.join(','))
             : const Value(null),
         ),
       );
+
+      for (var categoriaId in categoriasIds) {
+        await into(recetaCategorias).insert(
+          RecetaCategoriasCompanion(
+            recetaId: Value(recetaId),
+            categoriaId: Value(categoriaId),
+          ),
+        );
+      }
 
       for (var ing in recetaJson['ingredientes']) {
         await into(ingredientes).insert(
