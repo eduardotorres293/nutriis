@@ -76,6 +76,18 @@ class $RecetasTable extends Recetas with TableInfo<$RecetasTable, Receta> {
     type: DriftSqlType.string,
     requiredDuringInsert: false,
   );
+  static const VerificationMeta _porcionesMeta = const VerificationMeta(
+    'porciones',
+  );
+  @override
+  late final GeneratedColumn<int> porciones = GeneratedColumn<int>(
+    'porciones',
+    aliasedName,
+    false,
+    type: DriftSqlType.int,
+    requiredDuringInsert: false,
+    defaultValue: const Constant(1),
+  );
   @override
   List<GeneratedColumn> get $columns => [
     id,
@@ -84,6 +96,7 @@ class $RecetasTable extends Recetas with TableInfo<$RecetasTable, Receta> {
     tiempo,
     guardada,
     imagenes,
+    porciones,
   ];
   @override
   String get aliasedName => _alias ?? actualTableName;
@@ -139,6 +152,12 @@ class $RecetasTable extends Recetas with TableInfo<$RecetasTable, Receta> {
         imagenes.isAcceptableOrUnknown(data['imagenes']!, _imagenesMeta),
       );
     }
+    if (data.containsKey('porciones')) {
+      context.handle(
+        _porcionesMeta,
+        porciones.isAcceptableOrUnknown(data['porciones']!, _porcionesMeta),
+      );
+    }
     return context;
   }
 
@@ -172,6 +191,10 @@ class $RecetasTable extends Recetas with TableInfo<$RecetasTable, Receta> {
         DriftSqlType.string,
         data['${effectivePrefix}imagenes'],
       ),
+      porciones: attachedDatabase.typeMapping.read(
+        DriftSqlType.int,
+        data['${effectivePrefix}porciones'],
+      )!,
     );
   }
 
@@ -188,6 +211,7 @@ class Receta extends DataClass implements Insertable<Receta> {
   final int tiempo;
   final bool guardada;
   final String? imagenes;
+  final int porciones;
   const Receta({
     required this.id,
     required this.nombre,
@@ -195,6 +219,7 @@ class Receta extends DataClass implements Insertable<Receta> {
     required this.tiempo,
     required this.guardada,
     this.imagenes,
+    required this.porciones,
   });
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
@@ -207,6 +232,7 @@ class Receta extends DataClass implements Insertable<Receta> {
     if (!nullToAbsent || imagenes != null) {
       map['imagenes'] = Variable<String>(imagenes);
     }
+    map['porciones'] = Variable<int>(porciones);
     return map;
   }
 
@@ -220,6 +246,7 @@ class Receta extends DataClass implements Insertable<Receta> {
       imagenes: imagenes == null && nullToAbsent
           ? const Value.absent()
           : Value(imagenes),
+      porciones: Value(porciones),
     );
   }
 
@@ -235,6 +262,7 @@ class Receta extends DataClass implements Insertable<Receta> {
       tiempo: serializer.fromJson<int>(json['tiempo']),
       guardada: serializer.fromJson<bool>(json['guardada']),
       imagenes: serializer.fromJson<String?>(json['imagenes']),
+      porciones: serializer.fromJson<int>(json['porciones']),
     );
   }
   @override
@@ -247,6 +275,7 @@ class Receta extends DataClass implements Insertable<Receta> {
       'tiempo': serializer.toJson<int>(tiempo),
       'guardada': serializer.toJson<bool>(guardada),
       'imagenes': serializer.toJson<String?>(imagenes),
+      'porciones': serializer.toJson<int>(porciones),
     };
   }
 
@@ -257,6 +286,7 @@ class Receta extends DataClass implements Insertable<Receta> {
     int? tiempo,
     bool? guardada,
     Value<String?> imagenes = const Value.absent(),
+    int? porciones,
   }) => Receta(
     id: id ?? this.id,
     nombre: nombre ?? this.nombre,
@@ -264,6 +294,7 @@ class Receta extends DataClass implements Insertable<Receta> {
     tiempo: tiempo ?? this.tiempo,
     guardada: guardada ?? this.guardada,
     imagenes: imagenes.present ? imagenes.value : this.imagenes,
+    porciones: porciones ?? this.porciones,
   );
   Receta copyWithCompanion(RecetasCompanion data) {
     return Receta(
@@ -275,6 +306,7 @@ class Receta extends DataClass implements Insertable<Receta> {
       tiempo: data.tiempo.present ? data.tiempo.value : this.tiempo,
       guardada: data.guardada.present ? data.guardada.value : this.guardada,
       imagenes: data.imagenes.present ? data.imagenes.value : this.imagenes,
+      porciones: data.porciones.present ? data.porciones.value : this.porciones,
     );
   }
 
@@ -286,14 +318,22 @@ class Receta extends DataClass implements Insertable<Receta> {
           ..write('descripcion: $descripcion, ')
           ..write('tiempo: $tiempo, ')
           ..write('guardada: $guardada, ')
-          ..write('imagenes: $imagenes')
+          ..write('imagenes: $imagenes, ')
+          ..write('porciones: $porciones')
           ..write(')'))
         .toString();
   }
 
   @override
-  int get hashCode =>
-      Object.hash(id, nombre, descripcion, tiempo, guardada, imagenes);
+  int get hashCode => Object.hash(
+    id,
+    nombre,
+    descripcion,
+    tiempo,
+    guardada,
+    imagenes,
+    porciones,
+  );
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
@@ -303,7 +343,8 @@ class Receta extends DataClass implements Insertable<Receta> {
           other.descripcion == this.descripcion &&
           other.tiempo == this.tiempo &&
           other.guardada == this.guardada &&
-          other.imagenes == this.imagenes);
+          other.imagenes == this.imagenes &&
+          other.porciones == this.porciones);
 }
 
 class RecetasCompanion extends UpdateCompanion<Receta> {
@@ -313,6 +354,7 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
   final Value<int> tiempo;
   final Value<bool> guardada;
   final Value<String?> imagenes;
+  final Value<int> porciones;
   const RecetasCompanion({
     this.id = const Value.absent(),
     this.nombre = const Value.absent(),
@@ -320,6 +362,7 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     this.tiempo = const Value.absent(),
     this.guardada = const Value.absent(),
     this.imagenes = const Value.absent(),
+    this.porciones = const Value.absent(),
   });
   RecetasCompanion.insert({
     this.id = const Value.absent(),
@@ -328,6 +371,7 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     required int tiempo,
     this.guardada = const Value.absent(),
     this.imagenes = const Value.absent(),
+    this.porciones = const Value.absent(),
   }) : nombre = Value(nombre),
        descripcion = Value(descripcion),
        tiempo = Value(tiempo);
@@ -338,6 +382,7 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     Expression<int>? tiempo,
     Expression<bool>? guardada,
     Expression<String>? imagenes,
+    Expression<int>? porciones,
   }) {
     return RawValuesInsertable({
       if (id != null) 'id': id,
@@ -346,6 +391,7 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
       if (tiempo != null) 'tiempo': tiempo,
       if (guardada != null) 'guardada': guardada,
       if (imagenes != null) 'imagenes': imagenes,
+      if (porciones != null) 'porciones': porciones,
     });
   }
 
@@ -356,6 +402,7 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     Value<int>? tiempo,
     Value<bool>? guardada,
     Value<String?>? imagenes,
+    Value<int>? porciones,
   }) {
     return RecetasCompanion(
       id: id ?? this.id,
@@ -364,6 +411,7 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
       tiempo: tiempo ?? this.tiempo,
       guardada: guardada ?? this.guardada,
       imagenes: imagenes ?? this.imagenes,
+      porciones: porciones ?? this.porciones,
     );
   }
 
@@ -388,6 +436,9 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
     if (imagenes.present) {
       map['imagenes'] = Variable<String>(imagenes.value);
     }
+    if (porciones.present) {
+      map['porciones'] = Variable<int>(porciones.value);
+    }
     return map;
   }
 
@@ -399,7 +450,8 @@ class RecetasCompanion extends UpdateCompanion<Receta> {
           ..write('descripcion: $descripcion, ')
           ..write('tiempo: $tiempo, ')
           ..write('guardada: $guardada, ')
-          ..write('imagenes: $imagenes')
+          ..write('imagenes: $imagenes, ')
+          ..write('porciones: $porciones')
           ..write(')'))
         .toString();
   }
@@ -2412,6 +2464,7 @@ typedef $$RecetasTableCreateCompanionBuilder =
       required int tiempo,
       Value<bool> guardada,
       Value<String?> imagenes,
+      Value<int> porciones,
     });
 typedef $$RecetasTableUpdateCompanionBuilder =
     RecetasCompanion Function({
@@ -2421,6 +2474,7 @@ typedef $$RecetasTableUpdateCompanionBuilder =
       Value<int> tiempo,
       Value<bool> guardada,
       Value<String?> imagenes,
+      Value<int> porciones,
     });
 
 final class $$RecetasTableReferences
@@ -2561,6 +2615,11 @@ class $$RecetasTableFilterComposer
 
   ColumnFilters<String> get imagenes => $composableBuilder(
     column: $table.imagenes,
+    builder: (column) => ColumnFilters(column),
+  );
+
+  ColumnFilters<int> get porciones => $composableBuilder(
+    column: $table.porciones,
     builder: (column) => ColumnFilters(column),
   );
 
@@ -2728,6 +2787,11 @@ class $$RecetasTableOrderingComposer
     column: $table.imagenes,
     builder: (column) => ColumnOrderings(column),
   );
+
+  ColumnOrderings<int> get porciones => $composableBuilder(
+    column: $table.porciones,
+    builder: (column) => ColumnOrderings(column),
+  );
 }
 
 class $$RecetasTableAnnotationComposer
@@ -2758,6 +2822,9 @@ class $$RecetasTableAnnotationComposer
 
   GeneratedColumn<String> get imagenes =>
       $composableBuilder(column: $table.imagenes, builder: (column) => column);
+
+  GeneratedColumn<int> get porciones =>
+      $composableBuilder(column: $table.porciones, builder: (column) => column);
 
   Expression<T> ingredientesRefs<T extends Object>(
     Expression<T> Function($$IngredientesTableAnnotationComposer a) f,
@@ -2925,6 +2992,7 @@ class $$RecetasTableTableManager
                 Value<int> tiempo = const Value.absent(),
                 Value<bool> guardada = const Value.absent(),
                 Value<String?> imagenes = const Value.absent(),
+                Value<int> porciones = const Value.absent(),
               }) => RecetasCompanion(
                 id: id,
                 nombre: nombre,
@@ -2932,6 +3000,7 @@ class $$RecetasTableTableManager
                 tiempo: tiempo,
                 guardada: guardada,
                 imagenes: imagenes,
+                porciones: porciones,
               ),
           createCompanionCallback:
               ({
@@ -2941,6 +3010,7 @@ class $$RecetasTableTableManager
                 required int tiempo,
                 Value<bool> guardada = const Value.absent(),
                 Value<String?> imagenes = const Value.absent(),
+                Value<int> porciones = const Value.absent(),
               }) => RecetasCompanion.insert(
                 id: id,
                 nombre: nombre,
@@ -2948,6 +3018,7 @@ class $$RecetasTableTableManager
                 tiempo: tiempo,
                 guardada: guardada,
                 imagenes: imagenes,
+                porciones: porciones,
               ),
           withReferenceMapper: (p0) => p0
               .map(

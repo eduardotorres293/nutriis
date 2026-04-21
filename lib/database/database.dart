@@ -19,6 +19,7 @@ class Recetas extends Table {
   IntColumn get tiempo => integer()();
   BoolColumn get guardada => boolean().withDefault(const Constant(false))();
   TextColumn get imagenes => text().nullable()();
+  IntColumn get porciones => integer().withDefault(const Constant(1))();
 }
 
 class RecetaCategorias extends Table {
@@ -241,6 +242,7 @@ extension JsonSeed on AppDatabase {
           imagenes: imagenesJson != null && imagenesJson is List
             ? Value(imagenesJson.join(','))
             : const Value(null),
+          porciones: Value(recetaJson['porciones'] ?? 1)
         ),
       );
 
@@ -295,147 +297,3 @@ extension JsonSeed on AppDatabase {
     }
   }
 }
-
-// extension SeedData on AppDatabase {
-//   Future<void> insertarDatosIniciales() async {
-
-//     final ensaladaId = await into(categorias).insert(
-//       CategoriasCompanion(nombre: const Value("Ensaladas")),
-//     );
-
-//     final desayunoId = await into(categorias).insert(
-//       CategoriasCompanion(nombre: const Value("Desayunos")),
-//     );
-
-//     final receta1Id = await into(recetas).insert(
-//       RecetasCompanion(
-//         nombre: const Value("Ensalada fresca"),
-//         descripcion: const Value("Ligera y saludable"),
-//         tiempo: const Value(10),
-//         categoriaId: Value(ensaladaId),
-//       ),
-//     );
-
-//     await batch((batch) {
-//       batch.insertAll(ingredientes, [
-//         IngredientesCompanion(
-//           recetaId: Value(receta1Id),
-//           nombre: const Value("Lechuga"),
-//           cantidad: const Value(1),
-//           unidad: const Value("taza"),
-//         ),
-//         IngredientesCompanion(
-//           recetaId: Value(receta1Id),
-//           nombre: const Value("Tomate"),
-//           cantidad: const Value(2),
-//           unidad: const Value("piezas"),
-//         ),
-//         IngredientesCompanion(
-//           recetaId: Value(receta1Id),
-//           nombre: const Value("Pepino"),
-//           cantidad: const Value(0.5),
-//           unidad: const Value("pieza"),
-//         ),
-//       ]);
-//     });
-
-//     await batch((batch) {
-//       batch.insertAll(instrucciones, [
-//         InstruccionesCompanion(
-//           recetaId: Value(receta1Id),
-//           numero: const Value(1),
-//           descripcion: const Value("Lavar todos los ingredientes"),
-//         ),
-//         InstruccionesCompanion(
-//           recetaId: Value(receta1Id),
-//           numero: const Value(2),
-//           descripcion: const Value("Cortar en trozos pequeños"),
-//         ),
-//         InstruccionesCompanion(
-//           recetaId: Value(receta1Id),
-//           numero: const Value(3),
-//           descripcion: const Value("Mezclar en un bowl"),
-//         ),
-//       ]);
-//     });
-
-//     await into(infoNutrimental).insert(
-//       InfoNutrimentalCompanion(
-//         recetaId: Value(receta1Id),
-//         calorias: const Value(150),
-//         proteinas: const Value(5),
-//         grasas: const Value(3),
-//         carbohidratos: const Value(20),
-//       ),
-//     );
-
-//     final receta2Id = await into(recetas).insert(
-//       RecetasCompanion(
-//         nombre: const Value("Huevos revueltos"),
-//         descripcion: const Value("Desayuno rápido y nutritivo"),
-//         tiempo: const Value(8),
-//         categoriaId: Value(desayunoId),
-//       ),
-//     );
-
-//     await batch((batch) {
-//       batch.insertAll(ingredientes, [
-//         IngredientesCompanion(
-//           recetaId: Value(receta2Id),
-//           nombre: const Value("Huevo"),
-//           cantidad: const Value(2),
-//           unidad: const Value("piezas"),
-//         ),
-//         IngredientesCompanion(
-//           recetaId: Value(receta2Id),
-//           nombre: const Value("Aceite"),
-//           cantidad: const Value(1),
-//           unidad: const Value("cucharada"),
-//         ),
-//         IngredientesCompanion(
-//           recetaId: Value(receta2Id),
-//           nombre: const Value("Sal"),
-//           cantidad: const Value(1),
-//           unidad: const Value("pizca"),
-//         ),
-//       ]);
-//     });
-
-//     await batch((batch) {
-//       batch.insertAll(instrucciones, [
-//         InstruccionesCompanion(
-//           recetaId: Value(receta2Id),
-//           numero: const Value(1),
-//           descripcion: const Value("Batir los huevos"),
-//         ),
-//         InstruccionesCompanion(
-//           recetaId: Value(receta2Id),
-//           numero: const Value(2),
-//           descripcion: const Value("Calentar sartén con aceite"),
-//         ),
-//         InstruccionesCompanion(
-//           recetaId: Value(receta2Id),
-//           numero: const Value(3),
-//           descripcion: const Value("Cocinar y revolver"),
-//         ),
-//       ]);
-//     });
-
-//     await into(infoNutrimental).insert(
-//       InfoNutrimentalCompanion(
-//         recetaId: Value(receta2Id),
-//         calorias: const Value(250),
-//         proteinas: const Value(12),
-//         grasas: const Value(18),
-//         carbohidratos: const Value(2),
-//       ),
-//     );
-//   }
-
-//   Future<void> insertarSiVacio() async {
-//     final data = await select(recetas).get();
-//     if (data.isEmpty) {
-//       await insertarDatosIniciales();
-//     }
-//   }
-// }

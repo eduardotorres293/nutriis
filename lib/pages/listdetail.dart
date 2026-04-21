@@ -186,7 +186,7 @@ class _DetalleListaState extends State<DetalleLista> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.nombreLista)),
+      appBar: AppBar(title: Text(widget.nombreLista), backgroundColor: Colors.white),
       body: Padding(
         padding: const EdgeInsets.all(12),
         child: Column(

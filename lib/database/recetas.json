@@ -15,7 +15,8 @@
       {"numero": 2, "descripcion": "Agregar frutas"},
       {"numero": 3, "descripcion": "Servir"}
     ],
-    "info": {"calorias": 250,"proteinas": 8,"grasas": 5,"carbohidratos": 40}
+    "info": {"calorias": 250,"proteinas": 8,"grasas": 5,"carbohidratos": 40},
+    "porciones": 1
   },
   {
     "nombre": "Pollo a la plancha",
@@ -31,7 +32,8 @@
       {"numero": 1, "descripcion": "Sazonar el pollo"},
       {"numero": 2, "descripcion": "Cocinar a la plancha"}
     ],
-    "info": {"calorias": 300,"proteinas": 30,"grasas": 10,"carbohidratos": 0}
+    "info": {"calorias": 300,"proteinas": 30,"grasas": 10,"carbohidratos": 0},
+    "porciones": 2
   },
   {
     "nombre": "Ensalada de quinoa",
@@ -47,7 +49,8 @@
       {"numero": 1, "descripcion": "Cocer quinoa"},
       {"numero": 2, "descripcion": "Mezclar con verduras"}
     ],
-    "info": {"calorias": 220,"proteinas": 8,"grasas": 4,"carbohidratos": 35}
+    "info": {"calorias": 220,"proteinas": 8,"grasas": 4,"carbohidratos": 35},
+    "porciones": 3
   },
   {
     "nombre": "Smoothie de mango",
@@ -63,7 +66,8 @@
       {"numero": 1, "descripcion": "Licuar todo"},
       {"numero": 2, "descripcion": "Servir frío"}
     ],
-    "info": {"calorias": 200,"proteinas": 5,"grasas": 3,"carbohidratos": 35}
+    "info": {"calorias": 200,"proteinas": 5,"grasas": 3,"carbohidratos": 35},
+    "porciones": 4
   },
   {
     "nombre": "Omelette de espinaca",
@@ -79,9 +83,9 @@
       {"numero": 1, "descripcion": "Batir huevos"},
       {"numero": 2, "descripcion": "Cocinar con espinaca"}
     ],
-    "info": {"calorias": 210,"proteinas": 14,"grasas": 15,"carbohidratos": 5}
+    "info": {"calorias": 210,"proteinas": 14,"grasas": 15,"carbohidratos": 5},
+    "porciones": 5
   },
-
   {
     "nombre": "Tacos de lechuga con carne",
     "descripcion": "Alternativa ligera a los tacos tradicionales sin tortilla.",
@@ -96,7 +100,8 @@
       {"numero": 1, "descripcion": "Cocinar carne"},
       {"numero": 2, "descripcion": "Servir en hojas"}
     ],
-    "info": {"calorias": 280,"proteinas": 25,"grasas": 15,"carbohidratos": 5}
+    "info": {"calorias": 280,"proteinas": 25,"grasas": 15,"carbohidratos": 5},
+    "porciones": 6
   },
 
   {
@@ -113,9 +118,9 @@
       {"numero": 1, "descripcion": "Cocer arroz"},
       {"numero": 2, "descripcion": "Agregar verduras"}
     ],
-    "info": {"calorias": 300,"proteinas": 6,"grasas": 3,"carbohidratos": 60}
+    "info": {"calorias": 300,"proteinas": 6,"grasas": 3,"carbohidratos": 60},
+    "porciones": 7
   },
-
   {
     "nombre": "Yogur con granola",
     "descripcion": "Snack o desayuno rápido y energético.",
@@ -130,9 +135,9 @@
       {"numero": 1, "descripcion": "Servir yogur"},
       {"numero": 2, "descripcion": "Agregar granola"}
     ],
-    "info": {"calorias": 180,"proteinas": 7,"grasas": 5,"carbohidratos": 25}
+    "info": {"calorias": 180,"proteinas": 7,"grasas": 5,"carbohidratos": 25},
+    "porciones": 8
   },
-
   {
     "nombre": "Sopa de verduras",
     "descripcion": "Caliente, ligera y reconfortante.",
@@ -147,9 +152,9 @@
       {"numero": 1, "descripcion": "Hervir verduras"},
       {"numero": 2, "descripcion": "Sazonar"}
     ],
-    "info": {"calorias": 150,"proteinas": 4,"grasas": 2,"carbohidratos": 30}
+    "info": {"calorias": 150,"proteinas": 4,"grasas": 2,"carbohidratos": 30},
+    "porciones": 9
   },
-
   {
     "nombre": "Panqueques",
     "descripcion": "Clásico desayuno dulce y esponjoso.",
@@ -164,9 +169,9 @@
       {"numero": 1, "descripcion": "Mezclar ingredientes"},
       {"numero": 2, "descripcion": "Cocinar en sartén"}
     ],
-    "info": {"calorias": 320,"proteinas": 8,"grasas": 10,"carbohidratos": 50}
+    "info": {"calorias": 320,"proteinas": 8,"grasas": 10,"carbohidratos": 50},
+    "porciones": 10
   },
-
   {
     "nombre": "Ensalada de atún",
     "descripcion": "Alta en proteína y muy fácil de preparar.",
@@ -181,9 +186,9 @@
       {"numero": 1, "descripcion": "Mezclar ingredientes"},
       {"numero": 2, "descripcion": "Servir"}
     ],
-    "info": {"calorias": 250,"proteinas": 20,"grasas": 15,"carbohidratos": 5}
+    "info": {"calorias": 250,"proteinas": 20,"grasas": 15,"carbohidratos": 5},
+    "porciones": 6
   },
-
   {
     "nombre": "Batido de fresa",
     "descripcion": "Bebida dulce y refrescante.",
@@ -198,7 +203,8 @@
       {"numero": 1, "descripcion": "Licuar"},
       {"numero": 2, "descripcion": "Servir"}
     ],
-    "info": {"calorias": 180,"proteinas": 6,"grasas": 4,"carbohidratos": 30}
+    "info": {"calorias": 180,"proteinas": 6,"grasas": 4,"carbohidratos": 30},
+    "porciones": 4
   },
   {
     "nombre": "Avena con frutas",
@@ -216,7 +222,8 @@
       {"numero": 2, "descripcion": "Agregar fruta"},
       {"numero": 3, "descripcion": "Servir caliente"}
     ],
-    "info": {"calorias": 250,"proteinas": 8,"grasas": 5,"carbohidratos": 40}
+    "info": {"calorias": 250,"proteinas": 8,"grasas": 5,"carbohidratos": 40},
+    "porciones": 3
   },
   {
     "nombre": "Huevos con espinaca",
@@ -232,7 +239,8 @@
       {"numero": 1, "descripcion": "Batir huevos"},
       {"numero": 2, "descripcion": "Cocinar con espinaca"}
     ],
-    "info": {"calorias": 210,"proteinas": 14,"grasas": 15,"carbohidratos": 5}
+    "info": {"calorias": 210,"proteinas": 14,"grasas": 15,"carbohidratos": 5},
+    "porciones": 4
   },
   {
     "nombre": "Smoothie verde",
@@ -248,7 +256,8 @@
       {"numero": 1, "descripcion": "Licuar todo"},
       {"numero": 2, "descripcion": "Servir"}
     ],
-    "info": {"calorias": 120,"proteinas": 3,"grasas": 1,"carbohidratos": 25}
+    "info": {"calorias": 120,"proteinas": 3,"grasas": 1,"carbohidratos": 25},
+    "porciones": 2
   },
   {
     "nombre": "Pasta con tomate",
@@ -264,7 +273,8 @@
       {"numero": 1, "descripcion": "Cocer pasta"},
       {"numero": 2, "descripcion": "Agregar salsa"}
     ],
-    "info": {"calorias": 350,"proteinas": 10,"grasas": 8,"carbohidratos": 55}
+    "info": {"calorias": 350,"proteinas": 10,"grasas": 8,"carbohidratos": 55},
+    "porciones": 5
   },
   {
     "nombre": "Sopa de verduras",
@@ -280,7 +290,8 @@
       {"numero": 1, "descripcion": "Hervir"},
       {"numero": 2, "descripcion": "Sazonar"}
     ],
-    "info": {"calorias": 150,"proteinas": 4,"grasas": 2,"carbohidratos": 30}
+    "info": {"calorias": 150,"proteinas": 4,"grasas": 2,"carbohidratos": 30},
+    "porciones": 2
   },
 
   {
@@ -297,7 +308,8 @@
       {"numero": 1, "descripcion": "Cocinar carne"},
       {"numero": 2, "descripcion": "Servir en tortillas"}
     ],
-    "info": {"calorias": 400,"proteinas": 20,"grasas": 20,"carbohidratos": 30}
+    "info": {"calorias": 400,"proteinas": 20,"grasas": 20,"carbohidratos": 30},
+    "porciones": 6
   },
   {
     "nombre": "Ensalada fresca",
@@ -313,7 +325,8 @@
       {"numero": 1, "descripcion": "Lavar"},
       {"numero": 2, "descripcion": "Mezclar"}
     ],
-    "info": {"calorias": 150,"proteinas": 5,"grasas": 3,"carbohidratos": 20}
+    "info": {"calorias": 150,"proteinas": 5,"grasas": 3,"carbohidratos": 20},
+    "porciones": 1
   },
   {
     "nombre": "Batido de plátano",
@@ -329,9 +342,9 @@
       {"numero": 1, "descripcion": "Licuar"},
       {"numero": 2, "descripcion": "Servir"}
     ],
-    "info": {"calorias": 220,"proteinas": 6,"grasas": 4,"carbohidratos": 40}
+    "info": {"calorias": 220,"proteinas": 6,"grasas": 4,"carbohidratos": 40},
+    "porciones": 4
   },
-
   {
     "nombre": "Galletas caseras",
     "descripcion": "Dulce clásico para postre.",
@@ -346,7 +359,8 @@
       {"numero": 1, "descripcion": "Mezclar"},
       {"numero": 2, "descripcion": "Hornear"}
     ],
-    "info": {"calorias": 300,"proteinas": 5,"grasas": 10,"carbohidratos": 45}
+    "info": {"calorias": 300,"proteinas": 5,"grasas": 10,"carbohidratos": 45},
+    "porciones": 4
   },
   {
     "nombre": "Manzana con canela",
@@ -362,6 +376,7 @@
       {"numero": 1, "descripcion": "Cortar"},
       {"numero": 2, "descripcion": "Espolvorear"}
     ],
-    "info": {"calorias": 100,"proteinas": 1,"grasas": 0,"carbohidratos": 25}
+    "info": {"calorias": 100,"proteinas": 1,"grasas": 0,"carbohidratos": 25},
+    "porciones": 5
   }
 ]

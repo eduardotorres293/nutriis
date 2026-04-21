@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:nutriis/notifications.dart';
 import 'pages/lists.dart';
 import 'pages/searcher.dart';
 import 'pages/settings.dart';
@@ -12,6 +13,7 @@ void main() async{
 
   // El que inserta los datos
   await database.cargarSiVacio();
+  await NotiService.init();
   runApp(const MyApp());
 }
 

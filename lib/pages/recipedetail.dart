@@ -15,6 +15,7 @@ class _RecipedetailState extends State<Recipedetail> {
   bool isSaved = false;
   int currentImage = 0;
   late AppDatabase db;
+  int porciones = 1;
 
   late Future<Receta> recetaFuture;
   late Future<List<Ingrediente>> ingredientesFuture;
@@ -26,9 +27,69 @@ class _RecipedetailState extends State<Recipedetail> {
 
     setState(() {
       isSaved = saved;
-    }
-  );
-}
+    });
+  }
+  void seleccionarPorciones() {
+    showModalBottomSheet(
+      context: context,
+      builder: (_) {
+        return StatefulBuilder(
+          builder: (context, setModalState) {
+            return Padding(
+              padding: const EdgeInsets.all(16),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    "Porciones",
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          if (porciones > 1) {
+                            setModalState(() => porciones--);
+                            setState(() {});
+                          }
+                        },
+                        icon: const Icon(Icons.remove),
+                      ),
+
+                      Text(
+                        "$porciones",
+                        style: const TextStyle(fontSize: 20),
+                      ),
+
+                      IconButton(
+                        onPressed: () {
+                          setModalState(() => porciones++);
+                          setState(() {});
+                        },
+                        icon: const Icon(Icons.add),
+                      ),
+                    ],
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  ElevatedButton(
+                    onPressed: () => Navigator.pop(context),
+                    child: const Text("Listo"),
+                  )
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
   @override
   void initState() {
     super.initState();
@@ -191,19 +252,52 @@ class _RecipedetailState extends State<Recipedetail> {
 
                     const SizedBox(width: 8),
 
-                    IconButton(
-                      onPressed: () {
-                        // FALTA AGREGAR PARA PORCIONES
-                      }, 
-                      icon: const Icon(Icons.filter_alt, color: Color.fromARGB(255, 56, 55, 55),),
-                      style: IconButton.styleFrom(
-                        backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                        minimumSize: const Size(40, 40),
-                        padding: EdgeInsets.zero,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
+                    Stack(
+                      alignment: Alignment.topRight,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            seleccionarPorciones();
+                          },
+                          icon: const Icon(
+                            Icons.restaurant,
+                            color: Color.fromARGB(255, 56, 55, 55),
+                          ),
+                          style: IconButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+                            minimumSize: const Size(40, 40),
+                            padding: EdgeInsets.zero,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
                         ),
-                      ),
+
+                        Positioned(
+                          right: 4,
+                          top: 4,
+                          child: Container(
+                            padding: const EdgeInsets.all(4),
+                            decoration: BoxDecoration(
+                              color: const Color.fromARGB(255, 93, 204, 255),
+                              shape: BoxShape.circle,
+                            ),
+                            constraints: const BoxConstraints(
+                              minWidth: 18,
+                              minHeight: 18,
+                            ),
+                            child: Text(
+                              "$porciones",
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
 
                     const SizedBox(width: 8),
@@ -321,11 +415,17 @@ class _RecipedetailState extends State<Recipedetail> {
                               } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
                                 return const Center(child: Text('No hay ingredientes'));
                               }
+                              
                               return Column(
                                 children: snapshot.data!.map((ingrediente) {
+                                  double cantidadFinal = (ingrediente.cantidad / receta.porciones) * porciones;
+                                  String cantidadTexto = cantidadFinal % 1 == 0
+                                    ? cantidadFinal.toInt().toString()
+                                    : cantidadFinal.toStringAsFixed(1);
+
                                   return ListTile(
                                     title: Text(
-                                      '${ingrediente.cantidad} ${ingrediente.unidad} de ${ingrediente.nombre}')
+                                      '$cantidadTexto ${ingrediente.unidad} de ${ingrediente.nombre}')
                                   );
                                 }).toList(),
                               );
