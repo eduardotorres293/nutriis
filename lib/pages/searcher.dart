@@ -126,10 +126,15 @@ class _SearcherState extends State<Searcher> {
                         selectedColor: Colors.orange,
                         onSelected: (selected) {
                           setModalState(() {
-                            if (selected) {
-                              categoriasSeleccionadas.add(cat);
+                            if(cat == 'Todas') {
+                              categoriasSeleccionadas.clear();
                             } else {
-                              categoriasSeleccionadas.remove(cat);
+                              categoriasSeleccionadas.remove('Todas');
+                              if (selected) {
+                                categoriasSeleccionadas.add(cat);
+                              } else {
+                                categoriasSeleccionadas.remove(cat);
+                              }
                             }
                           });
                         },
@@ -213,23 +218,6 @@ class _SearcherState extends State<Searcher> {
               ),
               
               const SizedBox(width: 8),
-
-              // // Boton de busqueda
-              // IconButton(
-              //   onPressed: () {
-              //     print("Botón de búsqueda presionado");
-              //   },
-              //   icon: const Icon(Icons.search),
-              //   style: IconButton.styleFrom(
-              //     backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-              //     minimumSize: const Size(40, 40),
-              //     padding: EdgeInsets.zero,
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(8),
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(width: 8),
 
               // Boton de filtro
               IconButton(

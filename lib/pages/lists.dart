@@ -11,21 +11,42 @@ class Lists extends StatefulWidget {
 
 class _ListsState extends State<Lists> {
   late AppDatabase db;
-  late Future<List<Lista>> listasFuture;
+  late List<Lista> todasListas = [];
+  List<Lista> listasFiltradas = [];
+  String busqueda = '';
 
-  Future<void> _refrescar() async {
+  Future<void> cargarListas() async {
+    final listas = await db.obtenerListas();
     setState(() {
-      listasFuture = db.obtenerListas();
+      todasListas = listas;
+      listasFiltradas = listas;
     });
-
-    await Future.delayed(const Duration(milliseconds: 500));
   }
+
+  Future<void> filtrarListas() async {
+    List<Lista> resultado = [];
+
+    for (var lista in todasListas) {
+      final coincideNombre = lista.nombre
+          .toLowerCase()
+          .contains(busqueda.toLowerCase());
+
+      if (coincideNombre) {
+        resultado.add(lista);
+      }
+    }
+
+    setState(() {
+      listasFiltradas = resultado;
+    });
+  }
+
   @override
   void initState() {
     super.initState();
 
     db = AppDatabase();
-    listasFuture = db.obtenerListas();
+    cargarListas();
   }
 
   Future<String?> mostrarDialogoCrearLista() {
@@ -69,9 +90,8 @@ class _ListsState extends State<Lists> {
               Expanded(
                 child: TextField(
                   onChanged: (value) {
-                    print("Buscando: $value"); 
-                    // Reiniciar busquedas con el texto disponible
-                    // es un bucle
+                    busqueda = value;
+                    filtrarListas();
                   },
                   decoration: InputDecoration(
                     hintText: 'Buscar nombre de lista o ingrediente',
@@ -83,41 +103,6 @@ class _ListsState extends State<Lists> {
                       borderRadius: BorderRadius.circular(16),
                       borderSide: BorderSide.none,
                     ),
-                  ),
-                ),
-              ),
-              
-              const SizedBox(width: 8),
-
-              // // Boton de busqueda
-              // IconButton(
-              //   onPressed: () {
-              //     print("Botón de búsqueda presionado");
-              //   },
-              //   icon: const Icon(Icons.search),
-              //   style: IconButton.styleFrom(
-              //     backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-              //     minimumSize: const Size(40, 40),
-              //     padding: EdgeInsets.zero,
-              //     shape: RoundedRectangleBorder(
-              //       borderRadius: BorderRadius.circular(8),
-              //     ),
-              //   ),
-              // ),
-              // const SizedBox(width: 8),
-
-              // Boton de filtro
-              IconButton(
-                onPressed: () {
-                  print("Filtro presionado");
-                },
-                icon: const Icon(Icons.filter_alt),
-                style: IconButton.styleFrom(
-                  backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                  minimumSize: const Size(40, 40),
-                  padding: EdgeInsets.zero,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
                   ),
                 ),
               ),
@@ -134,9 +119,7 @@ class _ListsState extends State<Lists> {
                     final nombre = await mostrarDialogoCrearLista();
                     if (nombre != null && nombre.isNotEmpty) {
                       await db.crearLista(nombre);
-                      setState((){
-                        listasFuture = db.obtenerListas();
-                      });
+                      await cargarListas();
                     }
                 },
                 style: ElevatedButton.styleFrom(
@@ -158,26 +141,14 @@ class _ListsState extends State<Lists> {
 
           // Listas y eso
           Expanded(
-            child: FutureBuilder<List<Lista>>(
-            future: listasFuture,
-            builder:(context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } 
-              if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                return const Center(child: Text("No hay listas aún"));
-              }
-
-              final listas = snapshot.data!;
-
-              return RefreshIndicator(
-                onRefresh: _refrescar,
+            child: RefreshIndicator(
+                onRefresh: cargarListas,
                 child: ListView.separated(
                   physics: const AlwaysScrollableScrollPhysics(),
                   separatorBuilder: (_, __) => const SizedBox(height: 16),
-                  itemCount: listas.length,
+                  itemCount: listasFiltradas.length,
                   itemBuilder: (context, index) {
-                    final lista = listas[index];
+                    final lista = listasFiltradas[index];
 
                     return GestureDetector(
                       onTap: () async{
@@ -188,9 +159,7 @@ class _ListsState extends State<Lists> {
                           ),
                         );
 
-                        setState(() {
-                          listasFuture = db.obtenerListas();
-                        });
+                        await cargarListas();
                       },
                       onLongPress: () async {
                         final confirmar = await showDialog<bool>(
@@ -216,9 +185,7 @@ class _ListsState extends State<Lists> {
                         if (confirmar == true) {
                           await db.eliminarLista(lista.id);
 
-                          setState(() {
-                            listasFuture = db.obtenerListas();
-                          });
+                          await cargarListas();
                         }
                       },
                       child: SizedBox(
@@ -289,10 +256,9 @@ class _ListsState extends State<Lists> {
                     );
                   },
                 )
-              );
-            },),
-          ),
-        ],
+              )
+          )
+        ]
       )
     );
   }
