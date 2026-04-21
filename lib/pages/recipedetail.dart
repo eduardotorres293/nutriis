@@ -257,21 +257,6 @@ class _RecipedetailState extends State<Recipedetail> {
                   ],
                 ),
 
-                // DESCRIPCION DE LA RECETA
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Text(
-                          receta.descripcion,
-                          style: const TextStyle(fontSize: 16),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                
                 // TIEMPO DE PREPARACION
                 Row(
                   children: [
@@ -280,7 +265,23 @@ class _RecipedetailState extends State<Recipedetail> {
                         padding: const EdgeInsets.symmetric(horizontal: 16),
                         child: Text(
                           "Tiempo de preparación aproximado: ${receta.tiempo} min",
-                          style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+                          style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+                // DESCRIPCION DE LA RECETA
+                Row(
+                  children: [
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        child: Text(
+                          receta.descripcion,
+                          style: const TextStyle(fontSize: 18),
                         ),
                       ),
                     ),
@@ -308,7 +309,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         ),
                         backgroundColor: Colors.grey[200],
                         collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
-                        title: const Text('Ingredientes'),
+                        title: const Text('Ingredientes', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                         children: [
                           FutureBuilder <List<Ingrediente>>(
                             future: ingredientesFuture,
@@ -345,7 +346,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         ),
                         backgroundColor: Colors.grey[200],
                         collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
-                        title: const Text('Instrucciones'),
+                        title: const Text('Instrucciones', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                         children: [
                           FutureBuilder<List<Instruccione>>(
                             future: instruccionesFuture,
@@ -379,7 +380,7 @@ class _RecipedetailState extends State<Recipedetail> {
                         ),
                         backgroundColor: Colors.grey[200],
                         collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
-                        title: const Text('Información nutricional'),
+                        title: const Text('Información nutricional', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                         children: [
                           FutureBuilder<InfoNutrimentalData?>(
                             future: infoFuture,

@@ -312,7 +312,6 @@ class _SearcherState extends State<Searcher> {
                     );
                   },
                   child: Container(
-                    padding: const EdgeInsets.all(4),
                     // Creación de un contenedor para cada receta
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
@@ -323,13 +322,19 @@ class _SearcherState extends State<Searcher> {
                     ),
 
                     // Nombre de la receta centrado dentro del contenedor
-                    child: Center(
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.black.withOpacity(0.3),
+                      ),
                       child: Text(
                         receta.nombre,
                         textAlign: TextAlign.center,
-                        maxLines: 3,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                   ),
@@ -360,7 +365,6 @@ class _SearcherState extends State<Searcher> {
                   },
                   child: Container(
                     height: 300,
-                    padding: const EdgeInsets.all(4),
                     // Creación de un contenedor para cada receta
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
@@ -371,13 +375,19 @@ class _SearcherState extends State<Searcher> {
                     ),
 
                     // Nombre de la receta centrado dentro del contenedor
-                    child: Center(
+                    child: Container(
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.all(6),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(16),
+                        color: Colors.black.withOpacity(0.3),
+                      ),
                       child: Text(
                         receta.nombre,
                         textAlign: TextAlign.center,
-                        maxLines: 3,
+                        maxLines: 2,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20, color: Colors.white),
                       ),
                     ),
                   ),
