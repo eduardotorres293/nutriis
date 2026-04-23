@@ -118,7 +118,7 @@ class _SeleccionarListaSheetState extends State<SeleccionarListaSheet> {
                               SizedBox(height: 8),
                               Text(
                                 "Nueva lista",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: 16),
                               ),
                             ],
                           ),
@@ -141,7 +141,7 @@ class _SeleccionarListaSheetState extends State<SeleccionarListaSheet> {
                           child: Text(
                             lista.nombre,
                             textAlign: TextAlign.center,
-                            style: const TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 18),
                           ),
                         ),
                       ),

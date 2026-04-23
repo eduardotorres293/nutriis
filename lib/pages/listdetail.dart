@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../database/database.dart';
 import 'recipedetail.dart';
+import 'settings.dart';
 
 class DetalleLista extends StatefulWidget {
   final int listaId;
@@ -185,199 +186,204 @@ class _DetalleListaState extends State<DetalleLista> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text(widget.nombreLista), backgroundColor: Colors.white),
-      body: Padding(
-        padding: const EdgeInsets.all(12),
-        child: Column(
-          children: [
-            Row(
+    return ValueListenableBuilder<double>(
+      valueListenable: FontSizeController.scale,
+      builder: (context, scale, child) {
+        return Scaffold(
+          appBar: AppBar(title: Text(widget.nombreLista), backgroundColor: Colors.white),
+          body: Padding(
+            padding: const EdgeInsets.all(12),
+            child: Column(
               children: [
-                Expanded(
-                  child: TextField(
-                    onChanged: (value) {
-                      busqueda = value;
-                      filtrarRecetas();
-                    },
-                    decoration: InputDecoration(
-                      hintText: 'Buscar receta o ingrediente',
-                      suffixIcon: const Icon(Icons.search),
-                      filled: true,
-                      fillColor: Colors.grey[300],
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(16),
-                        borderSide: BorderSide.none,
+                Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        onChanged: (value) {
+                          busqueda = value;
+                          filtrarRecetas();
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'Buscar receta o ingrediente',
+                          suffixIcon: const Icon(Icons.search),
+                          filled: true,
+                          fillColor: Colors.grey[300],
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(16),
+                            borderSide: BorderSide.none,
+                          ),
+                        ),
                       ),
                     ),
+
+                    const SizedBox(width: 8),
+
+                    // Boton de filtro
+                    IconButton(
+                      onPressed: () {
+                        seleccionarFiltros();
+                      },
+                      icon: const Icon(Icons.filter_alt),
+                      style: IconButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+                        minimumSize: const Size(40, 40),
+                        padding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                    const SizedBox(width: 8),
+                    // Boton de vista
+                    IconButton(
+                      onPressed: () {
+                        setState(() {
+                        crossAxisCount = crossAxisCount == 2 ? 1 : 2;
+                      });
+                      },
+                      icon: Icon(crossAxisCount == 2 ? Icons.view_agenda : Icons.view_cozy,),
+                      style: IconButton.styleFrom(
+                        backgroundColor: const Color.fromARGB(255, 255, 189, 89),
+                        minimumSize: const Size(40, 40),
+                        padding: EdgeInsets.zero,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+
+                const SizedBox(height: 20),
+
+                Align(
+                alignment: Alignment.centerLeft,
+                  child: Text(
+                    'Categorías: ${categoriasSeleccionadas.isEmpty ? "Todas" : categoriasSeleccionadas.join(", ")} | Orden: $ordenSeleccionado',
+                    style: TextStyle(fontSize: 16 * scale),
                   ),
                 ),
 
-                const SizedBox(width: 8),
+                const SizedBox(height: 30),
 
-                // Boton de filtro
-                IconButton(
-                  onPressed: () {
-                    seleccionarFiltros();
-                  },
-                  icon: const Icon(Icons.filter_alt),
-                  style: IconButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                    minimumSize: const Size(40, 40),
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
+                Expanded(
+                  child: recetasFiltradas.isEmpty
+                ? const Center(child: Text("No hay recetas"))
+                : crossAxisCount == 2
+                ? GridView.builder(
+                    itemCount: recetasFiltradas.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: 300,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      childAspectRatio: 1,
                     ),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                // Boton de vista
-                IconButton(
-                  onPressed: () {
-                    setState(() {
-                    crossAxisCount = crossAxisCount == 2 ? 1 : 2;
-                  });
-                  },
-                  icon: Icon(crossAxisCount == 2 ? Icons.view_agenda : Icons.view_cozy,),
-                  style: IconButton.styleFrom(
-                    backgroundColor: const Color.fromARGB(255, 255, 189, 89),
-                    minimumSize: const Size(40, 40),
-                    padding: EdgeInsets.zero,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                    ),
+                    itemBuilder: (context, index) {
+                      final receta = recetasFiltradas[index];
+                      final imagen = (receta.imagenes != null &&
+                              receta.imagenes!.isNotEmpty)
+                          ? receta.imagenes!.split(',').first
+                          : 'assets/images/default.jpg';
+                          
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  Recipedetail(id: receta.id),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          // Creación de un contenedor para cada receta
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            image: DecorationImage(
+                              image: AssetImage(imagen),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+
+                          // Nombre de la receta centrado dentro del contenedor
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: Colors.black.withOpacity(0.3),
+                            ),
+                            child: Text(
+                              receta.nombre,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontSize: 20 * scale, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  )
+                : ListView.separated(
+                    itemCount: recetasFiltradas.length,
+                    separatorBuilder: (_, __) =>
+                        const SizedBox(height: 8),
+                    itemBuilder: (context, index) {
+                      final receta = recetasFiltradas[index];
+                      final imagen = (receta.imagenes != null &&
+                              receta.imagenes!.isNotEmpty)
+                          ? receta.imagenes!.split(',').first
+                          : 'assets/images/default.jpg';
+
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) =>
+                                  Recipedetail(id: receta.id),
+                            ),
+                          );
+                        },
+                        child: Container(
+                          height: 300,
+                          // Creación de un contenedor para cada receta
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            image: DecorationImage(
+                              image: AssetImage(imagen),
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+
+                          // Nombre de la receta centrado dentro del contenedor
+                          child: Container(
+                            alignment: Alignment.center,
+                            padding: const EdgeInsets.all(6),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(16),
+                              color: Colors.black.withOpacity(0.3),
+                            ),
+                            child: Text(
+                              receta.nombre,
+                              textAlign: TextAlign.center,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              style: TextStyle(fontSize: 20 * scale, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      );
+                    },
                   ),
                 ),
               ],
             ),
-
-            const SizedBox(height: 20),
-
-            Align(
-            alignment: Alignment.centerLeft,
-              child: Text(
-                'Categorías: ${categoriasSeleccionadas.isEmpty ? "Todas" : categoriasSeleccionadas.join(", ")} | Orden: $ordenSeleccionado',
-                style: const TextStyle(fontSize: 12),
-              ),
-            ),
-
-            const SizedBox(height: 30),
-
-            Expanded(
-              child: recetasFiltradas.isEmpty
-            ? const Center(child: Text("No hay recetas"))
-            : crossAxisCount == 2
-            ? GridView.builder(
-                itemCount: recetasFiltradas.length,
-                gridDelegate:
-                    const SliverGridDelegateWithMaxCrossAxisExtent(
-                  maxCrossAxisExtent: 300,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  childAspectRatio: 1,
-                ),
-                itemBuilder: (context, index) {
-                  final receta = recetasFiltradas[index];
-                  final imagen = (receta.imagenes != null &&
-                          receta.imagenes!.isNotEmpty)
-                      ? receta.imagenes!.split(',').first
-                      : 'assets/images/default.jpg';
-                      
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              Recipedetail(id: receta.id),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      // Creación de un contenedor para cada receta
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        image: DecorationImage(
-                          image: AssetImage(imagen),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-
-                      // Nombre de la receta centrado dentro del contenedor
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.black.withOpacity(0.3),
-                        ),
-                        child: Text(
-                          receta.nombre,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              )
-            : ListView.separated(
-                itemCount: recetasFiltradas.length,
-                separatorBuilder: (_, __) =>
-                    const SizedBox(height: 8),
-                itemBuilder: (context, index) {
-                  final receta = recetasFiltradas[index];
-                  final imagen = (receta.imagenes != null &&
-                          receta.imagenes!.isNotEmpty)
-                      ? receta.imagenes!.split(',').first
-                      : 'assets/images/default.jpg';
-
-                  return GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (_) =>
-                              Recipedetail(id: receta.id),
-                        ),
-                      );
-                    },
-                    child: Container(
-                      height: 300,
-                      // Creación de un contenedor para cada receta
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        image: DecorationImage(
-                          image: AssetImage(imagen),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-
-                      // Nombre de la receta centrado dentro del contenedor
-                      child: Container(
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.all(6),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(16),
-                          color: Colors.black.withOpacity(0.3),
-                        ),
-                        child: Text(
-                          receta.nombre,
-                          textAlign: TextAlign.center,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          style: const TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
-          ],
-        ),
-      ),
-    );  
+          ),
+        );  
+      },
+    );
   }
 }

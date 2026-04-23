@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:nutriis/notifications.dart';
-
+class FontSizeController {
+  static ValueNotifier<double> scale = ValueNotifier(1.0);
+}
 class Settings extends StatelessWidget {
   const Settings({super.key});
 
@@ -24,6 +26,29 @@ class Settings extends StatelessWidget {
                 NotiService.mostrarNotificacion();
               },
               child: const Text("Probar notificación"),
+            ),
+            
+            const SizedBox(height: 20),
+
+            ElevatedButton(
+              onPressed: () {
+                FontSizeController.scale.value = 0.8; // pequeño
+              },
+              child: const Text("Pequeño"),
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                FontSizeController.scale.value = 1.0; // mediano
+              },
+              child: const Text("Mediano"),
+            ),
+
+            ElevatedButton(
+              onPressed: () {
+                FontSizeController.scale.value = 1.3; // grande
+              },
+              child: const Text("Grande"),
             ),
           ],
         ),
