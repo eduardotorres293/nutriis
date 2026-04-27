@@ -8,14 +8,16 @@
     "ingredientes": [
       {"nombre": "Avena", "cantidad": 1, "unidad": "taza"},
       {"nombre": "Leche", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Fresas", "cantidad": 5, "unidad": "piezas"}
+      {"nombre": "Fruta al gusto", "cantidad": 5, "unidad": "piezas"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Cocer la avena con leche"},
-      {"numero": 2, "descripcion": "Agregar frutas"},
+      {"numero": 1, "descripcion": "Coortar la fruta de su preferencia"},
+      {"numero": 2, "descripcion": "En un plato colocar la avena y cubrir con leche"},
+      {"numero": 4, "descripcion": "Dejar reposar la avena con leche unos minutos hasta que este blanda"},
+      {"numero": 3, "descripcion": "En el plato con avena y leche colocar la fruta"},
       {"numero": 3, "descripcion": "Servir"}
     ],
-    "info": {"calorias": 250,"proteinas": 8,"grasas": 5,"carbohidratos": 40},
+    "info": {"calorias": 110,"proteinas": 3,"fibra": 3},
     "porciones": 1
   },
   {
@@ -26,31 +28,43 @@
     "imagenes": ["assets/images/pollo.jpg"],
     "ingredientes": [
       {"nombre": "Pechuga de pollo", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Aceite", "cantidad": 1, "unidad": "cucharada"},
       {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
     ],
     "instrucciones": [
       {"numero": 1, "descripcion": "Sazonar el pollo"},
+      {"numero": 2, "descripcion": "Agregar la cucharada al sarten"},
       {"numero": 2, "descripcion": "Cocinar a la plancha"}
     ],
-    "info": {"calorias": 300,"proteinas": 30,"grasas": 10,"carbohidratos": 0},
-    "porciones": 2
+    "info": {"calorias": 111,"proteinas": 22.39,"grasas": 1.75,"carbohidratos": 0},
+    "porciones": 1
   },
   {
     "nombre": "Ensalada de quinoa",
     "descripcion": "Fresca y rica en proteína vegetal, ideal para comidas ligeras.",
-    "tiempo": 15,
+    "tiempo": 30,
     "categorias": ["Almuerzo", "Vegano", "Bajas calorias"],
     "imagenes": ["assets/images/quinoa.jpg"],
     "ingredientes": [
       {"nombre": "Quinoa", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Pepino", "cantidad": 1, "unidad": "pieza"}
+      {"nombre": "Pepino", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Tomate cherry", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Pepino y Pimiento", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Zanahoria rallada", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Garbanzos o Frijoles negros", "cantidad": 0.5, "unidad": "taza"},
+      {"nombre": "Aguacate", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Queso Feta o Fresco", "cantidad": 50, "unidad": "gramos"},
+      {"nombre": "Aceite de oliva y Limón", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Hierbas secas", "cantidad": 1, "unidad": "cucharadas"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Cocer quinoa"},
-      {"numero": 2, "descripcion": "Mezclar con verduras"}
+      {"numero": 1, "descripcion": "Cocer quinoa y dejar enfriar"},
+      {"numero": 2, "descripcion": "Picar los vegetables, el aguacate, hierbas secas y el queso"},
+      {"numero": 3, "descripcion": "Mezclar la quinoa con los vegetales, las legumbres y el queso."},
+      {"numero": 4, "descripcion": "Preparar la vinagreta con aceite, limón, sal y pimienta, y bañar la ensalada."}
     ],
-    "info": {"calorias": 220,"proteinas": 8,"grasas": 4,"carbohidratos": 35},
-    "porciones": 3
+    "info": {"calorias": 343,"proteinas": 9,"grasas": 14,"carbohidratos": 47, "fibra": 5},
+    "porciones": 1
   },
   {
     "nombre": "Smoothie de mango",
@@ -59,15 +73,17 @@
     "categorias": ["Desayuno", "Vegetariano"],
     "imagenes": ["assets/images/mango.jpg"],
     "ingredientes": [
-      {"nombre": "Mango", "cantidad": 1, "unidad": "pieza"},
-      {"nombre": "Leche", "cantidad": 1, "unidad": "taza"}
+      {"nombre": "Mango", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Leche", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Yogur", "cantidad": 2, "unidad": "taza"},
+      {"nombre": "Endulsante natural", "cantidad": 1, "unidad": "cucharadas"}
     ],
     "instrucciones": [
       {"numero": 1, "descripcion": "Licuar todo"},
       {"numero": 2, "descripcion": "Servir frío"}
     ],
-    "info": {"calorias": 200,"proteinas": 5,"grasas": 3,"carbohidratos": 35},
-    "porciones": 4
+    "info": {"calorias": 240,"proteinas": 6,"grasas": 6,"carbohidratos": 45, "fibra": 4},
+    "porciones": 1
   },
   {
     "nombre": "Omelette de espinaca",
@@ -77,14 +93,24 @@
     "imagenes": ["assets/images/omelette.jpg"],
     "ingredientes": [
       {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
-      {"nombre": "Espinaca", "cantidad": 1, "unidad": "taza"}
+      {"nombre": "Espinaca", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Aceite", "cantidad": 1, "unidad": "cucharada"},
+      {"nombre": "Pimienta", "cantidad": 1, "unidad": "pizca"},
+      {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Batir huevos"},
-      {"numero": 2, "descripcion": "Cocinar con espinaca"}
+      {"numero": 1, "descripcion": "Romper los huevos en un bowl"},
+      {"numero": 2, "descripcion": "Agregar las pizcas de sal y pimienta"},
+      {"numero": 3, "descripcion": "Batir hasta obtenr una mezcla homogénea"},
+      {"numero": 4, "descripcion": "Utilizar un sartén y esparcir el aceite"},
+      {"numero": 5, "descripcion": "Precalentar a fuego medio"},
+      {"numero": 6, "descripcion": "Una vez ya precalentado, verter los huevos"},
+      {"numero": 7, "descripcion": "Tapar y cocinar durante 4 minutos"},
+      {"numero": 8, "descripcion": "Dar vuelta con la espatula, bajar el fuego, agregar las hojas de espinaca"},
+      {"numero": 9, "descripcion": "Cocinar durante 3 minnutos mas y retirar"}
     ],
-    "info": {"calorias": 210,"proteinas": 14,"grasas": 15,"carbohidratos": 5},
-    "porciones": 5
+    "info": {"calorias": 140,"proteinas": 17,"grasas": 7,"carbohidratos": 5},
+    "porciones": 1
   },
   {
     "nombre": "Tacos de lechuga con carne",
@@ -93,290 +119,652 @@
     "categorias": ["Cena", "Carnivoro", "Bajas calorias"],
     "imagenes": ["assets/images/tacos.jpg"],
     "ingredientes": [
-      {"nombre": "Carne molida", "cantidad": 200, "unidad": "gramos"},
-      {"nombre": "Lechuga", "cantidad": 4, "unidad": "hojas"}
+      {"nombre": "Carne molida", "cantidad": 500, "unidad": "gramos"},
+      {"nombre": "Lechuga romana", "cantidad": 4, "unidad": "hojas"},
+      {"nombre": "Cebolla", "cantidad": 0.5, "unidad": "picada"},
+      {"nombre": "Pimiento morrón", "cantidad": 1, "unidad": "picado"},
+      {"nombre": "Ajo", "cantidad": 1, "unidad": "picado"},
+      {"nombre": "Sal", "cantidad": 1, "unidad": "pizca"},
+      {"nombre": "Pimienta", "cantidad": 1, "unidad": "pizca"},
+      {"nombre": "Comino", "cantidad": 1, "unidad": "pizca"},
+      {"nombre": "Paprika", "cantidad": 1, "unidad": "pizca"},
+      {"nombre": "Aceite", "cantidad": 1, "unidad": "cucharada"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Cocinar carne"},
-      {"numero": 2, "descripcion": "Servir en hojas"}
+      {"numero": 1, "descripcion": "Preparar la lechuga"},
+      {"numero": 2, "descripcion": "En un sarter grande a fuego medio verter la cucharada de aceite"},
+      {"numero": 3, "descripcion": "Sofreir la cebolla con el y el ajo hasta que esten fragantes. Agregar el pimineto morrón"},
+      {"numero": 4, "descripcion": "Cocinar durante 3 minutos"},
+      {"numero": 5, "descripcion": "Agregar la carne al sartén y desbaratarla con la espatula"},
+      {"numero": 6, "descripcion": "Condimentar con sal, pimienta, paprika y comino"},
+      {"numero": 7, "descripcion": "Cocinar hasta que este dorada y los jugos se hayan reducido"},
+      {"numero": 8, "descripcion": "Armar los tacos con la lechuga y la carne"}
     ],
-    "info": {"calorias": 280,"proteinas": 25,"grasas": 15,"carbohidratos": 5},
-    "porciones": 6
+    "info": {"calorias": 250,"proteinas": 22,"grasas": 12,"carbohidratos": 6, "fibra": 2},
+    "porciones": 1
   },
 
   {
     "nombre": "Arroz con verduras",
-    "descripcion": "Plato sencillo y equilibrado con vegetales.",
+    "descripcion": "Plato sencillo, equilibrado y colorido, ideal como guarnición o plato único vegano.",
     "tiempo": 25,
     "categorias": ["Almuerzo", "Vegano"],
     "imagenes": ["assets/images/arroz.jpg"],
     "ingredientes": [
-      {"nombre": "Arroz", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Zanahoria", "cantidad": 1, "unidad": "pieza"}
+      {"nombre": "Arroz blanco o integral", "cantidad": 1, "unit": "taza"},
+      {"nombre": "Caldo de verduras", "cantidad": 2, "unit": "tazas"},
+      {"nombre": "Zanahoria picada", "cantidad": 1, "unit": "pieza"},
+      {"nombre": "Chícharos", "cantidad": 0.5, "unit": "taza"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Cocer arroz"},
-      {"numero": 2, "descripcion": "Agregar verduras"}
+      {"numero": 1, "descripcion": "Sofreír el arroz con la zanahoria por 2 minutos"},
+      {"numero": 2, "descripcion": "Agregar el caldo y chícharos; sazonar"},
+      {"numero": 3, "descripcion": "Cocer a fuego bajo tapado por 15-20 minutos hasta que el líquido se absorba"}
     ],
-    "info": {"calorias": 300,"proteinas": 6,"grasas": 3,"carbohidratos": 60},
-    "porciones": 7
+    "info": {"calorias": 280, "proteinas": 5, "grasas": 4, "carbohidratos": 55},
+    "porciones": 2
   },
   {
     "nombre": "Yogur con granola",
-    "descripcion": "Snack o desayuno rápido y energético.",
+    "descripcion": "Snack o desayuno rápido, alto en calcio y fibra.",
     "tiempo": 5,
     "categorias": ["Desayuno", "Vegetariano"],
     "imagenes": ["assets/images/yogur.jpg"],
     "ingredientes": [
-      {"nombre": "Yogur", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Granola", "cantidad": 0.5, "unidad": "taza"}
+      {"nombre": "Yogur griego natural", "cantidad": 1, "unit": "taza"},
+      {"nombre": "Granola integral", "cantidad": 0.5, "unit": "taza"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Servir yogur"},
-      {"numero": 2, "descripcion": "Agregar granola"}
+      {"numero": 1, "descripcion": "Servir el yogur en un tazón"},
+      {"numero": 2, "descripcion": "Agregar la granola encima para mantener su textura crujiente"}
     ],
-    "info": {"calorias": 180,"proteinas": 7,"grasas": 5,"carbohidratos": 25},
-    "porciones": 8
+    "info": {"calorias": 220, "proteinas": 8, "grasas": 6, "carbohidratos": 34},
+    "porciones": 1
   },
   {
     "nombre": "Sopa de verduras",
-    "descripcion": "Caliente, ligera y reconfortante.",
+    "descripcion": "Sopa ligera, nutritiva y reconfortante.",
     "tiempo": 30,
     "categorias": ["Cena", "Vegano", "Bajas calorias"],
     "imagenes": ["assets/images/sopa.jpg"],
     "ingredientes": [
-      {"nombre": "Zanahoria", "cantidad": 1, "unidad": "pieza"},
-      {"nombre": "Papa", "cantidad": 1, "unidad": "pieza"}
+      {"nombre": "Zanahoria en cubos", "cantidad": 2, "unit": "piezas"},
+      {"nombre": "Papa en cubos", "cantidad": 1, "unit": "pieza"},
+      {"nombre": "Calabacita (calabacín)", "cantidad": 1, "unit": "pieza"},
+      {"nombre": "Caldo de vegetales", "cantidad": 1.5, "unit": "litros"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Hervir verduras"},
-      {"numero": 2, "descripcion": "Sazonar"}
+      {"numero": 1, "descripcion": "Hervir el caldo y agregar la papa y zanahoria"},
+      {"numero": 2, "descripcion": "Tras 10 minutos, agregar la calabacita y sazonar"},
+      {"numero": 3, "descripcion": "Cocinar 10 minutos adicionales hasta que estén suaves"}
     ],
-    "info": {"calorias": 150,"proteinas": 4,"grasas": 2,"carbohidratos": 30},
-    "porciones": 9
+    "info": {"calorias": 120, "proteinas": 3, "grasas": 1, "carbohidratos": 25},
+    "porciones": 4
   },
   {
     "nombre": "Panqueques",
-    "descripcion": "Clásico desayuno dulce y esponjoso.",
+    "descripcion": "Desayuno clásico esponjoso.",
     "tiempo": 20,
     "categorias": ["Desayuno", "Postre", "Vegetariano"],
     "imagenes": ["assets/images/panqueques.jpg"],
     "ingredientes": [
-      {"nombre": "Harina", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Huevo", "cantidad": 1, "unidad": "pieza"}
+      {"nombre": "Harina de trigo", "cantidad": 1, "unit": "taza"},
+      {"nombre": "Huevo", "cantidad": 1, "unit": "pieza"},
+      {"nombre": "Leche", "cantidad": 0.75, "unit": "taza"},
+      {"nombre": "Polvo para hornear", "cantidad": 1, "unit": "cucharadita"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Mezclar ingredientes"},
-      {"numero": 2, "descripcion": "Cocinar en sartén"}
+      {"numero": 1, "descripcion": "Mezclar ingredientes secos y luego integrar líquidos"},
+      {"numero": 2, "descripcion": "Cocinar porciones en un sartén caliente engrasado"},
+      {"numero": 3, "descripcion": "Voltear al ver burbujas y dorar por el otro lado"}
     ],
-    "info": {"calorias": 320,"proteinas": 8,"grasas": 10,"carbohidratos": 50},
-    "porciones": 10
+    "info": {"calorias": 310, "proteinas": 9, "grasas": 11, "carbohidratos": 45},
+    "porciones": 2
   },
   {
     "nombre": "Ensalada de atún",
-    "descripcion": "Alta en proteína y muy fácil de preparar.",
+    "descripcion": "Mezcla proteica ideal para almuerzos rápidos.",
     "tiempo": 10,
     "categorias": ["Almuerzo", "Carnivoro"],
     "imagenes": ["assets/images/atun.jpg"],
     "ingredientes": [
-      {"nombre": "Atún", "cantidad": 1, "unidad": "lata"},
-      {"nombre": "Mayonesa", "cantidad": 1, "unidad": "cucharada"}
+      {"nombre": "Atún en agua", "cantidad": 1, "unit": "lata"},
+      {"nombre": "Mayonesa light", "cantidad": 1, "unit": "cucharada"},
+      {"nombre": "Cebolla morada picada", "cantidad": 2, "unit": "cucharadas"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Mezclar ingredientes"},
-      {"numero": 2, "descripcion": "Servir"}
+      {"numero": 1, "descripcion": "Drenar el atún y mezclar con la mayonesa y cebolla"},
+      {"numero": 2, "descripcion": "Sazonar con pimienta y limón al gusto"}
     ],
-    "info": {"calorias": 250,"proteinas": 20,"grasas": 15,"carbohidratos": 5},
-    "porciones": 6
-  },
-  {
-    "nombre": "Batido de fresa",
-    "descripcion": "Bebida dulce y refrescante.",
-    "tiempo": 5,
-    "categorias": ["Desayuno", "Vegetariano"],
-    "imagenes": ["assets/images/fresa.jpg"],
-    "ingredientes": [
-      {"nombre": "Fresas", "cantidad": 6, "unidad": "piezas"},
-      {"nombre": "Leche", "cantidad": 1, "unidad": "taza"}
-    ],
-    "instrucciones": [
-      {"numero": 1, "descripcion": "Licuar"},
-      {"numero": 2, "descripcion": "Servir"}
-    ],
-    "info": {"calorias": 180,"proteinas": 6,"grasas": 4,"carbohidratos": 30},
-    "porciones": 4
+    "info": {"calorias": 210, "proteinas": 22, "grasas": 12, "carbohidratos": 4},
+    "porciones": 1
   },
   {
     "nombre": "Avena con frutas",
-    "descripcion": "Desayuno nutritivo rico en fibra, ideal para comenzar el día con energía.",
+    "descripcion": "Desayuno saciante rico en fibra.",
     "tiempo": 10,
-    "categorias": ["Desayuno", "Vegetariano", "Bajas calorias"],
+    "categorias": ["Desayuno", "Vegetariano"],
     "imagenes": ["assets/images/avena.jpg"],
     "ingredientes": [
-      {"nombre": "Avena", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Leche", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Plátano", "cantidad": 1, "unidad": "pieza"}
+      {"nombre": "Avena en hojuelas", "cantidad": 0.5, "unit": "taza"},
+      {"nombre": "Leche de tu elección", "cantidad": 1, "unit": "taza"},
+      {"nombre": "Plátano en rodajas", "cantidad": 1, "unit": "pieza"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Cocer la avena con leche"},
-      {"numero": 2, "descripcion": "Agregar fruta"},
-      {"numero": 3, "descripcion": "Servir caliente"}
+      {"numero": 1, "descripcion": "Cocinar la avena con la leche a fuego medio"},
+      {"numero": 2, "descripcion": "Remover hasta que espese y agregar el plátano"},
+      {"numero": 3, "descripcion": "Servir caliente con una pizca de canela"}
     ],
-    "info": {"calorias": 250,"proteinas": 8,"grasas": 5,"carbohidratos": 40},
-    "porciones": 3
+    "info": {"calorias": 290, "proteinas": 10, "grasas": 5, "carbohidratos": 52},
+    "porciones": 1
   },
   {
     "nombre": "Huevos con espinaca",
-    "descripcion": "Desayuno alto en proteína con vegetales.",
+    "descripcion": "Desayuno saludable y bajo en carbohidratos.",
     "tiempo": 10,
     "categorias": ["Desayuno", "Vegetariano"],
     "imagenes": ["assets/images/huevos.jpg"],
     "ingredientes": [
-      {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
-      {"nombre": "Espinaca", "cantidad": 1, "unidad": "taza"}
+      {"nombre": "Huevos", "cantidad": 2, "unit": "piezas"},
+      {"nombre": "Espinaca fresca", "cantidad": 1, "unit": "taza"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Batir huevos"},
-      {"numero": 2, "descripcion": "Cocinar con espinaca"}
+      {"numero": 1, "descripcion": "Saltear la espinaca en un sartén hasta que reduzca"},
+      {"numero": 2, "descripcion": "Verter los huevos batidos y cocinar al gusto"}
     ],
-    "info": {"calorias": 210,"proteinas": 14,"grasas": 15,"carbohidratos": 5},
-    "porciones": 4
+    "info": {"calorias": 190, "proteinas": 14, "grasas": 13, "carbohidratos": 3},
+    "porciones": 1
   },
   {
     "nombre": "Smoothie verde",
-    "descripcion": "Bebida detox ligera y refrescante.",
+    "descripcion": "Bebida vitamínica y refrescante.",
     "tiempo": 5,
     "categorias": ["Desayuno", "Vegano", "Bajas calorias"],
     "imagenes": ["assets/images/smoothie.jpg"],
     "ingredientes": [
-      {"nombre": "Espinaca", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Manzana", "cantidad": 1, "unidad": "pieza"}
+      {"nombre": "Espinaca", "cantidad": 1, "unit": "taza"},
+      {"nombre": "Manzana verde", "cantidad": 1, "unit": "pieza"},
+      {"nombre": "Agua", "cantidad": 1, "unit": "taza"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Licuar todo"},
-      {"numero": 2, "descripcion": "Servir"}
+      {"numero": 1, "descripcion": "Licuar todos los ingredientes hasta que sea homogéneo"},
+      {"numero": 2, "descripcion": "Servir de inmediato para aprovechar los nutrientes"}
     ],
-    "info": {"calorias": 120,"proteinas": 3,"grasas": 1,"carbohidratos": 25},
-    "porciones": 2
+    "info": {"calorias": 110, "proteinas": 2, "grasas": 1, "carbohidratos": 26},
+    "porciones": 1
   },
-  {
-    "nombre": "Pasta con tomate",
-    "descripcion": "Clásico italiano sencillo.",
-    "tiempo": 20,
-    "categorias": ["Almuerzo", "Vegetariano"],
-    "imagenes": ["assets/images/pasta.jpg"],
-    "ingredientes": [
-      {"nombre": "Pasta", "cantidad": 200, "unidad": "gramos"},
-      {"nombre": "Tomate", "cantidad": 2, "unidad": "piezas"}
-    ],
-    "instrucciones": [
-      {"numero": 1, "descripcion": "Cocer pasta"},
-      {"numero": 2, "descripcion": "Agregar salsa"}
-    ],
-    "info": {"calorias": 350,"proteinas": 10,"grasas": 8,"carbohidratos": 55},
-    "porciones": 5
-  },
-  {
-    "nombre": "Sopa de verduras",
-    "descripcion": "Ligera y reconfortante.",
-    "tiempo": 30,
-    "categorias": ["Cena", "Vegano", "Bajas calorias"],
-    "imagenes": ["assets/images/sopaverdura.jpg"],
-    "ingredientes": [
-      {"nombre": "Zanahoria", "cantidad": 1, "unidad": "pieza"},
-      {"nombre": "Papa", "cantidad": 1, "unidad": "pieza"}
-    ],
-    "instrucciones": [
-      {"numero": 1, "descripcion": "Hervir"},
-      {"numero": 2, "descripcion": "Sazonar"}
-    ],
-    "info": {"calorias": 150,"proteinas": 4,"grasas": 2,"carbohidratos": 30},
-    "porciones": 2
-  },
-
   {
     "nombre": "Tacos de carne",
-    "descripcion": "Tradicional y delicioso.",
+    "descripcion": "Tacos tradicionales con carne de res asada.",
     "tiempo": 20,
     "categorias": ["Cena", "Carnivoro"],
     "imagenes": ["assets/images/tacoscarne.jpg"],
     "ingredientes": [
-      {"nombre": "Carne", "cantidad": 200, "unidad": "gramos"},
-      {"nombre": "Tortillas", "cantidad": 3, "unidad": "piezas"}
+      {"nombre": "Carne de res (bistec)", "cantidad": 250, "unit": "gramos"},
+      {"nombre": "Tortillas de maíz", "cantidad": 6, "unit": "piezas"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Cocinar carne"},
-      {"numero": 2, "descripcion": "Servir en tortillas"}
+      {"numero": 1, "descripcion": "Picar la carne y asar en sartén con sal y pimienta"},
+      {"numero": 2, "descripcion": "Calentar las tortillas y armar los tacos"},
+      {"numero": 3, "descripcion": "Acompañar con cebolla y cilantro al gusto"}
     ],
-    "info": {"calorias": 400,"proteinas": 20,"grasas": 20,"carbohidratos": 30},
-    "porciones": 6
-  },
-  {
-    "nombre": "Ensalada fresca",
-    "descripcion": "Ligera y saludable.",
-    "tiempo": 10,
-    "categorias": ["Almuerzo", "Vegano", "Bajas calorias"],
-    "imagenes": ["assets/images/ensalada.jpg"],
-    "ingredientes": [
-      {"nombre": "Lechuga", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Tomate", "cantidad": 2, "unidad": "piezas"}
-    ],
-    "instrucciones": [
-      {"numero": 1, "descripcion": "Lavar"},
-      {"numero": 2, "descripcion": "Mezclar"}
-    ],
-    "info": {"calorias": 150,"proteinas": 5,"grasas": 3,"carbohidratos": 20},
-    "porciones": 1
-  },
-  {
-    "nombre": "Batido de plátano",
-    "descripcion": "Energético y cremoso.",
-    "tiempo": 5,
-    "categorias": ["Desayuno", "Vegetariano"],
-    "imagenes": ["assets/images/batidoplatano.jpg"],
-    "ingredientes": [
-      {"nombre": "Plátano", "cantidad": 1, "unidad": "pieza"},
-      {"nombre": "Leche", "cantidad": 1, "unidad": "taza"}
-    ],
-    "instrucciones": [
-      {"numero": 1, "descripcion": "Licuar"},
-      {"numero": 2, "descripcion": "Servir"}
-    ],
-    "info": {"calorias": 220,"proteinas": 6,"grasas": 4,"carbohidratos": 40},
-    "porciones": 4
-  },
-  {
-    "nombre": "Galletas caseras",
-    "descripcion": "Dulce clásico para postre.",
-    "tiempo": 25,
-    "categorias": ["Postre", "Vegetariano"],
-    "imagenes": ["assets/images/galletas.jpg"],
-    "ingredientes": [
-      {"nombre": "Harina", "cantidad": 1, "unidad": "taza"},
-      {"nombre": "Azúcar", "cantidad": 0.5, "unidad": "taza"}
-    ],
-    "instrucciones": [
-      {"numero": 1, "descripcion": "Mezclar"},
-      {"numero": 2, "descripcion": "Hornear"}
-    ],
-    "info": {"calorias": 300,"proteinas": 5,"grasas": 10,"carbohidratos": 45},
-    "porciones": 4
+    "info": {"calorias": 420, "proteinas": 25, "grasas": 18, "carbohidratos": 38},
+    "porciones": 2
   },
   {
     "nombre": "Manzana con canela",
-    "descripcion": "Postre saludable y rápido.",
-    "tiempo": 10,
+    "descripcion": "Postre natural y digestivo.",
+    "tiempo": 5,
     "categorias": ["Postre", "Vegano", "Bajas calorias"],
     "imagenes": ["assets/images/manzana.jpg"],
     "ingredientes": [
-      {"nombre": "Manzana", "cantidad": 1, "unidad": "pieza"},
-      {"nombre": "Canela", "cantidad": 1, "unidad": "pizca"}
+      {"nombre": "Manzana", "cantidad": 1, "unit": "pieza"},
+      {"nombre": "Canela en polvo", "cantidad": 1, "unit": "pizca"}
     ],
     "instrucciones": [
-      {"numero": 1, "descripcion": "Cortar"},
-      {"numero": 2, "descripcion": "Espolvorear"}
+      {"numero": 1, "descripcion": "Lavar y rebanar la manzana en gajos"},
+      {"numero": 2, "descripcion": "Espolvorear canela encima antes de consumir"}
     ],
-    "info": {"calorias": 100,"proteinas": 1,"grasas": 0,"carbohidratos": 25},
-    "porciones": 5
+    "info": {"calorias": 95, "proteinas": 1, "grasas": 0, "carbohidratos": 24},
+    "porciones": 1
+  },
+  {
+    "nombre": "Avena con Manzana y Canela",
+    "descripcion": "Desayuno reconfortante y alto en fibra.",
+    "tiempo": 10,
+    "categorias": ["Desayuno", "Saludable"],
+    "imagenes": ["assets/images/avenamanzana.jpg"],
+    "ingredientes": [
+      {"nombre": "Avena en hojuelas", "cantidad": 0.5, "unidad": "taza"},
+      {"nombre": "Leche descremada", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Manzana picada", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Canela en polvo", "cantidad": 1, "unidad": "pizca"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Cocinar la avena con la leche a fuego medio."},
+      {"numero": 2, "descripcion": "Agregar la manzana y la canela al final."},
+      {"numero": 3, "descripcion": "Servir caliente."}
+    ],
+    "info": {"calorias": 250, "proteinas": 8, "grasas": 4, "carbohidratos": 45},
+    "porciones": 1
+  },
+  {
+    "nombre": "Pollo al Limón con Brócoli",
+    "descripcion": "Cena ligera proteica y baja en carbohidratos.",
+    "tiempo": 20,
+    "categorias": ["Cena", "Bajas calorías"],
+    "imagenes": ["assets/images/polloallimon.jpg"],
+    "ingredientes": [
+      {"nombre": "Pechuga de pollo", "cantidad": 150, "unidad": "gramos"},
+      {"nombre": "Brócoli al vapor", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Jugo de limón", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Aceite de oliva", "cantidad": 1, "unidad": "cucharadita"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Sellar el pollo en el aceite hasta dorar."},
+      {"numero": 2, "descripcion": "Agregar el jugo de limón y el brócoli."},
+      {"numero": 3, "descripcion": "Tapar y cocinar 5 minutos más."}
+    ],
+    "info": {"calorias": 280, "proteinas": 35, "grasas": 9, "carbohidratos": 12},
+    "porciones": 1
+  },
+  {
+    "nombre": "Tostadas de Aguacate y Huevo",
+    "descripcion": "Grasas saludables y proteína para iniciar el día.",
+    "tiempo": 5,
+    "categorias": ["Desayuno", "Vegetariano"],
+    "imagenes": ["assets/images/tostadasdeaguacamole.jpg"],
+    "ingredientes": [
+      {"nombre": "Pan integral tostado", "cantidad": 2, "unidad": "rebanadas"},
+      {"nombre": "Aguacate", "cantidad": 0.5, "unidad": "pieza"},
+      {"nombre": "Huevo cocido", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Chile quebrado", "cantidad": 1, "unidad": "pizca"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Machacar el aguacate sobre el pan."},
+      {"numero": 2, "descripcion": "Colocar el huevo en rebanadas encima."},
+      {"numero": 3, "descripcion": "Sazonar con sal y chile."}
+    ],
+    "info": {"calorias": 310, "proteinas": 12, "grasas": 18, "carbohidratos": 28},
+    "porciones": 1
+  },
+  {
+    "nombre": "Ensalada Griega",
+    "descripcion": "Fresca, hidratante y clásica.",
+    "tiempo": 10,
+    "categorias": ["Almuerzo", "Vegetariano"],
+    "imagenes": ["assets/images/ensaladagriega.jpg"],
+    "ingredientes": [
+      {"nombre": "Pepino", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Tomate", "cantidad": 2, "unidad": "piezas"},
+      {"nombre": "Queso Feta", "cantidad": 30, "unidad": "gramos"},
+      {"nombre": "Aceitunas", "cantidad": 5, "unidad": "piezas"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Cortar los vegetales en cubos medianos."},
+      {"numero": 2, "descripcion": "Mezclar con el queso y las aceitunas."},
+      {"numero": 3, "descripcion": "Aliñar con orégano y aceite de oliva."}
+    ],
+    "info": {"calorias": 190, "proteinas": 6, "grasas": 14, "carbohidratos": 10},
+    "porciones": 1
+  },
+  {
+    "nombre": "Salmón con Espárragos",
+    "descripcion": "Rico en Omega-3 para la salud del corazón.",
+    "tiempo": 15,
+    "categorias": ["Cena", "Saludable"],
+    "imagenes": ["assets/images/salmonconesparragos.jpg"],
+    "ingredientes": [
+      {"nombre": "Filete de salmón", "cantidad": 120, "unidad": "gramos"},
+      {"nombre": "Espárragos", "cantidad": 6, "unidad": "piezas"},
+      {"nombre": "Ajo picado", "cantidad": 1, "unidad": "diente"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Sazonar el salmón y los espárragos con ajo."},
+      {"numero": 2, "descripcion": "Cocinar a la plancha 4 min por lado."},
+      {"numero": 3, "descripcion": "Servir con una rodaja de limón."}
+    ],
+    "info": {"calorias": 320, "proteinas": 28, "grasas": 18, "carbohidratos": 5},
+    "porciones": 1
+  },
+  {
+    "nombre": "Tazón de Quinoa y Camote",
+    "descripcion": "Energía duradera con carbohidratos complejos.",
+    "tiempo": 25,
+    "categorias": ["Almuerzo", "Vegano"],
+    "imagenes": ["assets/images/quinoacamote.jpg"],
+    "ingredientes": [
+      {"nombre": "Quinoa cocida", "cantidad": 0.5, "unidad": "taza"},
+      {"nombre": "Camote en cubos", "cantidad": 0.5, "unidad": "taza"},
+      {"nombre": "Espinacas frescas", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Semillas de calabaza", "cantidad": 1, "unidad": "cucharada"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Hornear el camote con sal y pimienta hasta que ablande."},
+      {"numero": 2, "descripcion": "Mezclar con la quinoa y las espinacas en un bol."},
+      {"numero": 3, "descripcion": "Decorar con las semillas de calabaza."}
+    ],
+    "info": {"calorias": 310, "proteinas": 9, "grasas": 7, "carbohidratos": 52},
+    "porciones": 1
+  },
+  {
+    "nombre": "Omelette de Champiñones",
+    "descripcion": "Proteína pura para un desayuno ligero.",
+    "tiempo": 8,
+    "categorias": ["Desayuno", "Vegetariano"],
+    "imagenes": ["assets/images/omecham.jpg"],
+    "ingredientes": [
+      {"nombre": "Claras de huevo", "cantidad": 3, "unidad": "piezas"},
+      {"nombre": "Champiñones rebanados", "cantidad": 0.5, "unidad": "taza"},
+      {"nombre": "Cebolla blanca", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Aceite en spray", "cantidad": 1, "unidad": "disparo"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Saltear los champiñones y la cebolla en el sartén."},
+      {"numero": 2, "descripcion": "Verter las claras y cocinar a fuego lento."},
+      {"numero": 3, "descripcion": "Doblar a la mitad cuando cuaje y servir."}
+    ],
+    "info": {"calorias": 120, "proteinas": 15, "grasas": 2, "carbohidratos": 4},
+    "porciones": 1
+  },
+  {
+    "nombre": "Pescado al Papillote",
+    "descripcion": "Cocinado en su jugo, sin grasas añadidas.",
+    "tiempo": 15,
+    "categorias": ["Cena", "Bajas calorías"],
+    "imagenes": ["assets/images/pescadopapillote.jpg"],
+    "ingredientes": [
+      {"nombre": "Filete de pescado blanco", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Calabacita en rodajas", "cantidad": 0.5, "unidad": "pieza"},
+      {"nombre": "Zanahoria en tiras", "cantidad": 0.5, "unidad": "pieza"},
+      {"nombre": "Hierbas finas", "cantidad": 1, "unidad": "pizca"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Poner el pescado y la verdura sobre papel aluminio."},
+      {"numero": 2, "descripcion": "Cerrar el papel como un sobre y hornear o calentar en sartén."},
+      {"numero": 3, "descripcion": "Abrir con cuidado para no quemarse con el vapor."}
+    ],
+    "info": {"calorias": 180, "proteinas": 25, "grasas": 4, "carbohidratos": 8},
+    "porciones": 1
+  },
+  {
+    "nombre": "Pasta Integral con Pesto",
+    "descripcion": "Sabor italiano en una versión más saludable.",
+    "tiempo": 12,
+    "categorias": ["Almuerzo", "Vegetariano"],
+    "imagenes": ["assets/images/pastapesto.jpg"],
+    "ingredientes": [
+      {"nombre": "Pasta integral cocida", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Salsa pesto", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Tomatitos cherry", "cantidad": 5, "unidad": "piezas"},
+      {"nombre": "Nueces picadas", "cantidad": 1, "unidad": "cucharadita"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Mezclar la pasta caliente con el pesto."},
+      {"numero": 2, "descripcion": "Agregar los tomates partidos a la mitad."},
+      {"numero": 3, "descripcion": "Esparcir las nueces por encima."}
+    ],
+    "info": {"calorias": 350, "proteinas": 10, "grasas": 15, "carbohidratos": 48},
+    "porciones": 1
+  },
+  {
+    "nombre": "Hummus de Garbanzo",
+    "descripcion": "Snack ideal para acompañar con vegetales.",
+    "tiempo": 5,
+    "categorias": ["Snack", "Vegano"],
+    "imagenes": ["assets/images/hummusgar.jpg"],
+    "ingredientes": [
+      {"nombre": "Garbanzos cocidos", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Tahini o Crema de ajonjolí", "cantidad": 1, "unidad": "cucharada"},
+      {"nombre": "Jugo de limón", "cantidad": 1, "unidad": "cucharada"},
+      {"nombre": "Ajo", "cantidad": 1, "unidad": "diente"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Licuar todos los ingredientes hasta que esté cremoso."},
+      {"numero": 2, "descripcion": "Si está muy espeso, agregar un chorrito de agua."},
+      {"numero": 3, "descripcion": "Servir con bastoncitos de apio o zanahoria."}
+    ],
+    "info": {"calorias": 220, "proteinas": 8, "grasas": 12, "carbohidratos": 25},
+    "porciones": 2
+  },
+  {
+    "nombre": "Chia Pudding de Berries",
+    "descripcion": "Desayuno alto en Omega-3 preparado desde la noche anterior.",
+    "tiempo": 5,
+    "categorias": ["Desayuno", "Saludable"],
+    "imagenes": ["assets/images/chiapu.jpg"],
+    "ingredientes": [
+      {"nombre": "Semillas de chía", "cantidad": 3, "unidad": "cucharadas"},
+      {"nombre": "Leche de almendras", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Frutos rojos", "cantidad": 0.5, "unidad": "taza"},
+      {"nombre": "Miel de abeja", "cantidad": 1, "unidad": "cucharadita"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Mezclar la chía con la leche y la miel en un frasco."},
+      {"numero": 2, "descripcion": "Agitar bien y dejar reposar en el refri al menos 4 horas."},
+      {"numero": 3, "descripcion": "Añadir los frutos rojos antes de comer."}
+    ],
+    "info": {"calorias": 240, "proteinas": 7, "grasas": 12, "carbohidratos": 30},
+    "porciones": 1
+  },
+  {
+    "nombre": "Brochetas de Pollo y Pimiento",
+    "descripcion": "Comida divertida, colorida y llena de sabor.",
+    "tiempo": 15,
+    "categorias": ["Almuerzo", "Saludable"],
+    "imagenes": ["assets/images/brocheta.jpg"],
+    "ingredientes": [
+      {"nombre": "Pechuga de pollo en cubos", "cantidad": 150, "unidad": "gramos"},
+      {"nombre": "Pimiento morrón", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Cebolla morada", "cantidad": 0.5, "unidad": "pieza"},
+      {"nombre": "Aceite de oliva", "cantidad": 1, "unidad": "cucharadita"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Insertar pollo y vegetales de forma alternada en palitos."},
+      {"numero": 2, "descripcion": "Sazonar y cocinar en un sartén o parrilla."},
+      {"numero": 3, "descripcion": "Girar constantemente hasta que el pollo esté cocido."}
+    ],
+    "info": {"calorias": 260, "proteinas": 30, "grasas": 8, "carbohidratos": 10},
+    "porciones": 1
+  },
+  {
+    "nombre": "Sopa de Lentejas Casera",
+    "descripcion": "Proteína vegetal económica y muy llenadora.",
+    "tiempo": 30,
+    "categorias": ["Almuerzo", "Vegano"],
+    "imagenes": ["assets/images/sopalentejas.jpg"],
+    "ingredientes": [
+      {"nombre": "Lentejas cocidas", "cantidad": 1.5, "unidad": "tazas"},
+      {"nombre": "Espinacas picadas", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Cebolla y ajo picado", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Caldo de vegetales", "cantidad": 1, "unidad": "taza"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Sofreír cebolla y ajo hasta que estén transparentes."},
+      {"numero": 2, "descripcion": "Agregar lentejas, caldo y dejar hervir 10 minutos."},
+      {"numero": 3, "descripcion": "Añadir espinacas al final y apagar el fuego."}
+    ],
+    "info": {"calorias": 290, "proteinas": 18, "grasas": 2, "carbohidratos": 45},
+    "porciones": 2
+  },
+  {
+    "nombre": "Ceviche de Champiñones",
+    "descripcion": "Una entrada refrescante y ligera totalmente vegetal.",
+    "tiempo": 10,
+    "categorias": ["Snack", "Vegano"],
+    "imagenes": ["assets/images/cevichecham.jpg"],
+    "ingredientes": [
+      {"nombre": "Champiñones picados", "cantidad": 2, "unidad": "tazas"},
+      {"nombre": "Jugo de limón", "cantidad": 4, "unidad": "cucharadas"},
+      {"nombre": "Cilantro picado", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Chile serrano", "cantidad": 0.5, "unidad": "pieza"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Mezclar los champiñones con el jugo de limón."},
+      {"numero": 2, "descripcion": "Dejar marinar 5 minutos en el refrigerador."},
+      {"numero": 3, "descripcion": "Integrar el cilantro, chile y sal al gusto."}
+    ],
+    "info": {"calorias": 90, "proteinas": 5, "grasas": 1, "carbohidratos": 12},
+    "porciones": 2
+  },
+  {
+    "nombre": "Ensalada de Atún y Garbanzos",
+    "descripcion": "Una mezcla poderosa de proteína animal y vegetal.",
+    "tiempo": 10,
+    "categorias": ["Almuerzo", "Saludable"],
+    "images": ["assets/images/ensaladaatun.jpg"],
+    "ingredientes": [
+      {"nombre": "Garbanzos cocidos", "cantidad": 0.5, "unidad": "taza"},
+      {"nombre": "Atún en agua", "cantidad": 1, "unidad": "lata"},
+      {"nombre": "Pimiento rojo picado", "cantidad": 0.5, "unidad": "pieza"},
+      {"nombre": "Vinagre de manzana", "cantidad": 1, "unidad": "cucharada"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Enjuagar y escurrir bien los garbanzos y el atún."},
+      {"numero": 2, "descripcion": "Mezclar en un bol con el pimiento picado."},
+      {"numero": 3, "descripcion": "Aliñar con vinagre, sal y pimienta al gusto."}
+    ],
+    "info": {"calorias": 280, "proteinas": 26, "grasas": 5, "carbohidratos": 32},
+    "porciones": 1
+  },
+  {
+    "nombre": "Pudin de Chocolate y Aguacate",
+    "descripcion": "Postre cremoso y saludable sin lácteos.",
+    "tiempo": 5,
+    "categorias": ["Postre", "Vegano"],
+    "images": ["assets/images/pudinchoco.jpg"],
+    "ingredientes": [
+      {"nombre": "Aguacate maduro", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Cacao en polvo sin azúcar", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Miel de maple o agave", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Esencia de vainilla", "cantidad": 1, "unidad": "cucharadita"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Extraer la pulpa del aguacate y ponerla en la licuadora."},
+      {"numero": 2, "descripcion": "Agregar el cacao, el endulzante y la vainilla."},
+      {"numero": 3, "descripcion": "Procesar hasta obtener una crema suave y refrigerar."}
+    ],
+    "info": {"calorias": 210, "proteinas": 3, "grasas": 15, "carbohidratos": 22},
+    "porciones": 2
+  },
+  {
+    "nombre": "Filete de Pescado al Ajillo",
+    "descripcion": "Clásico, rápido y muy bajo en calorías.",
+    "tiempo": 12,
+    "categorias": ["Cena", "Bajas calorías"],
+    "images": ["assets/images/pescadoajo.jpg"],
+    "ingredientes": [
+      {"nombre": "Filete de pescado blanco", "cantidad": 150, "unidad": "gramos"},
+      {"nombre": "Ajo rebanado", "cantidad": 3, "unidad": "dientes"},
+      {"nombre": "Chiles guajillo en tiras", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Aceite de oliva", "cantidad": 1, "unidad": "cucharada"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Dorar el ajo y el chile en el aceite a fuego bajo."},
+      {"numero": 2, "descripcion": "Subir el fuego y cocinar el pescado en ese aceite aromático."},
+      {"numero": 3, "descripcion": "Cocinar 3 minutos por lado y servir."}
+    ],
+    "info": {"calorias": 190, "proteinas": 24, "grasas": 9, "carbohidratos": 2},
+    "porciones": 1
+  },
+  {
+    "nombre": "Sopa de Verduras con Pollo",
+    "descripcion": "El remedio perfecto para días fríos, nutritivo y ligero.",
+    "tiempo": 25,
+    "categorias": ["Cena", "Saludable"],
+    "images": ["assets/images/sopapollo.jpg"],
+    "ingredientes": [
+      {"nombre": "Pechuga de pollo deshebrada", "cantidad": 100, "unidad": "gramos"},
+      {"nombre": "Calabaza y zanahoria", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Caldo de pollo natural", "cantidad": 2, "unidad": "tazas"},
+      {"nombre": "Cilantro", "cantidad": 1, "unidad": "manojo pequeño"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Poner a hervir el caldo con las verduras picadas."},
+      {"numero": 2, "descripcion": "Cuando la verdura esté suave, añadir el pollo ya cocido."},
+      {"numero": 3, "descripcion": "Servir con cilantro fresco picado encima."}
+    ],
+    "info": {"calorias": 220, "proteinas": 28, "grasas": 4, "carbohidratos": 15},
+    "porciones": 1
+  },
+  {
+    "nombre": "Burritos de Huevo y Espinaca",
+    "descripcion": "Desayuno completo para llevar.",
+    "tiempo": 10,
+    "categorias": ["Desayuno", "Vegetariano"],
+    "images": ["assets/images/bues.jpg"],
+    "ingredientes": [
+      {"nombre": "Tortilla de harina integral", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Huevos", "cantidad": 2, "unidad": "piezas"},
+      {"nombre": "Espinaca fresca", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Queso panela rallado", "cantidad": 2, "unidad": "cucharadas"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Revolver los huevos con la espinaca en un sartén."},
+      {"numero": 2, "descripcion": "Calentar la tortilla y rellenar con el huevo y el queso."},
+      {"numero": 3, "descripcion": "Envolver en forma de burrito y dorar ligeramente por fuera."}
+    ],
+    "info": {"calorias": 320, "proteinas": 18, "grasas": 14, "carbohidratos": 26},
+    "porciones": 1
+  },
+  {
+    "nombre": "Ensalada de Lentejas y Feta",
+    "descripcion": "Una forma refrescante de comer legumbres.",
+    "tiempo": 12,
+    "categorias": ["Almuerzo", "Vegetariano"],
+    "imagenes": ["assets/images/ensaladafeta.jpg"],
+    "ingredientes": [
+      {"nombre": "Lentejas cocidas", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Queso Feta", "cantidad": 30, "unidad": "gramos"},
+      {"nombre": "Espinacas", "cantidad": 1, "unidad": "taza"},
+      {"nombre": "Nueces", "cantidad": 1, "unidad": "cucharada"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Mezclar las lentejas frías con las espinacas."},
+      {"numero": 2, "descripcion": "Desmoronar el queso feta encima."},
+      {"numero": 3, "descripcion": "Aliñar con un poco de vinagre balsámico."}
+    ],
+    "info": {"calorias": 260, "proteinas": 14, "grasas": 10, "carbohidratos": 32},
+    "porciones": 1
+  },
+  {
+    "nombre": "Pechuga de Pollo al Pesto",
+    "descripcion": "Sabor intenso con grasas saludables.",
+    "tiempo": 18,
+    "categorias": ["Almuerzo", "Saludable"],
+    "imagenes": ["assets/images/pollopesto.jpg"],
+    "ingredientes": [
+      {"nombre": "Pechuga de pollo", "cantidad": 150, "unidad": "gramos"},
+      {"nombre": "Salsa Pesto", "cantidad": 1.5, "unidad": "cucharadas"},
+      {"nombre": "Tomates deshidratados", "cantidad": 3, "unidad": "piezas"},
+      {"nombre": "Calabacitas", "cantidad": 1, "unidad": "taza"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Untar el pesto sobre el pollo crudo."},
+      {"numero": 2, "descripcion": "Cocinar a la plancha junto con las calabacitas."},
+      {"numero": 3, "descripcion": "Servir cuando el pollo esté bien cocido."}
+    ],
+    "info": {"calorias": 310, "proteinas": 32, "grasas": 16, "carbohidratos": 8},
+    "porciones": 1
+  },
+  {
+    "nombre": "Batido Verde Energético",
+    "descripcion": "Carga de vitaminas para empezar el día.",
+    "tiempo": 5,
+    "categorias": ["Desayuno", "Vegano"],
+    "imagenes": ["assets/images/batidoverde.jpg"],
+    "ingredientes": [
+      {"nombre": "Espinaca", "cantidad": 2, "unidad": "tazas"},
+      {"nombre": "Piña en cubos", "cantidad": 0.5, "unidad": "taza"},
+      {"nombre": "Pepino", "cantidad": 0.5, "unidad": "pieza"},
+      {"nombre": "Agua de coco", "cantidad": 1, "unidad": "taza"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Lavar bien las espinacas y el pepino."},
+      {"numero": 2, "descripcion": "Licuar todos los ingredientes hasta que no haya grumos."},
+      {"numero": 3, "descripcion": "Beber inmediatamente."}
+    ],
+    "info": {"calorias": 110, "proteinas": 3, "grasas": 0.5, "carbohidratos": 24},
+    "porciones": 1
   }
 ]
