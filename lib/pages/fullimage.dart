@@ -70,7 +70,7 @@ class _FullscreenImageState extends State<FullscreenImage> {
                 '${currentIndex + 1} / ${widget.images.length}',
                 style: const TextStyle(
                   color: Colors.white,
-                  fontSize: 16,
+                  fontSize: 20,
                 ),
               ),
             ),

@@ -16,7 +16,7 @@ void main() async{
   await NotiService.init();
   runApp(const MyApp());
 }
-
+final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 // Aquí se define la estructura principal de la aplicación, 
 // con un MaterialApp y un Scaffold que contiene un 
 // BottomNavigationBar para navegar entre las diferentes páginas
@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'NutriIS',
       theme: ThemeData(
         primaryColor: const Color.fromARGB(255, 255, 189, 89),
@@ -43,12 +44,12 @@ class MyHomePage extends StatefulWidget {
   final String title;
 
   @override
-  State<MyHomePage> createState() => _MyHomePageState();
+  State<MyHomePage> createState() => MyHomePageState();
 }
 
 // Aquí se maneja la navegación entre las 
 // diferentes páginas usando un BottomNavigationBar
-class _MyHomePageState extends State<MyHomePage> {
+class MyHomePageState extends State<MyHomePage> {
   int currentIndex = 0; // Creacion del indice actual
 
   // Lista de páginas a mostrar según el indice seleccionado
