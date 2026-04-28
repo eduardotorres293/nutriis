@@ -789,7 +789,7 @@
     "descripcion": "Comida mexicana rápida y saludable.",
     "tiempo": 10,
     "categorias": ["Almuerzo", "Carnivoro"],
-    "imagenes": ["assets/images/pollotos.jpg"],
+    "imagenes": ["assets/images/pollotosta.jpg"],
     "ingredientes": [
       {"nombre": "Pechuga de pollo cocida", "cantidad": 100, "unidad": "gramos"},
       {"nombre": "Tostadas horneadas", "cantidad": 2, "unidad": "piezas"},
