@@ -6,12 +6,19 @@ import '../main.dart';
 import '../pages/recipedetail.dart';
 
 class NotiService {
+  static bool activadas = true;
+
   static final FlutterLocalNotificationsPlugin notificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
   static int _id = 0;
 
   static Future<void> init() async {
+    await notificationsPlugin
+    .resolvePlatformSpecificImplementation<
+        AndroidFlutterLocalNotificationsPlugin>()
+    ?.requestNotificationsPermission();
+
     const AndroidInitializationSettings androidSettings =
         AndroidInitializationSettings('@mipmap/ic_launcher');
 
@@ -40,6 +47,9 @@ class NotiService {
 
   static Future<void> _mostrar(String titulo, String cuerpo,
       {String? payload}) async {
+
+    if (!activadas) return;
+    
     const AndroidNotificationDetails androidDetails =
         AndroidNotificationDetails(
       'canal_id',

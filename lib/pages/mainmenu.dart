@@ -90,6 +90,13 @@ class _MainmenuState extends State<Mainmenu> {
       {"nombre": "Cena ligera", "categoria": "Cena"},
       {"nombre": "Opciones veganas", "categoria": "Vegano"},
       {"nombre": "Algo dulce", "categoria": "Postre"},
+      {"nombre": "Almuerzos completos", "categoria": "Almuerzo"},
+      {"nombre": "Opciones vegetarianas", "categoria": "Vegetariano"},
+      {"nombre": "Altas en proteína", "categoria": "Proteico"},
+      {"nombre": "Bajas en calorías", "categoria": "Bajas calorias"},
+      {"nombre": "Comida rápida", "categoria": "Rápido"},
+      {"nombre": "Comida saludable", "categoria": "Saludable"},
+      {"nombre": "Platillos con carne", "categoria": "Carnivoro"},
     ];
 
     for (var config in configuraciones) {
@@ -109,7 +116,7 @@ class _MainmenuState extends State<Mainmenu> {
         nuevasListas.add(
           ListaSugerida(
             nombre: config["nombre"] as String,
-            recetas: filtradas.take(4).toList(),
+            recetas: filtradas.take(8).toList(),
           ),
         );
       }

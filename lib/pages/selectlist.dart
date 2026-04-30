@@ -57,9 +57,15 @@ class _SeleccionarListaSheetState extends State<SeleccionarListaSheet> {
     return Container(
       height: 500,
       padding: const EdgeInsets.all(16),
-      decoration: const BoxDecoration(
-        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
-        color: Colors.white,
+      decoration: BoxDecoration(
+        color: Theme.of(context).colorScheme.surfaceVariant,
+        borderRadius: const BorderRadius.vertical(
+          top: Radius.circular(20),
+        ),
+        border: Border.all(
+          color: Theme.of(context).colorScheme.primary,
+          width: 2,
+        ),
       ),
       child: Column(
         children: [
@@ -104,21 +110,24 @@ class _SeleccionarListaSheetState extends State<SeleccionarListaSheet> {
                         },
                         child: Container(
                           decoration: BoxDecoration(
-                            color: Colors.orange[50],
+                            color: Theme.of(context).colorScheme.surfaceVariant,
                             borderRadius: BorderRadius.circular(16),
                             border: Border.all(
-                              color: const Color.fromARGB(255, 233, 182, 107),
+                              color: Theme.of(context).colorScheme.primary,
                               width: 2,
                             ),
                           ),
-                          child: const Column(
+                          child: Column(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              Icon(Icons.add, size: 30, color: Color.fromARGB(255, 233, 182, 107)),
+                              Icon(Icons.add, size: 30, color: Theme.of(context).colorScheme.primary),
                               SizedBox(height: 8),
                               Text(
                                 "Nueva lista",
-                                style: TextStyle(fontSize: 16),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: Theme.of(context).colorScheme.onSurface
+                                ),
                               ),
                             ],
                           ),
@@ -134,7 +143,7 @@ class _SeleccionarListaSheetState extends State<SeleccionarListaSheet> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: Colors.orange[100],
+                          color: Theme.of(context).colorScheme.primaryContainer,
                           borderRadius: BorderRadius.circular(16),
                         ),
                         child: Center(

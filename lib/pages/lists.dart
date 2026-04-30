@@ -99,7 +99,7 @@ class _ListsState extends State<Lists> {
                         filtrarListas();
                       },
                       decoration: InputDecoration(
-                        hintText: 'Buscar nombre de lista o ingrediente',
+                        hintText: 'Buscar nombre de lista',
                         suffixIcon: const Icon(Icons.search),
                         filled: true,
                         fillColor: Colors.grey[300],
@@ -146,7 +146,11 @@ class _ListsState extends State<Lists> {
 
               // Listas y eso
               Expanded(
-                child: RefreshIndicator(
+                child: listasFiltradas.isEmpty
+                ? const Center(
+                    child: Text("No hay listas aún")
+                  )
+                : RefreshIndicator(
                     onRefresh: cargarListas,
                     child: ListView.separated(
                       physics: const AlwaysScrollableScrollPhysics(),
@@ -154,6 +158,7 @@ class _ListsState extends State<Lists> {
                       itemCount: listasFiltradas.length,
                       itemBuilder: (context, index) {
                         final lista = listasFiltradas[index];
+                        
 
                         return GestureDetector(
                           onTap: () async{

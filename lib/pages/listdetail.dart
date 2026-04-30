@@ -190,7 +190,7 @@ class _DetalleListaState extends State<DetalleLista> {
       valueListenable: FontSizeController.scale,
       builder: (context, scale, child) {
         return Scaffold(
-          appBar: AppBar(title: Text(widget.nombreLista), backgroundColor: Colors.white),
+          appBar: AppBar(title: Text(widget.nombreLista)),
           body: Padding(
             padding: const EdgeInsets.all(12),
             child: Column(

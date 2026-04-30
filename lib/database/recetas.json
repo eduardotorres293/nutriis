@@ -960,5 +960,41 @@
     ],
     "info": {"calorias": 60, "proteinas": 1, "grasas": 0, "carbohidratos": 15, "fibra": 3},
     "porciones": 1
+  },
+  {
+    "nombre": "Pulpo ensoyado",
+    "descripcion": "Platillo tradicional preparado con pulpo en una salsa espesa de tomate, chile y especias.",
+    "tiempo": 60,
+    "categorias": ["Almuerzo"],
+    "imagenes": ["assets/images/pulpo1.jpg"],
+    "ingredientes": [
+      {"nombre": "Pulpo cocido", "cantidad": 1, "unidad": "kg"},
+      {"nombre": "Jitomate", "cantidad": 4, "unidad": "piezas"},
+      {"nombre": "Cebolla", "cantidad": 1, "unidad": "pieza"},
+      {"nombre": "Ajo", "cantidad": 2, "unidad": "dientes"},
+      {"nombre": "Chile guajillo", "cantidad": 3, "unidad": "piezas"},
+      {"nombre": "Aceite", "cantidad": 2, "unidad": "cucharadas"},
+      {"nombre": "Sal", "cantidad": 1, "unidad": "al gusto"},
+      {"nombre": "Pimienta", "cantidad": 1, "unidad": "al gusto"}
+    ],
+    "instrucciones": [
+      {"numero": 1, "descripcion": "Cortar el pulpo cocido en trozos medianos"},
+      {"numero": 2, "descripcion": "Hervir los jitomates y los chiles guajillo, luego licuarlos con el ajo hasta obtener una salsa"},
+      {"numero": 3, "descripcion": "Picar finamente la cebolla"},
+      {"numero": 4, "descripcion": "En una sartén calentar el aceite y sofreír la cebolla hasta que esté transparente"},
+      {"numero": 5, "descripcion": "Agregar la salsa licuada y cocinar a fuego medio durante 10 minutos"},
+      {"numero": 6, "descripcion": "Incorporar el pulpo a la salsa y mezclar bien"},
+      {"numero": 7, "descripcion": "Cocinar a fuego bajo durante 15-20 minutos hasta que la salsa espese"},
+      {"numero": 8, "descripcion": "Sazonar con sal y pimienta al gusto"},
+      {"numero": 9, "descripcion": "Servir caliente"}
+    ],
+    "info": {
+      "calorias": 250,
+      "proteinas": 30,
+      "grasas": 8,
+      "carbohidratos": 10,
+      "fibra": 2
+    },
+    "porciones": 1
   }
 ]

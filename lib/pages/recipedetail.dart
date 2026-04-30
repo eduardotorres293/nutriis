@@ -390,8 +390,8 @@ class _RecipedetailState extends State<Recipedetail> {
                     Container(
                       width: double.infinity,
                       padding: const EdgeInsets.all(16),
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
+                      decoration: BoxDecoration(
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
                       ),
                       child: Column(
@@ -405,9 +405,9 @@ class _RecipedetailState extends State<Recipedetail> {
                             collapsedShape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            backgroundColor: Colors.grey[200],
-                            collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
-                            title: Text('Ingredientes', style: TextStyle(fontSize: 18 * scale, fontWeight: FontWeight.bold)),
+                            backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                            collapsedBackgroundColor: Theme.of(context).colorScheme.primary,
+                            title: Text('Ingredientes', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 18 * scale, fontWeight: FontWeight.bold)),
                             children: [
                               FutureBuilder <List<Ingrediente>>(
                                 future: ingredientesFuture,
@@ -449,9 +449,9 @@ class _RecipedetailState extends State<Recipedetail> {
                             collapsedShape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            backgroundColor: Colors.grey[200],
-                            collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
-                            title: Text('Instrucciones', style: TextStyle(fontSize: 18 * scale, fontWeight: FontWeight.bold)),
+                            backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                            collapsedBackgroundColor: Theme.of(context).colorScheme.primary,
+                            title: Text('Instrucciones', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 18 * scale, fontWeight: FontWeight.bold)),
                             children: [
                               FutureBuilder<List<Instruccione>>(
                                 future: instruccionesFuture,
@@ -483,9 +483,9 @@ class _RecipedetailState extends State<Recipedetail> {
                             collapsedShape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(12),
                             ),
-                            backgroundColor: Colors.grey[200],
-                            collapsedBackgroundColor: Color.fromARGB(255, 255, 189, 89),
-                            title: Text('Información nutricional', style: TextStyle(fontSize: 18 * scale, fontWeight: FontWeight.bold)),
+                            backgroundColor: Theme.of(context).colorScheme.surfaceVariant,
+                            collapsedBackgroundColor: Theme.of(context).colorScheme.primary,
+                            title: Text('Información nutricional', style: TextStyle(color: Theme.of(context).colorScheme.onPrimary, fontSize: 18 * scale, fontWeight: FontWeight.bold)),
                             children: [
                               FutureBuilder<InfoNutrimentalData?>(
                                 future: infoFuture,

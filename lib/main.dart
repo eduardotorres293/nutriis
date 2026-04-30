@@ -12,7 +12,7 @@ void main() async{
   final database = AppDatabase();
 
   // El que inserta los datos
-  await database.cargarSiVacio();
+  await database.cargarDesdeJson();
   await NotiService.init();
   runApp(const MyApp());
 }
@@ -25,15 +25,42 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      navigatorKey: navigatorKey,
-      title: 'NutriIS',
-      theme: ThemeData(
-        primaryColor: const Color.fromARGB(255, 255, 189, 89),
-        scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
-      ),
-      home: const MyHomePage(title: 'NutriIS'),
-      
+    return ValueListenableBuilder(
+      valueListenable: ThemeController.themeMode,
+      builder: (context, ThemeMode mode, _) {
+        return MaterialApp(
+          navigatorKey: navigatorKey,
+          title: 'NutriIS',
+
+          themeMode: mode,
+          
+          theme: ThemeData(
+            brightness: Brightness.light,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 255, 189, 89),
+              brightness: Brightness.light,
+            ).copyWith(
+              primary: const Color.fromARGB(255, 255, 189, 89),
+            ),
+
+            primaryColor: const Color.fromARGB(255, 255, 189, 89),
+            scaffoldBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
+          ),
+          darkTheme: ThemeData(
+            brightness: Brightness.dark,
+            colorScheme: ColorScheme.fromSeed(
+              seedColor: const Color.fromARGB(255, 255, 189, 89),
+              brightness: Brightness.dark,
+            ).copyWith(
+              primary: const Color.fromARGB(255, 255, 189, 89),
+            ),
+            primaryColor: Colors.orange,
+            scaffoldBackgroundColor: const Color(0xFF121212),
+          ),
+          home: const MyHomePage(title: 'NutriIS'),
+          
+        );
+      }
     );
   }
 }
